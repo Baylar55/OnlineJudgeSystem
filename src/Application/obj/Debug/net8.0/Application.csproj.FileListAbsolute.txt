@@ -1,0 +1,15 @@
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\bin\Debug\net8.0\AlgoCode.Application.deps.json
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\bin\Debug\net8.0\AlgoCode.Application.dll
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\bin\Debug\net8.0\AlgoCode.Application.pdb
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\bin\Debug\net8.0\AlgoCode.Domain.dll
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\bin\Debug\net8.0\AlgoCode.Domain.pdb
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\Application.csproj.AssemblyReference.cache
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\AlgoCode.Application.dll
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\refint\AlgoCode.Application.dll
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\AlgoCode.Application.pdb
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\ref\AlgoCode.Application.dll
+C:\Users\Baylar\Desktop\AlgoCode\src\Application\obj\Debug\net8.0\Applicat.44B5EDA2.Up2Date
