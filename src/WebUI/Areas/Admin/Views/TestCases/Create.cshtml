@@ -1,0 +1,36 @@
+﻿@using AlgoCode.Application.Features.TestCases.Commands.CreateTestCase
+@model CreateTestCaseCommand
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" asp-action="create" asp-controller="testcases" asp-area="admin">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Input">Input</label>
+                                <input class="form-control" asp-for="Input">
+                                <span class="text-danger" asp-validation-for="Input"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ExpectedOutput">Expected Output</label>
+                                <input class="form-control" asp-for="ExpectedOutput">
+                                <span class="text-danger" asp-validation-for="ExpectedOutput"></span>
+                            </div>
+
+                           <div class="form-group">
+                                <label>Problems</label>
+                                <select class="form-control" asp-items="@ViewBag.SelectItems"></select>
+                                <span class="form-text text-danger "></span>
+                            </div> 
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

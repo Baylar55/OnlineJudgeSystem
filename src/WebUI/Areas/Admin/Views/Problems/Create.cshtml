@@ -1,0 +1,48 @@
+﻿@using AlgoCode.Application.Features.Problem.Commands.CreateProblem
+@using AlgoCode.Domain.Constants
+@model CreateProblemCommand
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" asp-area="admin" asp-action="create" asp-controller="problems">
+                            <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <input class="form-control" asp-for="Title"></input>
+                                <span class="text-danger" asp-validation-for="Title"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <textarea id="editor" class="form-control" asp-for="Description"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Point">Point</label>
+                                <input class="form-control" asp-for="Point">
+                                <span class="text-danger" asp-validation-for="Point"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MethodName">Method Name</label>
+                                <input class="form-control" asp-for="MethodName">
+                                <span class="text-danger" asp-validation-for="MethodName"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Difficulty">Difficulty</label>
+                                <select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<ProblemDifficulty>()"></select>
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/super-build/ckeditor.js"></script>
+<script src="~/admin/js/ckeditor.js"></script>

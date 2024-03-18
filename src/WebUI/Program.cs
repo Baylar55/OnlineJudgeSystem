@@ -23,10 +23,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Tags}/{action=Index}/{id?}"
+    );
+
+app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=compile}/{action=index}/{id?}");
+    pattern: "{controller=problems}/{action=index}/{id?}");
 
 app.Run();

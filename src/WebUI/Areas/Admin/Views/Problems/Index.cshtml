@@ -1,0 +1,94 @@
+﻿@using AlgoCode.Application.Features.Problem.Queries.GetAll
+@model GetProblemsWithPaginationQueryResponse
+
+<header>
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+    </style>
+</header>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Problems Table</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <a class="btn btn-primary mb-3" asp-action="create" asp-area="admin" asp-controller="problems">Create problem</a>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Point</th>
+                        <th>Created At</th>
+                        <th>Modified At</th>
+                        <th colspan="3" style="text-align:center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model is not null)
+                    {
+                        @foreach (var problem in Model.Problems)
+                        {
+                            <tr>
+                                <td>@problem.Id</td>
+                                <td>@problem.Title</td>
+                                <td>@problem.Point</td>
+                                <td>@problem.Created</td>
+                                <td>@problem.LastModified</td>
+                                <td class="text-center">
+                                    <a asp-action="update" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Id" class="btn btn-primary">Update</a>
+                                </td>
+                                <td class="text-center">
+                                    <form method="post">
+                                        <button asp-action="delete" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Id" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                                <td width="20px" class="text-center">
+                                    <a asp-action="details" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Id" class="btn btn-info">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <div class="pagination d-flex justify-content-center">
+                @{
+                    if (Model is not null)
+                    {
+                        @if (Model.PageNumber > 1)
+                        {
+                            <li class="page-item">
+                                @{
+                                    var prevPage = Model.PageNumber - 1;
+                                    <a class="page-link" itemprop="url" asp-area="admin" asp-action="index" asp-controller="problems" asp-route-page="@prevPage">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                    </a>
+                                }
+                            </li>
+                        }
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            <li class="page-item">
+                                <a asp-action="index" asp-area="admin" asp-controller="problems" asp-route-page="@i" class="@(Model.PageNumber==i ? "mkdf-pag-active disabled page-link" : "mkdf-pag-inactive page-link")">@i</a>
+                            </li>
+                        }
+                        @if (Model.PageCount != Model.PageNumber)
+                        {
+                            <li class="page-item">
+                                @{
+                                    var nextPage = @Model.PageNumber + 1;
+                                    <a class="page-link" itemprop="url" asp-area="admin" asp-action="index" asp-controller="problems" asp-route-page="@nextPage">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+                                }
+                            </li>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,8 +2,8 @@
 {
     public class CompileProblemCommand : IRequest<string>
     {
-        public string Code { get; set; } 
-        public List<TestCase> TestCases { get; set; } = new ()
+        public string Code { get; set; }
+        public List<TestCase> TestCases { get; set; } = new()
         {
             new TestCase
             {

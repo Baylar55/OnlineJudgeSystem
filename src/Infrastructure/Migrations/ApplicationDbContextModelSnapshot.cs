@@ -338,7 +338,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("ProblemId");
 
-                    b.ToTable("TestCase");
+                    b.ToTable("TestCases");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Identity.ApplicationUser", b =>

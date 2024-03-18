@@ -2,7 +2,7 @@
 
 namespace AlgoCode.Infrastructure.Data.Configurations
 {
-    public class ApplicationUserConfiguration : Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<ApplicationUser>
+    public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {

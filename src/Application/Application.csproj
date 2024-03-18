@@ -22,7 +22,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Features\AppUser\Queries\" />
-	  <Folder Include="Features\Problem\Queries\" />
 	</ItemGroup>
 
 </Project>

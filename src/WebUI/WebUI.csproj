@@ -9,6 +9,50 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="wwwroot\admin\js\ckeditor.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="wwwroot\admin\js\ckeditor.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\admin\js\ckeditor.js" />
+	  <None Include="wwwroot\assets\css\fonts\fa-brands-400.svg" />
+	  <None Include="wwwroot\assets\css\fonts\fa-brands-400.woff2" />
+	  <None Include="wwwroot\assets\css\fonts\fa-regular-400.svg" />
+	  <None Include="wwwroot\assets\css\fonts\fa-regular-400.woff2" />
+	  <None Include="wwwroot\assets\css\fonts\fa-solid-900.svg" />
+	  <None Include="wwwroot\assets\css\fonts\fa-solid-900.woff2" />
+	  <None Include="wwwroot\assets\css\fonts\Flaticon.svg" />
+	  <None Include="wwwroot\assets\css\fonts\fontawesome-webfont3e6e.svg" />
+	  <None Include="wwwroot\assets\css\fonts\fontawesome-webfont3e6e.woff2" />
+	  <None Include="wwwroot\assets\css\fonts\houses.svg" />
+	  <None Include="wwwroot\assets\css\fonts\themify9f24.svg" />
+	  <None Include="wwwroot\assets\css\plugins\font\summernote.woff2" />
+	  <None Include="wwwroot\assets\css\styles.css.map" />
+	  <None Include="wwwroot\assets\css\styles.scss" />
+	  <None Include="wwwroot\assets\img\AnyDesk.exe" />
+	  <None Include="wwwroot\assets\js\bootstrap.min.js" />
+	  <None Include="wwwroot\assets\js\custom.js" />
+	  <None Include="wwwroot\assets\js\daterangepicker.js" />
+	  <None Include="wwwroot\assets\js\jquery.min.js" />
+	  <None Include="wwwroot\assets\js\metisMenu.min.js" />
+	  <None Include="wwwroot\assets\js\moment.min.js" />
+	  <None Include="wwwroot\assets\js\morris.js" />
+	  <None Include="wwwroot\assets\js\morris.min.js" />
+	  <None Include="wwwroot\assets\js\popper.min.js" />
+	  <None Include="wwwroot\assets\js\raphael.min.js" />
+	  <None Include="wwwroot\assets\js\select2.min.js" />
+	  <None Include="wwwroot\assets\js\slick.js" />
+	  <None Include="wwwroot\assets\js\summernote.min.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />		
 	</ItemGroup>
 

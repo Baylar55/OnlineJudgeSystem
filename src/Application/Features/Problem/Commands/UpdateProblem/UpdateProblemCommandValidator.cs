@@ -1,6 +1,6 @@
 ﻿namespace AlgoCode.Application.Features.Problem.Commands.UpdateProblem
 {
-    public class UpdateProblemCommandValidator: AbstractValidator<UpdateProblemCommand>
+    public class UpdateProblemCommandValidator : AbstractValidator<UpdateProblemCommand>
     {
         public UpdateProblemCommandValidator()
         {
@@ -25,5 +25,5 @@
                 .NotNull().WithMessage("Point is required")
                 .NotEmpty().WithMessage("Point is required");
         }
-    }   
+    }
 }

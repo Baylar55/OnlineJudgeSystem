@@ -6,6 +6,7 @@ C:\Users\Baylar\Desktop\AlgoCode\src\Domain\obj\Debug\net8.0\Domain.GeneratedMSB
 C:\Users\Baylar\Desktop\AlgoCode\src\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
 C:\Users\Baylar\Desktop\AlgoCode\src\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
 C:\Users\Baylar\Desktop\AlgoCode\src\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Baylar\Desktop\AlgoCode\src\Domain\obj\Debug\net8.0\Domain.sourcelink.json
 C:\Users\Baylar\Desktop\AlgoCode\src\Domain\obj\Debug\net8.0\AlgoCode.Domain.dll
 C:\Users\Baylar\Desktop\AlgoCode\src\Domain\obj\Debug\net8.0\refint\AlgoCode.Domain.dll
 C:\Users\Baylar\Desktop\AlgoCode\src\Domain\obj\Debug\net8.0\AlgoCode.Domain.pdb

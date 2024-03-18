@@ -21,16 +21,16 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
 
                 var references = new[]
                 {
-                                  MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                                  MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
-                                  MetadataReference.CreateFromFile(Assembly.Load("System.Runtime").Location)
-                              };
+                    MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
+                    MetadataReference.CreateFromFile(Assembly.Load("System.Runtime").Location)
+                };
 
                 var syntaxTree = SyntaxFactory.ParseSyntaxTree(code);
                 var compilation = CSharpCompilation.Create("LibraryAssembly")
-                    .WithOptions(compilationOptions)
-                    .AddReferences(references)
-                    .AddSyntaxTrees(syntaxTree);
+                                                   .WithOptions(compilationOptions)
+                                                   .AddReferences(references)
+                                                   .AddSyntaxTrees(syntaxTree);
 
                 using var ms = new MemoryStream();
                 var emitResult = compilation.Emit(ms);
@@ -49,6 +49,7 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
                     var testResults = ExecuteTestCases(assembly, testCases);
 
                     stopwatch.Stop();
+
                     var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
 
                     var memoryUsageBytes = Process.GetCurrentProcess().WorkingSet64;
@@ -70,8 +71,9 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
             foreach (var testCase in testCases)
             {
                 var parameters = testCase.Inputs.Select(str => (object)str).ToArray();
-                var expectedOutput = (object)testCase.ExpectedOutput; // Convert.ChangeType(testCase.ExpectedOutput, typeof(object));
-
+                //var expectedOutput = (object)testCase.ExpectedOutput;
+                var expectedOutput = Convert.ChangeType(testCase.ExpectedOutput, typeof(object));
+                var exp = testCase.ExpectedOutput;
                 Type? solutionType = assembly.GetType("Solution");
                 MethodInfo? methodInfo = solutionType.GetMethod("IsPalindrome");
                 for (int i = 0; i < parameters.Length; i++)

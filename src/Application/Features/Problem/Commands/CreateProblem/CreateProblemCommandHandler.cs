@@ -20,7 +20,6 @@
                 Title = request.Title,
                 Description = request.Description,
                 Difficulty = request.Difficulty,
-                Status = request.Status,
                 Point = request.Point,
                 MethodName = request.MethodName
             };

@@ -1,0 +1,53 @@
+﻿@using AlgoCode.Application.Features.Problem.Queries.GetById
+@model GetProblemByIdQueryResponse
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Problem Table</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <th>Title</th>
+                        <td>@Html.Raw(Model.Title)</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>@Html.Raw(Model.Description)</td>
+                    </tr>
+                    <tr>
+                        <th>Point</th>
+                        <td>@Model.Point</td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align:middle;">Method Name</th>
+                        <td>@Model.MethodName</td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align:middle;">Difficulty</th>
+                        <td>@Model.Difficulty</td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td>@Model.Created.ToString("dddd, dd MMMM yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th>Created By</th>
+                        <td>@Model.CreatedBy</td
+                    </tr>
+                    <tr>
+                        <th>Modified At</th>
+                        <td>@Model.LastModified.ToString()</td>
+                    </tr>
+                    <tr>
+                        <th>Modified By</th>
+                        <td>@Model.LastModifiedBy</td>
+                    </tr>
+                </tbody>
+                <a asp-action="index" asp-controller="problems" asp-area="admin" class="btn btn-info mb-2">Go to Back</a>
+            </table>
+        </div>
+    </div>
+</div>

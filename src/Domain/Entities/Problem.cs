@@ -7,7 +7,7 @@
         public string MethodName { get; set; } = null!;
         public int Point { get; set; }
         public ProblemDifficulty Difficulty { get; set; }
-        public ProblemStatus Status { get; set; }
+        public ProblemStatus Status { get; set; } = ProblemStatus.Unsolved;
         public ICollection<TestCase> TestCases { get; set; }
         public ICollection<ApplicationUser>? Users { get; set; }
         public ICollection<Contest>? Contests { get; set; }

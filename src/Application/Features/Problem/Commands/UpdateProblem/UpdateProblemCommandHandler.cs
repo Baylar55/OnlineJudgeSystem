@@ -1,6 +1,6 @@
 ﻿namespace AlgoCode.Application.Features.Problem.Commands.UpdateProblem
 {
-    public class UpdateProblemCommandHandler: IRequestHandler<UpdateProblemCommand, ValidationResultModel>
+    public class UpdateProblemCommandHandler : IRequestHandler<UpdateProblemCommand, ValidationResultModel>
     {
         private readonly IApplicationDbContext _context;
         public UpdateProblemCommandHandler(IApplicationDbContext context) => _context = context;
@@ -19,6 +19,7 @@
             problem.Difficulty = request.Difficulty;
             problem.Status = request.Status;
             problem.Point = request.Point;
+            problem.MethodName = request.MethodName;
             _context.Problems.Update(problem);
             await _context.SaveChangesAsync(cancellationToken);
             return validationResult;
