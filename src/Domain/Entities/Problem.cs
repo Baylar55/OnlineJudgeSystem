@@ -5,6 +5,7 @@
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string MethodName { get; set; } = null!;
+        public string CodeTemplate { get; set; } = null!;
         public int Point { get; set; }
         public ProblemDifficulty Difficulty { get; set; }
         public ProblemStatus Status { get; set; } = ProblemStatus.Unsolved;

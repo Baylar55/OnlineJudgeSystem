@@ -9345,4 +9345,539 @@ footer.skin-dark-footer ul.footer-bottom-social li a:focus {
   font-size: 14px;
   font-weight: 700;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --dark-body: #4d4c5a;
+  --dark-main: #282828;
+  --dark-second: #79788c;
+  --dark-hover: #323048;
+  --dark-text: #f8fbff;
+  --light-body: #f3f8fe;
+  --light-main: #fdfdfd;
+  --light-second: #c3c2c8;
+  --light-hover: #edf0f5;
+  --light-text: #151426;
+  --green: #03c988;
+  --white: #fff;
+  --red: #ef4743;
+  --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dark {
+  --bg-body: var(--dark-body);
+  --bg-main: var(--dark-main);
+  --bg-second: var(--dark-second);
+  --color-hover: var(--dark-hover);
+  --color-txt: var(--dark-text);
+}
+
+.light {
+  --bg-body: var(--light-body);
+  --bg-main: var(--light-main);
+  --bg-second: var(--light-second);
+  --color-hover: var(--light-hover);
+  --color-txt: var(--light-text);
+}
+
+.calendar {
+    height: 400px;
+    width: 280px;
+    background-color: #F2F3F4;
+    border-radius: 15px;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    margin-left: -10px;
+}
+
+.light .calendar {
+  box-shadow: var(--shadow);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-txt);
+  padding: 10px;
+}
+
+.calendar-body {
+  padding: 10px;
+}
+
+.calendar-week-day {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: 600;
+  height: 50px;
+}
+
+.calendar-week-day div {
+  display: grid;
+  place-items: center;
+  color: var(--bg-second);
+}
+
+.calendar-day {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  color: var(--color-txt);
+  justify-content: center;
+}
+
+.calendar-day div {
+  width: 32px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+  animation: to-top 1s forwards;
+  font-size: 12px;
+}
+
+.month-picker {
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.month-picker:hover {
+  background-color: var(--color-hover);
+}
+
+.year-picker {
+  display: flex;
+  align-items: center;
+}
+
+.year-change {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  margin-bottom: 15px !important;
+}
+
+.year-change pre {
+  margin-top: 17px;
+}
+
+.year-change:hover {
+  background-color: var(--color-hover);
+}
+
+.calendar-day div span:nth-child(1),
+.calendar-day div span:nth-child(3) {
+  width: 2px;
+  height: 0;
+  background-color: var(--color-txt);
+}
+
+.calendar-day div span:nth-child(1) {
+  bottom: 0;
+  left: 0;
+}
+
+.calendar-day div span:nth-child(3) {
+  top: 0;
+  right: 0;
+}
+
+.calendar-day div span:nth-child(2),
+.calendar-day div span:nth-child(4) {
+  width: 0;
+  height: 2px;
+  background-color: var(--color-txt);
+}
+
+.calendar-day div span:nth-child(2) {
+  top: 0;
+  left: 0;
+}
+
+.calendar-day div span:nth-child(4) {
+  bottom: 0;
+  right: 0;
+}
+
+.calendar-day div:hover span:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.calendar-day div:hover span:nth-child(3) {
+  transition-delay: 0.4s;
+}
+
+.calendar-day div:hover span:nth-child(4) {
+  transition-delay: 0.6s;
+}
+
+.calendar-day div.currDate {
+  color: var(--white);
+  border-radius: 50%;
+}
+
+.calendar-day div.currDate span {
+  display: none;
+}
+
+.month-list {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-main);
+  padding: 10px;
+  color: var(--color-txt);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 3px;
+  transform: scale(1.5);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.month-list.show {
+  transform: scale(1);
+  visibility: visible;
+  pointer-events: visible;
+  transition: all 0.2s ease-in-out;
+}
+
+.month-list > div {
+  display: grid;
+  place-items: center;
+}
+
+.month-list > div > div {
+  width: 100%;
+  padding: 5px 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.month-list > div > div:hover {
+  background-color: var(--color-hover);
+}
+
+@keyframes to-top {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* Add dote under the number of day in red color */
+.calendar-day div.calendarDayHover:not(.currDate)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: var(--red);
+  border-radius: 50%;
+}
+
+.calendar-day div.currDate img {
+  margin-top: 12px;
+}
+
+.study-plan-card {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+.study-plan-card img {
+  height: 75%;
+  margin-left:15px;
+}
+.study-plan-card .card-body {
+  padding-inline: 1px;
+}
+.study-plan-card .card-body .card-title {
+  font-size: 14px;
+  font-family: "Times New Roman", Times, serif;
+  color: black;
+}
+.study-plan-card .card-body .card-text {
+    font-family: "Times New Roman", Times, serif;
+    color: rgb(0 0 0 / 60%);
+    font-size: 12px;
+}
+.horizontal-filter{
+  margin-top:10px;
+}
+.horizontal-filter .dropdown-toggle {
+  margin: 3px;
+  background-color: #e5e6e8;
+  border: none;
+  outline:none;
+  width:fit-content;
+  color:black;
+  height: fit-content;
+}
+.horizontal-filter .dropdown-menu {
+    background-color: white;
+}
+.horizontal-filter .dropdown-menu .dropdown-item {
+  color: black;
+  font-size: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.horizontal-filter .dropdown-menu .dropdown-item:hover {
+  background-color: #e5e6e8;
+}
+.horizontal-filter input[type=search] {
+  height: 45px;
+  margin-top: 2px;
+  background-color: #e5e6e8;
+  color: black;
+  border: none;
+  border-end-end-radius: 0;
+  border-start-end-radius: 0;
+  outline: none;
+}
+.horizontal-filter input[type=search]::-moz-placeholder {
+  color: black;
+}
+.horizontal-filter input[type=search]::placeholder {
+  color: black;
+}
+.horizontal-filter input[type=search]:focus {
+  border-color: inherit;
+  box-shadow: none;
+  outline: none;
+}
+.horizontal-filter .input-group-append {
+  height:45px;
+  background-color: #e5e6e8;
+  border: none;
+  border-radius: 0;
+}
+
+.horizontal-filter .dropdown-toggle:focus{
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
+.horizontal-filter .btn-md {
+    padding: 9px 30px;
+}
+.horizontal-filter .shuffle-container {
+  padding-top: 9px;
+  border: 0;
+}
+.horizontal-filter .shuffle-container .shuffle {
+  justify-content: center;
+  align-items: center;
+  padding-inline: 5px;
+}
+.horizontal-filter .shuffle-container .shuffle img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-inline: 10px;
+}
+.horizontal-filter .shuffle-container .shuffle span {
+  font-size: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: aqua;
+  font-weight:600;
+}
+
+.problem-list table {
+  text-decoration: none;
+  margin-top:10px;
+}
+.problem-list table thead th,
+.problem-list table td {
+  font-size: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  vertical-align: middle;
+}
+.problem-list table tr:nth-child(even) td,
+.problem-list table th {
+  background-color: white;
+  height: 45px;
+}
+.problem-list table tr:nth-child(odd) td {
+  background-color: #f7f8fa;
+  height: 45px;
+}
+.problem-list table td:nth-child(2),
+.problem-list table td:nth-child(4) {
+  color: black;
+}
+.problem-list table td:nth-child(5) {
+  font-size: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.problem-list table td:last-child{
+  font-weight:600;
+}
+.problem-list table .fa-circle-check {
+  color: green;
+  transform: scale(1.4);
+}
+.problem-list table .fa-file-circle-check {
+  transform: scale(1.3);
+  color: rgb(15, 96, 177);
+}
+.problem-list table .fa-circle-half-stroke {
+  color: #caa127;
+  transform:scale(1.3);
+}
+.problem-list table .fa-file-video {
+  transform: scale(1.4);
+  color: #bf5af2;
+}
+.problem-list table .fa-calendar-minus {
+  transform: scale(1.4);
+  color: rgb(196, 52, 219);
+}
+.problem-list table .status-easy {
+  color: #00b8a3;  
+}
+.problem-list table .status-medium {
+  color: #ffc01e;
+}
+.problem-list table .status-hard {
+  color: #ff375f;
+}
+.problem-list .pagination-container {
+  display: flex;
+  justify-content: end;
+  margin-block:60px;
+}
+.problem-list .pagination-container .pagination {
+  margin-top: 10px;
+}
+.problem-list .pagination-container .pagination .page-link {
+  background-color: #f7f8fa;
+  border: none;
+  color: black;
+  box-shadow: none;
+  font-size: 14px;
+  border-radius: 5px !important;
+}
+.problem-list .pagination-container .pagination .page-link:hover {
+  background-color: #363636;
+  color: white;
+}
+.problem-list .pagination-container .pagination .page-item.active .page-link {
+  background-color: #363636;
+  
+}
+
+.user-session {
+  padding: 10px;
+  height: 190px;
+  border-radius: 10px;
+  margin-inline: -10px;
+  background-color: #eaebed;
+}
+.user-session .circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #eaebed;
+  margin-inline: 5px;
+  border: 3px solid #4a4a4a;
+  color: black;
+  position: absolute;
+}
+.user-session .circle > * {
+  position: relative;
+  top: 20%;
+  left: 32%;
+  margin-block: 2px;
+}
+.user-session .circle > span {
+  font-size: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  margin-left: 3px;
+}
+.user-session .circle > h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-inline: 5px;
+}
+.user-session .circle > hr {
+  width: 40%;
+  margin-left: 0px;
+  border: 1px solid #4a4a4a;
+}
+.user-session .dataDifficulty {
+  margin-top: 10px;
+}
+.user-session .dataDifficulty span:first-child {
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.user-session .dataDifficulty span:nth-child(2) {
+  color: #8f8282;
+  font-size: 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.user-session .dataDifficulty p {
+  font-size: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-right: 10px;
+  font-weight: 600;
+}
+.user-session .dataDifficulty .difficulty-easy p {
+  color: #00b8a3;
+}
+.user-session .dataDifficulty .difficulty-medium p {
+  color: #ffc01e;
+}
+.user-session .dataDifficulty .difficulty-hard p {
+  color: #ff375f;
+}
+.user-session .session-header {
+  color: black;
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.user-session .session-name {
+  font-size: 12px;
+  margin-left: -15px;
+  border-radius: 5px;
+  padding-block: 5px;
+  padding-inline: 10px;
+  background-color: #4a4a4a;
+  color: RGBA(239, 242, 246, 0.6);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.user-session .session-name i {
+  margin-left: 5px;
+  font-size: 14px;
+  color: RGBA(239, 242, 246, 0.6);
 }/*# sourceMappingURL=styles.css.map */
+
+.form-floating > .form-control:disabled ~ label::after, .form-floating > :disabled ~ label::after{
+    background-color: #353535;
+}

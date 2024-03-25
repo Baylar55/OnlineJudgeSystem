@@ -7673,14 +7673,6 @@
       "PackagePath": "staticwebassets\\assets\\css\\styles.css"
     },
     {
-      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\css\\styles.css.map",
-      "PackagePath": "staticwebassets\\assets\\css\\styles.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\css\\styles.scss",
-      "PackagePath": "staticwebassets\\assets\\css\\styles.scss"
-    },
-    {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\01_preview.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\01_preview.jpg"
     },
@@ -7689,8 +7681,8 @@
       "PackagePath": "staticwebassets\\assets\\img\\404.png"
     },
     {
-      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\AnyDesk.exe",
-      "PackagePath": "staticwebassets\\assets\\img\\AnyDesk.exe"
+      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\algocode-75.png",
+      "PackagePath": "staticwebassets\\assets\\img\\algocode-75.png"
     },
     {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\algocodelogo-light.png",
@@ -7853,6 +7845,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\career.png"
     },
     {
+      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\checkmark.png",
+      "PackagePath": "staticwebassets\\assets\\img\\checkmark.png"
+    },
+    {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\colored.png",
       "PackagePath": "staticwebassets\\assets\\img\\colored.png"
     },
@@ -7949,8 +7945,16 @@
       "PackagePath": "staticwebassets\\assets\\img\\img-3.png"
     },
     {
+      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\interview-img.jpeg",
+      "PackagePath": "staticwebassets\\assets\\img\\interview-img.jpeg"
+    },
+    {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\itsoft-1.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\itsoft-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\js-30.png",
+      "PackagePath": "staticwebassets\\assets\\img\\js-30.png"
     },
     {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\lg-1.png",
@@ -8005,10 +8009,6 @@
       "PackagePath": "staticwebassets\\assets\\img\\logo-h3.png"
     },
     {
-      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\logo-light.png",
-      "PackagePath": "staticwebassets\\assets\\img\\logo-light.png"
-    },
-    {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\logo.png",
       "PackagePath": "staticwebassets\\assets\\img\\logo.png"
     },
@@ -8035,6 +8035,10 @@
     {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\rate.png",
       "PackagePath": "staticwebassets\\assets\\img\\rate.png"
+    },
+    {
+      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\shuffle_icon.png",
+      "PackagePath": "staticwebassets\\assets\\img\\shuffle_icon.png"
     },
     {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\side-1.jpg",
@@ -8109,6 +8113,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\team-5.jpg"
     },
     {
+      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\top-int.png",
+      "PackagePath": "staticwebassets\\assets\\img\\top-int.png"
+    },
+    {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\img\\user-1.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\user-1.jpg"
     },
@@ -8155,6 +8163,10 @@
     {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\js\\calendar.js",
+      "PackagePath": "staticwebassets\\assets\\js\\calendar.js"
     },
     {
       "Id": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\wwwroot\\assets\\js\\custom.js",

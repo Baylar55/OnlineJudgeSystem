@@ -21,7 +21,8 @@
                 Description = request.Description,
                 Difficulty = request.Difficulty,
                 Point = request.Point,
-                MethodName = request.MethodName
+                MethodName = request.MethodName,
+                CodeTemplate = request.CodeTemplate
             };
             _context.Problems.Add(problem);
             await _context.SaveChangesAsync(cancellationToken);

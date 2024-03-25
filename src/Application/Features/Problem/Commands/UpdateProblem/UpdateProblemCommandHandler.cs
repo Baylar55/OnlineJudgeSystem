@@ -20,6 +20,7 @@
             problem.Status = request.Status;
             problem.Point = request.Point;
             problem.MethodName = request.MethodName;
+            problem.CodeTemplate = request.CodeTemplate;
             _context.Problems.Update(problem);
             await _context.SaveChangesAsync(cancellationToken);
             return validationResult;

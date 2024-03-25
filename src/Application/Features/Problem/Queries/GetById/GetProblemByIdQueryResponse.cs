@@ -5,6 +5,7 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public string MethodName { get; set; }
+        public string CodeTemplate { get; set; }
         public int Point { get; set; }
         public string Difficulty { get; set; }
         public string Status { get; set; }

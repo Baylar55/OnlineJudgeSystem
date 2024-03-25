@@ -30,9 +30,6 @@
 	  <None Include="wwwroot\assets\css\fonts\houses.svg" />
 	  <None Include="wwwroot\assets\css\fonts\themify9f24.svg" />
 	  <None Include="wwwroot\assets\css\plugins\font\summernote.woff2" />
-	  <None Include="wwwroot\assets\css\styles.css.map" />
-	  <None Include="wwwroot\assets\css\styles.scss" />
-	  <None Include="wwwroot\assets\img\AnyDesk.exe" />
 	  <None Include="wwwroot\assets\js\bootstrap.min.js" />
 	  <None Include="wwwroot\assets\js\custom.js" />
 	  <None Include="wwwroot\assets\js\daterangepicker.js" />

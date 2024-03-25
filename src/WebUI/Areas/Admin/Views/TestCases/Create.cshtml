@@ -21,9 +21,9 @@
                             </div>
 
                            <div class="form-group">
-                                <label>Problems</label>
-                                <select class="form-control" asp-items="@ViewBag.SelectItems"></select>
-                                <span class="form-text text-danger "></span>
+                                <label asp-for="ProblemId">Problems</label>
+                                <select class="form-control" asp-for="ProblemId" asp-items="@ViewBag.SelectItems"></select>
+                                <span class="form-text text-danger" asp-validation-for="ProblemId"></span>
                             </div> 
 
                             <button type="submit" class="btn btn-primary me-2">Submit</button>

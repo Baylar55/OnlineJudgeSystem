@@ -25,7 +25,7 @@
             {
                 Id = testCase.Id,
                 ProblemId = testCase.ProblemId,
-                Input = testCase.Inputs,
+                Input = testCase.Input,
                 ExpectedOutput = testCase.ExpectedOutput
             };
         }

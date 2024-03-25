@@ -1,0 +1,368 @@
+﻿@using AlgoCode.Application.Features.Problem.Queries.GetById
+@model GetProblemByIdWithTestCaseQueryResponse
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Description and Code Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"
+            integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://kit.fontawesome.com/0aae8d5fb5.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .card-content {
+            height: 100%;
+        }
+
+        .submission-table > tbody > tr > td {
+            font-weight: 500;
+            font-size: 14px;
+            font-family: 'Segoe UI';
+        }
+
+        .accepted {
+            color: #2cbb5d !important;
+        }
+
+        .rejected {
+            color: red !important;
+        }
+
+        .btn-compiler-test {
+            background-color: #262626 !important;
+            border-color: white;
+            position: relative;
+            transform: translateX(2%) translateY(25%);
+        }
+
+        .btn-container {
+            display: flex;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            gap: 10px;
+        }
+
+            .btn-container button {
+                width: fit-content;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Side: Problem Description -->
+
+            <div class="col-md-6">
+                <div class="card mt-3">
+                    <div class="card-header bg-transparent">
+                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                            <li class="nav-item me-2" role="presentation">
+                                <button class="btn btn-sm active btn-outline-success border-0 fw-bold"
+                                        id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description"
+                                        type="button" role="tab" aria-controls="pills-description"
+                                        aria-selected="true">
+                                    Description
+                                </button>
+                            </li>
+                            <li class="nav-item me-2" role="presentation">
+                                <button class="btn btn-sm btn-outline-success border-0 fw-bold" id="pills-solution-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-solution" type="button" role="tab"
+                                        aria-controls="pills-solution" aria-selected="false">
+                                    Solutions
+                                </button>
+                            </li>
+                            <li class="nav-item me-2" role="presentation">
+                                <button class="btn btn-sm btn-outline-success border-0 fw-bold"
+                                        id="pills-submission-tab" data-bs-toggle="pill" data-bs-target="#pills-submission"
+                                        type="button" role="tab" aria-controls="pills-submission"
+                                        aria-selected="false">
+                                    Submissions
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+                                 aria-labelledby="pills-description-tab" tabindex="0">
+                                <div>
+                                    Point:@Model.Point
+                                    Difficulty:@Model.Difficulty
+                                    Status:@Model.Status
+
+                                    @Html.Raw(@Model.Description)
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-submission" role="tabpanel"
+                                 aria-labelledby="pills-submission-tab" tabindex="0">
+                                <div>
+                                    <table class="table submission-table" align="center">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Runtime</th>
+                                                <th scope="col">Memory</th>
+                                                <th scope="col">Submitted at</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="rejected"><i class="fa-solid fa-ban me-2"></i>Rejected</td>
+                                                <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
+                                                <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
+                                                <td>2022-01-01 12:00:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="accepted">
+                                                    <i class="fa-regular fa-circle-check me-2"></i>Accepted
+                                                </td>
+                                                <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
+                                                <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
+                                                <td>2022-01-01 12:00:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="accepted">
+                                                    <i class="fa-regular fa-circle-check me-2"></i>Accepted
+                                                </td>
+                                                <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
+                                                <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
+                                                <td>2022-01-01 12:00:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="rejected"><i class="fa-solid fa-ban me-2"></i>Rejected</td>
+                                                <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
+                                                <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
+                                                <td>2022-01-01 12:00:00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-solution" role="tabpanel"
+                                 aria-labelledby="pills-solution-tab" tabindex="0">
+                                <div id="editor">This is some solution content.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Code Editor and Output -->
+
+            <div class="col-md-6">
+                <div class="row">
+                    <!-- Top Right: Code Editor -->
+                    <div class="col mt-2">
+                        <div class="h-50 mt-2">
+                            <div class="card" style="background-color: #262626;">
+                                <div>
+                                    <div style="position: relative;transform: translateX(2%) translateY(25%);">
+                                        <p class="card-title text-white fw-bold" style="height: 37px;">
+                                            <i class="fa-solid fa-code me-1" style="color:green;"></i>
+                                            Code
+                                        </p>
+                                    </div>
+                                    <div id="monaco-editor" class="border-0" style="height: 300px;"></div>
+                                </div>
+                            </div>
+                            <div class="btn-container">
+                                <button type="button" class="mt-2 btn btn-outline-primary btn-sm" onclick="runCode()">
+                                    <i class="fa-solid fa-play me-2"></i>Run
+                                </button>
+                                <button type="button" class="mt-2 btn btn-outline-success btn-sm">
+                                    <i class="fa-solid fa-cloud-arrow-up me-2"></i>Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Bottom Right: Output and Test Cases -->
+                    <div class="col">
+                        <div class="h-50" style="width:625px;">
+                            <div class="card-body card-content">
+                                <div class="card mt-2" style="background-color: #262626;">
+                                    <div>
+                                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                            <li class="nav-item me-2" role="presentation">
+                                                <button class="btn btn-compiler-test btn-sm active btn-outline-secondary border-0 fw-bold"
+                                                        id="pills-testcase-tab" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-testcase" type="button" role="tab"
+                                                        aria-controls="pills-testcase" aria-selected="true">
+                                                    <i class="fa-regular fa-square-check me-1"
+                                                       style="color:green;"></i>
+                                                    Testcase
+                                                </button>
+                                            </li>
+                                            <li class="nav-item me-2" role="presentation">
+                                                <button class="btn btn-sm btn-compiler-test btn-outline-secondary border-0 fw-bold"
+                                                        id="pills-testresult-tab" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-testresult" type="button" role="tab"
+                                                        aria-controls="pills-testresult" aria-selected="false">
+                                                    <i class="fa-solid fa-terminal me-1" style="color:green;"></i>
+                                                    Test Result
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-testcase" role="tabpanel"
+                                             aria-labelledby="pills-testcase-tab" tabindex="0">
+                                            <div class="card border-0 mt-3" style="background-color: #262626;">
+                                                @foreach (var testcase in Model.TestCases)
+                                                {
+                                                    <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
+                                                        <input disabled class="form-control shadow-none border-0 text-white"
+                                                               id="floatingInput" style="background-color: #353535;"
+                                                               placeholder="sample" value="@testcase.Input">
+                                                        <label class="ms-3" for="floatingInput">Input</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
+                                                        <input disabled class="form-control shadow-none border-0 text-white"
+                                                               id="floatingOutput" style="background-color: #353535;"
+                                                               placeholder="sample" value="@testcase.ExpectedOutput">
+                                                        <label class="ms-3" for="floatingOutput">Expected Output</label>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-testresult" role="tabpanel"
+                                             aria-labelledby="pills-testresult-tab" tabindex="0">
+                                            <div class="ms-3 mt-3 mb-3">
+                                                <h6 id="statusText"></h6>
+                                                <div id="resultContainer" class="text-white fw-bold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        console.log("ckeditor working");
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            </script>
+
+            <script>
+
+                var editorOptions = {
+                    value: [
+                        // 'using System;',
+                        // 'public class Program',
+                        // '{',
+                        // '    public static void Main()',
+                        // '    {',
+                        // '        Console.WriteLine(LibMethod());',
+                        // '    }',
+                        // '    public static bool LibMethod()',
+                        // '    {',
+                        // '        return true;',
+                        // '    }',
+                        // '}'
+                        `@Html.Raw(Model.CodeTemplate)`
+                    ].join('\n'),
+                    language: 'csharp',
+                    theme: 'vs-dark',
+                    automaticLayout: true
+                };
+
+
+                require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' } });
+                require(['vs/editor/editor.main'], function () {
+                    var editor = monaco.editor.create(document.getElementById('monaco-editor'), editorOptions);
+                    window.editor = editor;
+                });
+
+
+                function runCode() {
+                    var codeToRun = window.editor.getModel().getValue();
+                    var inputValue = $('#floatingInput').val();
+                    var outputValue = $('#floatingOutput').val();
+
+                    console.log(outputValue);
+
+                    myCode = codeToRun;
+                    var requestData = {
+                        code: myCode,
+                        testCases: [{
+                            input: inputValue,
+                            expectedOutput: outputValue
+                        }],
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Problems/CompileAndRun",
+                        contentType: 'application/json',
+                        data: JSON.stringify(requestData),
+                        success: function (result) {
+                            var testResultContainer = document.getElementById("resultContainer");
+                            testResultContainer.innerHTML = result;
+                            if (result.toLowerCase().includes("compilation error") || result.toLowerCase().includes("failed")) {
+                                updateStatus("Rejected: Test failed");
+                            } else {
+                                updateStatus("Accepted");
+                            }
+                        },
+                        error: function (error) {
+                            updateStatus("Rejected");
+                            console.log(error);
+                            console.log("it doesn't work");
+                        }
+                    });
+                    switchToTestResultTab();
+                }
+
+                function switchToTestResultTab() {
+                    $('#pills-testcase-tab').removeClass('active');
+                    $('#pills-testresult-tab').addClass('active');
+
+                    $('#pills-testcase').removeClass('show active');
+                    $('#pills-testresult').addClass('show active');
+                }
+
+                function updateStatus(status) {
+                    var statusElement = document.getElementById("statusText");
+                    statusElement.textContent = status;
+                    statusElement.classList.remove("accepted", "rejected");
+
+                    for (var i = 0; i < statusElement.classList.length; i++) {
+                        console.log(statusElement.classList[i]);
+                    }
+
+                    if (status.toLowerCase().includes("accepted")) {
+                        statusElement.classList.add("accepted");
+                    } else if (status.toLowerCase().includes("rejected")) {
+                        statusElement.classList.add("rejected");
+                    } else {
+                        statusElement.classList.add("rejected");
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</body>
+
+</html> 

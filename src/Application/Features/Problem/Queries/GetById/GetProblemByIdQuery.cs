@@ -19,6 +19,7 @@
                 Title = entity.Title,
                 Description = entity.Description,
                 MethodName = entity.MethodName,
+                CodeTemplate = entity.CodeTemplate,
                 Point = entity.Point,
                 Difficulty = entity.Difficulty.ToString(),
                 Status = entity.Status.ToString(),

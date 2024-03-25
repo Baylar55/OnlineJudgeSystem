@@ -112,6 +112,10 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CodeTemplate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("datetimeoffset");
 
@@ -321,7 +325,7 @@ namespace AlgoCode.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Inputs")
+                    b.Property<string>("Input")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

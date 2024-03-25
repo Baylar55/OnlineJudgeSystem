@@ -70,20 +70,35 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
 
             foreach (var testCase in testCases)
             {
-                var parameters = testCase.Inputs.Select(str => (object)str).ToArray();
-                //var expectedOutput = (object)testCase.ExpectedOutput;
+                var parameter = testCase.Input; // Change to single string instead of array
                 var expectedOutput = Convert.ChangeType(testCase.ExpectedOutput, typeof(object));
-                var exp = testCase.ExpectedOutput;
+
                 Type? solutionType = assembly.GetType("Solution");
                 MethodInfo? methodInfo = solutionType.GetMethod("IsPalindrome");
-                for (int i = 0; i < parameters.Length; i++)
+
+                ParameterInfo[] methodParams = methodInfo.GetParameters();
+                if (methodParams.Length != 1)
                 {
-                    ParameterInfo paramInfo = methodInfo.GetParameters()[i];
-                    if (parameters[i] != null)
+                    results.Add($"Test case failed: Method 'IsPalindrome' does not have exactly one parameter.");
+                    continue;
+                }
+
+                ParameterInfo paramInfo = methodParams[0];
+
+                object? parameterValue = null;
+                if (!string.IsNullOrWhiteSpace(parameter))
+                {
+                    try
                     {
-                        parameters[i] = Convert.ChangeType(parameters[i].ToString(), paramInfo.ParameterType);
+                        parameterValue = Convert.ChangeType(parameter, paramInfo.ParameterType);
+                    }
+                    catch (Exception ex)
+                    {
+                        results.Add($"Test case failed: Failed to convert input parameter '{parameter}' to type '{paramInfo.ParameterType}'. Reason: {ex.Message}");
+                        continue;
                     }
                 }
+
                 try
                 {
                     if (solutionType == null)
@@ -91,17 +106,19 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
                         results.Add($"Test case failed: Solution type not found.");
                         continue;
                     }
+
                     object? instance = Activator.CreateInstance(solutionType);
-                    object? actualOutput = methodInfo.Invoke(instance, parameters);
+                    object? actualOutput = methodInfo.Invoke(instance, new[] { parameterValue });
+
                     Type returnType = methodInfo.ReturnType;
 
                     actualOutput = Convert.ChangeType(actualOutput?.ToString(), returnType);
                     expectedOutput = Convert.ChangeType(expectedOutput.ToString(), returnType);
 
                     if (!actualOutput.Equals(expectedOutput))
-                        results.Add($"Test case failed: Inputs: {string.Join(", ", testCase.Inputs)}, Expected: {expectedOutput}, Actual: {actualOutput}");
+                        results.Add($"Test case failed: Input: {parameter}, Expected: {expectedOutput}, Actual: {actualOutput}");
                     else
-                        results.Add($"Test case passed: Inputs: {string.Join(", ", testCase.Inputs)}, Expected Output: {expectedOutput}, Actual Output: {actualOutput}");
+                        results.Add($"Test case passed: Input: {parameter}, Expected Output: {expectedOutput}, Actual Output: {actualOutput}");
                 }
                 catch (Exception ex)
                 {
@@ -110,5 +127,6 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
             }
             return results.Any() ? string.Join("\n", results) : "All test cases passed successfully";
         }
+
     }
 }
