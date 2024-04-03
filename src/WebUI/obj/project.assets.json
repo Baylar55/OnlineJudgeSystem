@@ -3014,7 +3014,8 @@
           "FluentValidation.DependencyInjectionExtensions": "11.9.0",
           "Microsoft.AspNetCore.Identity.UI": "8.0.2",
           "Microsoft.CodeAnalysis.CSharp": "4.5.0",
-          "Microsoft.EntityFrameworkCore": "8.0.2"
+          "Microsoft.EntityFrameworkCore": "8.0.2",
+          "Newtonsoft.Json": "13.0.3"
         },
         "compile": {
           "bin/placeholder/AlgoCode.Application.dll": {}

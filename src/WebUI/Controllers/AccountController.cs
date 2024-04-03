@@ -45,7 +45,7 @@ namespace AlgoCode.WebUI.Controllers
                 _errorHandlingService.AddErrorsToModelState(validationResult);
                 return View(command);
             }
-            return RedirectToAction("Index", "Tags");
+            return RedirectToAction("Index", "Problems");
         }
     }
 }

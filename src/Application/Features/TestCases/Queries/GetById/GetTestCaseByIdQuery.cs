@@ -20,12 +20,12 @@
                 validationResult.IsValid = false;
                 validationResult.Errors.Add("Id", ["Test case not found"]);
             }
-
+            var inp = testCase.InputParameter;
             return new GetTestCaseByIdQueryResponse
             {
                 Id = testCase.Id,
                 ProblemId = testCase.ProblemId,
-                Input = testCase.Input,
+                Inputs = testCase.InputParameter,
                 ExpectedOutput = testCase.ExpectedOutput
             };
         }

@@ -21,7 +21,7 @@ namespace AlgoCode.WebUI.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CompileAndRun([FromBody] CompileProblemCommand command)
+        public async Task<IActionResult> CompileAndRun([FromBody]CompileProblemCommand command)
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");

@@ -29,6 +29,7 @@
         public async Task<GetProblemByIdWithTestCaseQueryResponse> Handle(GetProblemByIdWithTestCaseQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Problems.Include(x => x.TestCases).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+
             return new GetProblemByIdWithTestCaseQueryResponse
             {
                 Title = entity.Title,
@@ -44,7 +45,7 @@
                 LastModifiedBy = entity.LastModifiedBy,
                 TestCases = entity.TestCases.Select(x => new TestCase
                 {
-                    Input = x.Input,
+                    InputParameter  = x.InputParameter, 
                     ExpectedOutput = x.ExpectedOutput
                 }).ToList()
             };

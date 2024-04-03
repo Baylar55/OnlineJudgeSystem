@@ -18,7 +18,7 @@
             }
 
             testCase.ProblemId = request.ProblemId;
-            testCase.Input = request.Input;
+            testCase.InputParameter = request.Inputs;
             testCase.ExpectedOutput = request.ExpectedOutput;
 
             _context.TestCases.Update(testCase);

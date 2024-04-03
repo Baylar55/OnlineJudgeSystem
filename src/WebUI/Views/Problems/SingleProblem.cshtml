@@ -221,22 +221,21 @@
                                         <div class="tab-pane fade show active" id="pills-testcase" role="tabpanel"
                                              aria-labelledby="pills-testcase-tab" tabindex="0">
                                             <div class="card border-0 mt-3" style="background-color: #262626;">
-                                                @foreach (var testcase in Model.TestCases)
+                                                 @foreach (var testcase in Model.TestCases)
                                                 {
-                                                    <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                                        <input disabled class="form-control shadow-none border-0 text-white"
-                                                               id="floatingInput" style="background-color: #353535;"
-                                                               placeholder="sample" value="@testcase.Input">
-                                                        <label class="ms-3" for="floatingInput">Input</label>
-                                                    </div>
+                                                <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
+                                                        <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x => "\"" + x + "\""))">
 
-                                                    <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                                        <input disabled class="form-control shadow-none border-0 text-white"
-                                                               id="floatingOutput" style="background-color: #353535;"
-                                                               placeholder="sample" value="@testcase.ExpectedOutput">
-                                                        <label class="ms-3" for="floatingOutput">Expected Output</label>
-                                                    </div>
-                                                }
+                                                <label class="ms-3" for="floatingInput">Input</label>
+                                                </div>
+
+                                                <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
+                                                <input disabled class="form-control shadow-none border-0 text-white"
+                                                id="floatingOutput" style="background-color: #353535;"
+                                                placeholder="sample" value="@testcase.ExpectedOutput">
+                                                <label class="ms-3" for="floatingOutput">Expected Output</label>
+                                                </div>
+                                                } 
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="pills-testresult" role="tabpanel"
@@ -300,18 +299,17 @@
                     var codeToRun = window.editor.getModel().getValue();
                     var inputValue = $('#floatingInput').val();
                     var outputValue = $('#floatingOutput').val();
+                    var inputArray = JSON.parse("[" + inputValue + "]");
 
-                    console.log(outputValue);
-
-                    myCode = codeToRun;
                     var requestData = {
-                        code: myCode,
-                        testCases: [{
-                            input: inputValue,
-                            expectedOutput: outputValue
+                        Code: codeToRun,
+                        TestCases: [{
+                            InputParameter: inputArray,
+                            ExpectedOutput: outputValue
                         }],
+                        MethodName: `@Model.MethodName`,
                     };
-
+                    // console.log("inputParameter : " + requestData.TestCases[0].InputParameter);  
                     $.ajax({
                         type: 'POST',
                         url: "/Problems/CompileAndRun",
@@ -322,6 +320,7 @@
                             testResultContainer.innerHTML = result;
                             if (result.toLowerCase().includes("compilation error") || result.toLowerCase().includes("failed")) {
                                 updateStatus("Rejected: Test failed");
+                                console.log(requestData.TestCases);
                             } else {
                                 updateStatus("Accepted");
                             }
@@ -329,11 +328,13 @@
                         error: function (error) {
                             updateStatus("Rejected");
                             console.log(error);
-                            console.log("it doesn't work");
                         }
                     });
                     switchToTestResultTab();
                 }
+
+
+               
 
                 function switchToTestResultTab() {
                     $('#pills-testcase-tab').removeClass('active');

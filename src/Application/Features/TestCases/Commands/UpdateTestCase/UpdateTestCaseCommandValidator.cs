@@ -8,7 +8,7 @@
                 .NotEmpty().WithMessage("Problem is required.")
                 .NotNull();
 
-            RuleFor(p => p.Input)
+            RuleFor(p => p.Inputs)
                 .NotEmpty().WithMessage("Input is required.")
                 .NotNull();
 

@@ -10,7 +10,7 @@
             var entity = new TestCase
             {
                 ProblemId = request.ProblemId,
-                Input = request.Input,
+                InputParameter = request.Inputs,
                 ExpectedOutput = request.ExpectedOutput
             };
 
