@@ -287,7 +287,7 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
                             methodParameters[i] = intArray;
                         }
                         else
-                            methodParameters[i] = JsonSerializer.Deserialize(parameters[i], parameterType);
+                            methodParameters[i] = Convert.ChangeType(parameters[i], parameterType);
                     }
 
                     object? instance = Activator.CreateInstance(solutionType);

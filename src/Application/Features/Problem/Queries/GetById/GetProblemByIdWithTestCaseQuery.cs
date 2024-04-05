@@ -7,6 +7,7 @@
 
     public class GetProblemByIdWithTestCaseQueryResponse
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string MethodName { get; set; }
@@ -32,6 +33,7 @@
 
             return new GetProblemByIdWithTestCaseQueryResponse
             {
+                Id = entity.Id,
                 Title = entity.Title,
                 Description = entity.Description,
                 MethodName = entity.MethodName,

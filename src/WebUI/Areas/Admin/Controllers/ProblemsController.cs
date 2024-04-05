@@ -3,7 +3,10 @@ using AlgoCode.Application.Features.Problem.Commands.DeleteProblem;
 using AlgoCode.Application.Features.Problem.Commands.UpdateProblem;
 using AlgoCode.Application.Features.Problem.Queries.GetAll;
 using AlgoCode.Application.Features.Problem.Queries.GetById;
+using AlgoCode.Application.Features.Tags.Queries.GetAll;
 using AlgoCode.Domain.Constants;
+using AlgoCode.Domain.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AlgoCode.WebUI.Areas.Admin.Controllers
 {
@@ -28,10 +31,14 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+
+            var tags = await Mediator.Send(new GetTagsWithPaginationQuery());
+            ViewBag.SelectItems =  new SelectList(tags.Tags, "Id", "Title");
             return View();
         }
+
 
         [HttpPost("[action]")]
         public async Task<IActionResult> Create(CreateProblemCommand command)

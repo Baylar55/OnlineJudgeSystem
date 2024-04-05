@@ -1,6 +1,14 @@
 ﻿@using AlgoCode.Application.Features.Problem.Queries.GetById
 @model GetProblemByIdWithTestCaseQueryResponse
-
+@{
+    string badgeClass = Model.Difficulty.ToLower() switch
+    {
+        "hard" => "bg-danger",
+        "medium" => "bg-warning",
+        "easy" => "bg-success",
+        _ => "bg-primary" 
+    };
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,9 +106,12 @@
                             <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
                                  aria-labelledby="pills-description-tab" tabindex="0">
                                 <div>
-                                    Point:@Model.Point
-                                    Difficulty:@Model.Difficulty
-                                    Status:@Model.Status
+                                    <h4>
+                                        @Model.Id. @Model.Title
+                                    </h4>
+                                    <span class="badge @badgeClass mb-3">@Model.Difficulty</span>
+                                    <span class="badge bg-primary">@Model.Status</span>
+                                    <span class="badge bg-secondary">@Model.Point Point</span>
 
                                     @Html.Raw(@Model.Description)
                                 </div>
@@ -221,21 +232,21 @@
                                         <div class="tab-pane fade show active" id="pills-testcase" role="tabpanel"
                                              aria-labelledby="pills-testcase-tab" tabindex="0">
                                             <div class="card border-0 mt-3" style="background-color: #262626;">
-                                                 @foreach (var testcase in Model.TestCases)
+                                                @foreach (var testcase in Model.TestCases)
                                                 {
-                                                <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                                        <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x => "\"" + x + "\""))">
+                                                    <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
+                                                        <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x =>  x ))">
 
-                                                <label class="ms-3" for="floatingInput">Input</label>
-                                                </div>
+                                                        <label class="ms-3" for="floatingInput">Input</label>
+                                                    </div>
 
-                                                <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                                <input disabled class="form-control shadow-none border-0 text-white"
-                                                id="floatingOutput" style="background-color: #353535;"
-                                                placeholder="sample" value="@testcase.ExpectedOutput">
-                                                <label class="ms-3" for="floatingOutput">Expected Output</label>
-                                                </div>
-                                                } 
+                                                    <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
+                                                        <input disabled class="form-control shadow-none border-0 text-white"
+                                                               id="floatingOutput" style="background-color: #353535;"
+                                                               placeholder="sample" value="@testcase.ExpectedOutput">
+                                                        <label class="ms-3" for="floatingOutput">Expected Output</label>
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="pills-testresult" role="tabpanel"
@@ -309,7 +320,7 @@
                         }],
                         MethodName: `@Model.MethodName`,
                     };
-                    // console.log("inputParameter : " + requestData.TestCases[0].InputParameter);  
+                    console.log("inputParameter : " + requestData.TestCases[0].InputParameter);
                     $.ajax({
                         type: 'POST',
                         url: "/Problems/CompileAndRun",
@@ -334,7 +345,7 @@
                 }
 
 
-               
+
 
                 function switchToTestResultTab() {
                     $('#pills-testcase-tab').removeClass('active');

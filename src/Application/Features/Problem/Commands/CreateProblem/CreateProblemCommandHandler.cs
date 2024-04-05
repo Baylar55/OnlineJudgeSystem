@@ -24,6 +24,12 @@
                 MethodName = request.MethodName,
                 CodeTemplate = request.CodeTemplate
             };
+
+            if (request.TagIds != null && request.TagIds.Any())
+            {
+                problem.Tags = await _context.Tags.Where(t => request.TagIds.Contains(t.Id)).ToListAsync(cancellationToken);
+            }
+
             _context.Problems.Add(problem);
             await _context.SaveChangesAsync(cancellationToken);
             return validationResult;
