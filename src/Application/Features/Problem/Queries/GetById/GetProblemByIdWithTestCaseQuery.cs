@@ -20,6 +20,7 @@
         public DateTimeOffset? LastModified { get; set; }
         public string? LastModifiedBy { get; set; }
         public List<TestCase> TestCases { get; set; }
+        public List<Tag> Tags { get; set; }
     }
 
     public class GetProblemByIdWithTestCaseQueryHandler : IRequestHandler<GetProblemByIdWithTestCaseQuery, GetProblemByIdWithTestCaseQueryResponse>
@@ -29,7 +30,7 @@
 
         public async Task<GetProblemByIdWithTestCaseQueryResponse> Handle(GetProblemByIdWithTestCaseQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Problems.Include(x => x.TestCases).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var entity = await _context.Problems.Include(x => x.TestCases).Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             return new GetProblemByIdWithTestCaseQueryResponse
             {
@@ -47,8 +48,13 @@
                 LastModifiedBy = entity.LastModifiedBy,
                 TestCases = entity.TestCases.Select(x => new TestCase
                 {
-                    InputParameter  = x.InputParameter, 
+                    InputParameter = x.InputParameter,
                     ExpectedOutput = x.ExpectedOutput
+                }).ToList(),
+                Tags = entity.Tags.Select(x => new Tag
+                {
+                    Id = x.Id,
+                    Title = x.Title
                 }).ToList()
             };
         }

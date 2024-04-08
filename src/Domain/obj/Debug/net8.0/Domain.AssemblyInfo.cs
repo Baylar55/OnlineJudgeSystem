@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlgoCode.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cac8d86d094a20352d9c3ae8ed954c2b929e4dee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c82973ff57dce5d143b38cda8bc88131b0db110f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AlgoCode.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AlgoCode.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

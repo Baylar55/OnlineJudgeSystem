@@ -1,4 +1,5 @@
 ﻿using AlgoCode.Application.Features.Problem.Commands.CompileProblem;
+using AlgoCode.Application.Features.Problem.Commands.SubmitProblem;
 using AlgoCode.Application.Features.Problem.Queries.GetAll;
 using AlgoCode.Application.Features.Problem.Queries.GetById;
 using Microsoft.AspNetCore.Authorization;
@@ -21,7 +22,17 @@ namespace AlgoCode.WebUI.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CompileAndRun([FromBody]CompileProblemCommand command)
+        public async Task<IActionResult> CompileAndRun([FromBody] CompileProblemCommand command)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+            var result = await Mediator.Send(command);
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Submit([FromBody] SubmitProblemCommand command)
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");

@@ -13,5 +13,6 @@
         public string? CreatedBy { get; set; }
         public DateTimeOffset? LastModified { get; set; }
         public string? LastModifiedBy { get; set; }
+        public List<string> Tags { get; set; }
     }
 }

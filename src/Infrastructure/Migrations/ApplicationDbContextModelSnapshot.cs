@@ -275,7 +275,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Submission");
+                    b.ToTable("Submissions");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Tag", b =>

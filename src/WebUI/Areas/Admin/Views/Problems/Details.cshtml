@@ -51,6 +51,19 @@
                         <th>Modified By</th>
                         <td>@Model.LastModifiedBy</td>
                     </tr>
+                    <tr>
+                        <th>Tags</th>
+                        <td>
+                            @foreach (var tag in Model.Tags)
+                            {
+                                @tag
+                                @if (tag != Model.Tags[Model.Tags.Count-1])
+                                {
+                                    @:, 
+                                }
+                            }
+                        </td>
+                    </tr>
                 </tbody>
                 <a asp-action="index" asp-controller="problems" asp-area="admin" class="btn btn-info mb-2">Go to Back</a>
             </table>

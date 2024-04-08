@@ -13,7 +13,7 @@
 
         public async Task<GetProblemByIdQueryResponse> Handle(GetProblemByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Problems.FindAsync(request.Id, cancellationToken);
+            var entity = await _context.Problems.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
             return new GetProblemByIdQueryResponse
             {
                 Title = entity.Title,
@@ -26,7 +26,8 @@
                 Created = entity.Created,
                 CreatedBy = entity.CreatedBy,
                 LastModified = entity.LastModified,
-                LastModifiedBy = entity.LastModifiedBy
+                LastModifiedBy = entity.LastModifiedBy,
+                Tags = entity.Tags.Select(x => x.Title).ToList()
             };
         }
     }

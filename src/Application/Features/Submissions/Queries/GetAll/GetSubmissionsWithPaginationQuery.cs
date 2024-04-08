@@ -1,0 +1,48 @@
+﻿namespace AlgoCode.Application.Features.Submissions.Queries.GetAll
+{
+    public class GetSubmissionsWithPaginationQuery : IRequest<GetSubmissionsWithPaginationQueryResponse>
+    {
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+    }
+
+    public class GetSubmissionsWithPaginationQueryResponse
+    {
+        //public int Id { get; set; }
+        //public string ProblemName { get; set; }
+        //public string SourceCode { get; set; }
+        //public string Language { get; set; }
+        //public string Status { get; set; }
+        //public string SubmissionTime { get; set; }
+        //public string MemoryUsage { get; set; }
+        //public string ExecutionTime { get; set; }
+        public ICollection<Submission>? Submissions { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public int PageCount { get; set; }
+    }
+
+    public class GetSubmissionsWithPaginationQueryHandler : IRequestHandler<GetSubmissionsWithPaginationQuery, GetSubmissionsWithPaginationQueryResponse>
+    {
+        private readonly IApplicationDbContext _context;
+        public GetSubmissionsWithPaginationQueryHandler(IApplicationDbContext context) => _context = context;
+
+        public async Task<GetSubmissionsWithPaginationQueryResponse> Handle(GetSubmissionsWithPaginationQuery request, CancellationToken cancellationToken)
+        {
+            var submissions = await _context.Submissions.OrderByDescending(s => s.Id)
+                                                        .Skip((request.PageNumber - 1) * request.PageSize)
+                                                        .Take(request.PageSize)
+                                                        .ToListAsync();
+
+            var pageCount = (int)Math.Ceiling((await _context.Submissions.CountAsync()) / (decimal)request.PageSize);
+
+            return new()
+            {
+                Submissions = submissions,
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                PageCount = pageCount
+            };
+        }
+    }
+}

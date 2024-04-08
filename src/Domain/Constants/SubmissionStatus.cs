@@ -3,10 +3,10 @@
     public enum SubmissionStatus
     {
         Accepted,
+        CompilationError,
+        RuntimeError,
         WrongAnswer,
         TimeLimitExceeded,
-        MemoryLimitExceeded,
-        RuntimeError,
-        CompilationError
+        MemoryLimitExceeded
     }
 }

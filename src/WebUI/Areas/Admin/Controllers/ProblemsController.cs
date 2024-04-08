@@ -4,9 +4,6 @@ using AlgoCode.Application.Features.Problem.Commands.UpdateProblem;
 using AlgoCode.Application.Features.Problem.Queries.GetAll;
 using AlgoCode.Application.Features.Problem.Queries.GetById;
 using AlgoCode.Application.Features.Tags.Queries.GetAll;
-using AlgoCode.Domain.Constants;
-using AlgoCode.Domain.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AlgoCode.WebUI.Areas.Admin.Controllers
 {
@@ -35,7 +32,7 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
         {
 
             var tags = await Mediator.Send(new GetTagsWithPaginationQuery());
-            ViewBag.SelectItems =  new SelectList(tags.Tags, "Id", "Title");
+            ViewBag.SelectItems = new SelectList(tags.Tags, "Id", "Title");
             return View();
         }
 
@@ -56,6 +53,7 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Update(int id)
         {
             var response = await Mediator.Send(new GetProblemByIdQuery { Id = id });
+            var tags = await Mediator.Send(new GetTagsWithPaginationQuery());
             var mainModel = new UpdateProblemCommand
             {
                 Title = response.Title,
@@ -66,6 +64,7 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
                 Status = Enum.TryParse(response.Status, out ProblemStatus status) ? status : default,
                 Difficulty = Enum.TryParse(response.Difficulty, out ProblemDifficulty difficulty) ? difficulty : default
             };
+            ViewBag.SelectItems = new SelectList(tags.Tags, "Id", "Title");
             return View(mainModel);
         }
 

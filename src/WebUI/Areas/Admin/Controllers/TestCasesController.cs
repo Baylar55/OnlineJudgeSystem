@@ -1,13 +1,8 @@
-﻿using AlgoCode.Application.Features.Problem.Commands.UpdateProblem;
-using AlgoCode.Application.Features.Problem.Queries.GetAll;
-using AlgoCode.Application.Features.Problem.Queries.GetById;
+﻿using AlgoCode.Application.Features.Problem.Queries.GetAll;
 using AlgoCode.Application.Features.TestCases.Commands.CreateTestCase;
 using AlgoCode.Application.Features.TestCases.Commands.UpdateTestCase;
 using AlgoCode.Application.Features.TestCases.Queries.GetAll;
 using AlgoCode.Application.Features.TestCases.Queries.GetById;
-using AlgoCode.Domain.Constants;
-using AlgoCode.Domain.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AlgoCode.WebUI.Areas.Admin.Controllers
 {

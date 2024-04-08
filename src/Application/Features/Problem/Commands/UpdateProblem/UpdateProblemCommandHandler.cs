@@ -21,6 +21,7 @@
             problem.Point = request.Point;
             problem.MethodName = request.MethodName;
             problem.CodeTemplate = request.CodeTemplate;
+            problem.Tags = await _context.Tags.Where(x => request.TagIds.Contains(x.Id)).ToListAsync(cancellationToken);
             _context.Problems.Update(problem);
             await _context.SaveChangesAsync(cancellationToken);
             return validationResult;

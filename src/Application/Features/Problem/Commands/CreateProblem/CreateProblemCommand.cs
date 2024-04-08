@@ -8,6 +8,6 @@
         public int Point { get; set; }
         public string CodeTemplate { get; set; } = null!;
         public string MethodName { get; set; } = null!;
-        public List<int> TagIds { get; set; } 
+        public List<int> TagIds { get; set; }
     }
 }
