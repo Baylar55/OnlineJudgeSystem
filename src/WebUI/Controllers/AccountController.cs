@@ -1,15 +1,15 @@
 ﻿using AlgoCode.Application.Features.AppUser.Commands.LoginUser;
 using AlgoCode.Application.Features.AppUser.Commands.RegisterUser;
+using AlgoCode.Domain.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace AlgoCode.WebUI.Controllers
 {
     public class AccountController : BaseMVCController
     {
-        private readonly IErrorHandlingService _errorHandlingService;
-        public AccountController(IErrorHandlingService errorHandlingService)
-        {
-            _errorHandlingService = errorHandlingService;
-        }
+        private readonly SignInManager<ApplicationUser> _signInManager;
+
+        public AccountController(SignInManager<ApplicationUser> signInManager) => _signInManager = signInManager;
 
         [HttpGet]
         public IActionResult Register()
@@ -23,7 +23,7 @@ namespace AlgoCode.WebUI.Controllers
             var validationResult = await Mediator.Send(command);
             if (!validationResult.IsValid)
             {
-                _errorHandlingService.AddErrorsToModelState(validationResult);
+                ErrorHandlingService.AddErrorsToModelState(validationResult);
                 return View(command);
             }
             return RedirectToAction("Login", "Account");
@@ -42,10 +42,17 @@ namespace AlgoCode.WebUI.Controllers
             var validationResult = await Mediator.Send(command);
             if (!validationResult.IsValid)
             {
-                _errorHandlingService.AddErrorsToModelState(validationResult);
+                ErrorHandlingService.AddErrorsToModelState(validationResult);
                 return View(command);
             }
             return RedirectToAction("Index", "Problems");
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+        }
+
     }
 }

@@ -11,9 +11,6 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
     [Route("admin/tags")]
     public class TagsController : BaseMVCController
     {
-        private readonly IErrorHandlingService _errorHandlingService;
-        public TagsController(IErrorHandlingService errorHandlingService) => _errorHandlingService = errorHandlingService;
-
         [HttpGet("[action]")]
         public async Task<IActionResult> Index(int page)
         {
@@ -38,7 +35,7 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
             var validationResult = await Mediator.Send(command);
             if (!validationResult.IsValid)
             {
-                _errorHandlingService.AddErrorsToModelState(validationResult);
+                ErrorHandlingService.AddErrorsToModelState(validationResult);
                 return View(command);
             }
             return RedirectToAction("Index");
@@ -62,7 +59,7 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
             var validationResult = await Mediator.Send(command);
             if (!validationResult.IsValid)
             {
-                _errorHandlingService.AddErrorsToModelState(validationResult);
+                ErrorHandlingService.AddErrorsToModelState(validationResult);
                 return View(command);
             }
             return RedirectToAction("Index");

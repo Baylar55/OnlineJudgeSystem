@@ -13,8 +13,8 @@
 
         public async Task<ValidationResultModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var dbEmail = await _userManager.FindByEmailAsync(request.Email);
-            var dbUserName = await _userManager.FindByNameAsync(request.UserName);
+            ApplicationUser? dbEmail = await _userManager.FindByEmailAsync(request.Email);
+            ApplicationUser? dbUserName = await _userManager.FindByNameAsync(request.UserName);
             var validationResult = new ValidationResultModel();
             if (dbEmail != null)
             {
@@ -30,7 +30,7 @@
                 return validationResult;
             }
 
-            var user = new ApplicationUser
+            ApplicationUser user = new ApplicationUser
             {
                 Email = request.Email,
                 UserName = request.UserName
@@ -45,6 +45,14 @@
                 return validationResult;
             }
 
+            Session defaultSession = new Session
+            {
+                Title = "Default",
+                UserId = user.Id,
+                IsActive = true
+            };
+            await _context.Sessions.AddAsync(defaultSession);
+            await _context.SaveChangesAsync(cancellationToken);
             return validationResult;
         }
     }

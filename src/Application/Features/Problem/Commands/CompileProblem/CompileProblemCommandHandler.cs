@@ -34,7 +34,7 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
 
                 using var ms = new MemoryStream();
                 var emitResult = compilation.Emit(ms);
-                
+
                 if (!emitResult.Success)
                 {
                     var errors = emitResult.Diagnostics.Select(diagnostic => diagnostic.ToString());
@@ -67,7 +67,7 @@ namespace AlgoCode.Application.Features.Problem.Commands.CompileProblem
 
                     return new CompileProblemCommandResponse
                     {
-                        Result =testResults,
+                        Result = testResults,
                         MemoryUsage = elapsedMilliseconds,
                         ExecutionTime = (long)memoryUsageMB,
                         Status = testResults.Contains("error") ? SubmissionStatus.CompilationError : SubmissionStatus.Accepted

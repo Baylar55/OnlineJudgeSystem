@@ -4,8 +4,9 @@
     {
         public void Configure(EntityTypeBuilder<Session> builder)
         {
-            builder.HasMany(s => s.Problems)
-                .WithMany(u => u.Sessions);
+            builder.HasOne(s => s.User)
+                .WithMany(u => u.Sessions)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -17,10 +17,6 @@
                 .NotNull().WithMessage("Difficulty is required")
                 .NotEmpty().WithMessage("Difficulty is required");
 
-            RuleFor(v => v.Status)
-                .NotNull().WithMessage("Status is required")
-                .NotEmpty().WithMessage("Status is required");
-
             RuleFor(v => v.Point)
                 .NotNull().WithMessage("Point is required")
                 .NotEmpty().WithMessage("Point is required");

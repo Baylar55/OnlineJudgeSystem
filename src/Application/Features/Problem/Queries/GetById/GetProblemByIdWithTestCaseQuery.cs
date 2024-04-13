@@ -14,7 +14,6 @@
         public string CodeTemplate { get; set; }
         public int Point { get; set; }
         public string Difficulty { get; set; }
-        public string Status { get; set; }
         public DateTimeOffset Created { get; set; }
         public string? CreatedBy { get; set; }
         public DateTimeOffset? LastModified { get; set; }
@@ -41,7 +40,6 @@
                 CodeTemplate = entity.CodeTemplate,
                 Point = entity.Point,
                 Difficulty = entity.Difficulty.ToString(),
-                Status = entity.Status.ToString(),
                 Created = entity.Created,
                 CreatedBy = entity.CreatedBy,
                 LastModified = entity.LastModified,

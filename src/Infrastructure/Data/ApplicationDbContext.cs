@@ -12,6 +12,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Problem> Problems => Set<Problem>();
     public DbSet<TestCase> TestCases => Set<TestCase>();
     public DbSet<Submission> Submissions => Set<Submission>();
+    public DbSet<Session> Sessions => Set<Session>();
+    public DbSet<UserProblemStatus> UserProblemStatuses => Set<UserProblemStatus>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

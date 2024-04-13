@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlgoCode.Application.Features.Submissions.Queries.GetAll
+﻿namespace AlgoCode.Application.Features.Submissions.Queries.GetAll
 {
-    public class GetSubmissionsByProblemIdQuery:IRequest<ICollection<GetSubmissionsByProblemIdQueryResponse>>
+    public class GetSubmissionsByProblemIdQuery : IRequest<ICollection<GetSubmissionsByProblemIdQueryResponse>>
     {
         public int ProblemId { get; set; }
     }
@@ -27,8 +21,13 @@ namespace AlgoCode.Application.Features.Submissions.Queries.GetAll
 
         public async Task<ICollection<GetSubmissionsByProblemIdQueryResponse>> Handle(GetSubmissionsByProblemIdQuery request, CancellationToken cancellationToken)
         {
-            // get all submissions by problem id
-            var submissions = await _context.Submissions.Where(x => x.ProblemId == request.ProblemId).ToListAsync();
+            int activeSessionId = await _context.Sessions.Where(x => x.IsActive)
+                                                         .Select(x => x.Id)
+                                                         .FirstOrDefaultAsync();
+
+            var submissions = await _context.Submissions
+                                            .Where(x => x.ProblemId == request.ProblemId && x.SessionId==activeSessionId)
+                                            .ToListAsync(cancellationToken);
             return submissions.Select(x => new GetSubmissionsByProblemIdQueryResponse
             {
                 Language = x.Language,

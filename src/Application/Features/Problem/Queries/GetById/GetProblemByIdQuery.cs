@@ -22,7 +22,6 @@
                 CodeTemplate = entity.CodeTemplate,
                 Point = entity.Point,
                 Difficulty = entity.Difficulty.ToString(),
-                Status = entity.Status.ToString(),
                 Created = entity.Created,
                 CreatedBy = entity.CreatedBy,
                 LastModified = entity.LastModified,

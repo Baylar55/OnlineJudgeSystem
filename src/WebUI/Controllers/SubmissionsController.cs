@@ -1,6 +1,5 @@
 ﻿using AlgoCode.Application.Features.Submissions.Queries.GetAll;
 using AlgoCode.Application.Features.Submissions.Queries.GetById;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AlgoCode.WebUI.Controllers
 {

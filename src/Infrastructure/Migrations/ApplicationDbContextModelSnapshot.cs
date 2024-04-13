@@ -65,7 +65,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contest");
+                    b.ToTable("Contest", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.MockAssesment", b =>
@@ -101,7 +101,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MockAssesment");
+                    b.ToTable("MockAssesment", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Problem", b =>
@@ -151,7 +151,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Problems");
+                    b.ToTable("Problems", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Session", b =>
@@ -189,7 +189,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Session");
+                    b.ToTable("Session", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.StudyPlan", b =>
@@ -222,7 +222,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StudyPlan");
+                    b.ToTable("StudyPlan", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Submission", b =>
@@ -275,7 +275,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Submissions");
+                    b.ToTable("Submissions", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Tag", b =>
@@ -304,7 +304,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.TestCase", b =>
@@ -342,7 +342,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("ProblemId");
 
-                    b.ToTable("TestCases");
+                    b.ToTable("TestCases", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Identity.ApplicationUser", b =>
@@ -422,7 +422,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserContest");
+                    b.ToTable("ApplicationUserContest", (string)null);
                 });
 
             modelBuilder.Entity("ApplicationUserMockAssesment", b =>
@@ -437,7 +437,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserMockAssesment");
+                    b.ToTable("ApplicationUserMockAssesment", (string)null);
                 });
 
             modelBuilder.Entity("ApplicationUserProblem", b =>
@@ -452,7 +452,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserProblem");
+                    b.ToTable("ApplicationUserProblem", (string)null);
                 });
 
             modelBuilder.Entity("ApplicationUserStudyPlan", b =>
@@ -467,7 +467,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserStudyPlan");
+                    b.ToTable("ApplicationUserStudyPlan", (string)null);
                 });
 
             modelBuilder.Entity("ContestProblem", b =>
@@ -482,7 +482,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("ProblemsId");
 
-                    b.ToTable("ContestProblem");
+                    b.ToTable("ContestProblem", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -630,7 +630,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("ProblemsId");
 
-                    b.ToTable("MockAssesmentProblem");
+                    b.ToTable("MockAssesmentProblem", (string)null);
                 });
 
             modelBuilder.Entity("ProblemSession", b =>
@@ -645,7 +645,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("SessionsId");
 
-                    b.ToTable("ProblemSession");
+                    b.ToTable("ProblemSession", (string)null);
                 });
 
             modelBuilder.Entity("ProblemStudyPlan", b =>
@@ -660,7 +660,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("StudyPlansId");
 
-                    b.ToTable("ProblemStudyPlan");
+                    b.ToTable("ProblemStudyPlan", (string)null);
                 });
 
             modelBuilder.Entity("ProblemTag", b =>
@@ -675,7 +675,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("ProblemTag");
+                    b.ToTable("ProblemTag", (string)null);
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Session", b =>

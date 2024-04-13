@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlgoCode.Application.Features.Submissions.Queries.GetById
+﻿namespace AlgoCode.Application.Features.Submissions.Queries.GetById
 {
-    public class GetSubmissionByIdQuery:IRequest<GetSubmissionByIdQueryResponse>    
+    public class GetSubmissionByIdQuery : IRequest<GetSubmissionByIdQueryResponse>
     {
         public int Id { get; set; }
     }
