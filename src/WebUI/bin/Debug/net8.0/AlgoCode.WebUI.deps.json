@@ -10,6 +10,7 @@
         "dependencies": {
           "AlgoCode.Infrastructure": "1.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.2",
+          "Stripe.net": "44.2.0",
           "AlgoCode.Application.Reference": "1.0.0.0",
           "AlgoCode.Domain.Reference": "1.0.0.0",
           "AlgoCode.Infrastructure.Reference": "1.0.0.0"
@@ -1760,6 +1761,18 @@
           }
         }
       },
+      "Stripe.net/44.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Configuration.ConfigurationManager": "7.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Stripe.net.dll": {
+            "assemblyVersion": "44.2.0.0",
+            "fileVersion": "44.2.0.0"
+          }
+        }
+      },
       "System.CodeDom/5.0.0": {
         "runtime": {
           "lib/netstandard2.0/System.CodeDom.dll": {
@@ -2037,7 +2050,8 @@
           "Microsoft.AspNetCore.Identity.UI": "8.0.2",
           "Microsoft.CodeAnalysis.CSharp": "4.8.0",
           "Microsoft.EntityFrameworkCore": "8.0.2",
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.3",
+          "Stripe.net": "44.2.0"
         },
         "runtime": {
           "AlgoCode.Application.dll": {}
@@ -3042,6 +3056,13 @@
       "sha512": "sha512-ypnSvEtpNGo48bAWn95J1oHChycCXcevFSbn53fqzLxlXFSZP7dawu8p/7mHAfGufZQSV2sBpW80XQGIfXO8kQ==",
       "path": "nuget.versioning/6.9.1",
       "hashPath": "nuget.versioning.6.9.1.nupkg.sha512"
+    },
+    "Stripe.net/44.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2QMltgWLdGSiuuMDCXGOq9aCBwAYnJCfEjG1RojgRul/6nqYwnqjFPOGI++Igw0ogNeJgoZh0UfMN4weJaCmIA==",
+      "path": "stripe.net/44.2.0",
+      "hashPath": "stripe.net.44.2.0.nupkg.sha512"
     },
     "System.CodeDom/5.0.0": {
       "type": "package",

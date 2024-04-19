@@ -1,0 +1,58 @@
+﻿@using AlgoCode.Application.Features.Submissions.Queries.GetById
+@model GetSubmissionByIdQueryResponse
+@{
+    var statusColor = Model.Status == "Accepted" ? "text-success" : "text-danger";
+    TimeSpan timeElapsed = DateTime.UtcNow - Model.Created;
+
+    string timeElapsedString = "";
+
+    if (timeElapsed.TotalDays >= 1)
+        timeElapsedString = $"{(int)timeElapsed.TotalDays} day{(timeElapsed.TotalDays >= 2 ? "s" : "")} ";
+
+    if (timeElapsed.TotalHours >= 1)
+        timeElapsedString += $"{(int)timeElapsed.Hours} hour{(timeElapsed.Hours >= 2 ? "s" : "")} ago";
+    else
+    {
+        timeElapsedString = "Less than an hour ago";
+    }
+}
+<!-- ============================ Detail Start================================== -->
+
+<section class="page-header bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-md-12 text-start border-bottom">
+                <h3 class="text-info">Longest Palindromic Substring</h3>
+                <p class="text-dark fw-bolder fs-4">Submission Detail</p>
+                <div class="border border-dark-subtle mb-3 d-flex justify-content-between" style="border-width: 3px !important;">
+                    @{
+                        if (Model.Status == "Accepted")
+                        {
+                            <div class="border-left p-3">
+                                <p>All test cases passed</p>
+                                <p>Runtime: <span class="fw-bold">@Model.ExecutionTime ms</span></p>
+                                <p>Memory Usage: <span class="fw-bold">@Model.MemoryUsage MB</span></p>
+                            </div>
+                        }
+                    }
+                    <div class="border-right p-3 text-end">
+                        <p>Status: <span class="fw-bold @statusColor">@Model.Status</span></p>
+                        <p>Language: <span class="fw-bold">C#</span></p>
+                        <p>Submission Time: <span class="fw-bold">@timeElapsed</span></p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-info">Source Code</h4>
+                    <pre>
+                    <code class="language-csharp">@Model.SourceCode.TrimStart('\r', '\n')</code>                    
+                    </pre>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+<script>
+    hljs.addPlugin(new CopyButtonPlugin());
+</script>
+<!-- ============================ Detail End ================================== -->

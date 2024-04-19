@@ -14,7 +14,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Submission> Submissions => Set<Submission>();
     public DbSet<Session> Sessions => Set<Session>();
     public DbSet<UserProblemStatus> UserProblemStatuses => Set<UserProblemStatus>();
-
+    public DbSet<Subscription> Subscriptions => Set<Subscription>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -47,10 +47,15 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+	  <PackageReference Include="Stripe.net" Version="44.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />		
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\assets\images\" />
 	</ItemGroup>
 
 </Project>

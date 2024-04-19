@@ -1,0 +1,59 @@
+﻿@using AlgoCode.Application.Features.Subscriptions.Queries.GetAll
+@model GetAllSubscriptionsQueryResponse
+
+<header>
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+    </style>
+</header>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Subscriptions Table</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <a class="btn btn-primary mb-3" asp-action="create" asp-area="admin" asp-controller="subscriptions">Create Subscription Plan</a>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Created At</th>
+                        <th>Modified At</th>
+                        <th colspan="3" style="text-align:center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model is not null)
+                    {
+                        @foreach (var subscription in Model.Subscriptions)
+                        {
+                            <tr>
+                                <td>@subscription.Id</td>
+                                <td>@subscription.Title</td>
+                                <td>@Html.Raw(subscription.Description)</td>
+                                <td>@subscription.Created</td>
+                                <td>@subscription.LastModified</td>
+                                <td class="text-center">
+                                    <a asp-action="update" asp-controller="subscriptions" asp-area="admin" asp-route-id="@subscription.Id" class="btn btn-primary">Update</a>
+                                </td>
+                                <td class="text-center">
+                                    <form method="post">
+                                        <button asp-action="delete" asp-controller="subscriptions" asp-area="admin" asp-route-id="@subscription.Id" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                                <td width="20px" class="text-center">
+                                    <a asp-action="details" asp-controller="subscriptions" asp-area="admin" asp-route-id="@subscription.Id" class="btn btn-info">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>           
+        </div>
+    </div>
+</div>

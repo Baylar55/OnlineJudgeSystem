@@ -29,9 +29,8 @@
                 <tr>
                     <td>@submission.Created.ToString()</td>
                     <td>@Model.ProblemTitles.ElementAtOrDefault(Model.Submissions.ToList().IndexOf(submission))</td>
-                    <td>@submission.Status</td>
+                    <td><a asp-action="details" asp-controller="submissions" asp-route-id="@submission.Id">@submission.Status</a></td>
                     <td>@submission.ExecutionTime ms</td>
-                    <td>@submission.MemoryUsage</td>
                 </tr>
             }
     </table>

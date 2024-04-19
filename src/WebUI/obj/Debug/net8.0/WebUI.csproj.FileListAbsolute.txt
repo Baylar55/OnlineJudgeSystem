@@ -274,3 +274,4 @@ C:\Users\Baylar\Desktop\AlgoCode\src\WebUI\obj\Debug\net8.0\refint\AlgoCode.WebU
 C:\Users\Baylar\Desktop\AlgoCode\src\WebUI\obj\Debug\net8.0\AlgoCode.WebUI.pdb
 C:\Users\Baylar\Desktop\AlgoCode\src\WebUI\obj\Debug\net8.0\WebUI.genruntimeconfig.cache
 C:\Users\Baylar\Desktop\AlgoCode\src\WebUI\obj\Debug\net8.0\ref\AlgoCode.WebUI.dll
+C:\Users\Baylar\Desktop\AlgoCode\src\WebUI\bin\Debug\net8.0\Stripe.net.dll

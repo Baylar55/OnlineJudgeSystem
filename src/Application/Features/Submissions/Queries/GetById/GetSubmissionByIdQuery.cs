@@ -8,12 +8,13 @@
     public class GetSubmissionByIdQueryResponse
     {
         public int Id { get; set; }
+        public DateTimeOffset Created { get; set; }
         public string ProblemName { get; set; }
         public string SourceCode { get; set; }
         public string Language { get; set; }
         public string Status { get; set; }
         public DateTimeOffset SubmissionTime { get; set; }
-        public string MemoryUsage { get; set; }
+        public double MemoryUsage { get; set; }
         public long ExecutionTime { get; set; }
     }
 
@@ -29,6 +30,8 @@
             {
                 ProblemName = _context.Problems.FirstOrDefault(x => x.Id == entity.ProblemId).Title,
                 Id = entity.Id,
+                Created = entity.Created,
+                MemoryUsage = entity.MemoryUsage,
                 SourceCode = entity.SourceCode,
                 Language = entity.Language,
                 Status = entity.Status.ToString(),

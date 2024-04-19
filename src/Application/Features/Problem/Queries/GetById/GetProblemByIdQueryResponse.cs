@@ -8,6 +8,7 @@
         public string CodeTemplate { get; set; }
         public int Point { get; set; }
         public string Difficulty { get; set; }
+        public string AccessLevel { get; set; }
         public DateTimeOffset Created { get; set; }
         public string? CreatedBy { get; set; }
         public DateTimeOffset? LastModified { get; set; }

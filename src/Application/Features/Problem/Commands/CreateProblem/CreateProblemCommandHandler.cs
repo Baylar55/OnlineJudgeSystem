@@ -22,7 +22,8 @@
                 Difficulty = request.Difficulty,
                 Point = request.Point,
                 MethodName = request.MethodName,
-                CodeTemplate = request.CodeTemplate
+                CodeTemplate = request.CodeTemplate,
+                AccessLevel = request.AccessLevel
             };
 
             if (request.TagIds != null && request.TagIds.Any())

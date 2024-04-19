@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlgoCode.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22e76304a6d9fa22944e5f80d80aa9f5e6e734f3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e26f5848fe1ecf6bd051fd0cd7e9a54bc820b81e")]
 [assembly: System.Reflection.AssemblyProductAttribute("AlgoCode.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AlgoCode.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

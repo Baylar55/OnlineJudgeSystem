@@ -32,6 +32,8 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Create(CreateTagCommand command)
         {
+            if (!ModelState.IsValid)
+                return View(command);
             var validationResult = await Mediator.Send(command);
             if (!validationResult.IsValid)
             {
@@ -56,6 +58,8 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Update(UpdateTagCommand command)
         {
+            if (!ModelState.IsValid)
+                return View(command);
             var validationResult = await Mediator.Send(command);
             if (!validationResult.IsValid)
             {

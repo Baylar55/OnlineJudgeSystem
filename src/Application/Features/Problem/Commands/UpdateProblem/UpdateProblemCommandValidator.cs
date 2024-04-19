@@ -19,7 +19,12 @@
 
             RuleFor(v => v.Point)
                 .NotNull().WithMessage("Point is required")
-                .NotEmpty().WithMessage("Point is required");
+                .NotEmpty().WithMessage("Point is required")
+                .GreaterThan(0).WithMessage("Point must be greater than 0");
+
+            RuleFor(v => v.CodeTemplate)
+                .NotNull().WithMessage("CodeTemplate is required")
+                .NotEmpty().WithMessage("CodeTemplate is required");
         }
     }
 }

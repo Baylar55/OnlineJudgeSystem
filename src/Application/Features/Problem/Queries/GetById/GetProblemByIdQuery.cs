@@ -22,6 +22,7 @@
                 CodeTemplate = entity.CodeTemplate,
                 Point = entity.Point,
                 Difficulty = entity.Difficulty.ToString(),
+                AccessLevel = entity.AccessLevel.ToString(),
                 Created = entity.Created,
                 CreatedBy = entity.CreatedBy,
                 LastModified = entity.LastModified,

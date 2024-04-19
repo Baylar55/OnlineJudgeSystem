@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vwYO3yCc54x9ezq3UyhPWQOE4P7xAK3OhXKGoLM1o6nwfR3fJRXZ64gVrv1y+Sz8sKvDTH3gVAmKXYgdFJlsLw==",
+  "dgSpecHash": "lR9k4VGc3T4a+0I6nXBil3NtNI0SFuebXFBTsOtxYIIztvDR7Ye6LBbzH979x0fzXwYd73/o+0V9HIrDYVu+NQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -62,6 +62,7 @@
     "C:\\Users\\Baylar\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Baylar\\.nuget\\packages\\stripe.net\\44.2.0\\stripe.net.44.2.0.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\system.composition\\6.0.0\\system.composition.6.0.0.nupkg.sha512",

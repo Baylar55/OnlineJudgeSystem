@@ -17,6 +17,7 @@
             problem.Title = request.Title;
             problem.Description = request.Description;
             problem.Difficulty = request.Difficulty;
+            problem.AccessLevel = request.AccessLevel;
             problem.Point = request.Point;
             problem.MethodName = request.MethodName;
             problem.CodeTemplate = request.CodeTemplate;

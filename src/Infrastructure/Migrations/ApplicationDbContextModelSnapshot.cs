@@ -65,7 +65,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contest", (string)null);
+                    b.ToTable("Contest");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.MockAssesment", b =>
@@ -101,7 +101,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MockAssesment", (string)null);
+                    b.ToTable("MockAssesment");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Problem", b =>
@@ -111,6 +111,9 @@ namespace AlgoCode.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccessLevel")
+                        .HasColumnType("int");
 
                     b.Property<string>("CodeTemplate")
                         .IsRequired()
@@ -142,16 +145,13 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.Property<int>("Point")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Problems", (string)null);
+                    b.ToTable("Problems");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Session", b =>
@@ -189,7 +189,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Session", (string)null);
+                    b.ToTable("Sessions");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.StudyPlan", b =>
@@ -222,7 +222,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StudyPlan", (string)null);
+                    b.ToTable("StudyPlan");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Submission", b =>
@@ -258,6 +258,9 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.Property<int>("ProblemId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SourceCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -273,9 +276,50 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("ProblemId");
 
+                    b.HasIndex("SessionId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Submissions", (string)null);
+                    b.ToTable("Submissions");
+                });
+
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Subscription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Tag", b =>
@@ -304,7 +348,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.TestCase", b =>
@@ -342,7 +386,47 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("ProblemId");
 
-                    b.ToTable("TestCases", (string)null);
+                    b.ToTable("TestCases");
+                });
+
+            modelBuilder.Entity("AlgoCode.Domain.Entities.UserProblemStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProblemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProblemId");
+
+                    b.ToTable("UserProblemStatuses");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Identity.ApplicationUser", b =>
@@ -387,8 +471,17 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PhotoName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SubscriptionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubscriptionStatus")
+                        .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -407,6 +500,8 @@ namespace AlgoCode.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("SubscriptionId");
+
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
@@ -422,7 +517,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserContest", (string)null);
+                    b.ToTable("ApplicationUserContest");
                 });
 
             modelBuilder.Entity("ApplicationUserMockAssesment", b =>
@@ -437,7 +532,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserMockAssesment", (string)null);
+                    b.ToTable("ApplicationUserMockAssesment");
                 });
 
             modelBuilder.Entity("ApplicationUserProblem", b =>
@@ -452,7 +547,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserProblem", (string)null);
+                    b.ToTable("ApplicationUserProblem");
                 });
 
             modelBuilder.Entity("ApplicationUserStudyPlan", b =>
@@ -467,7 +562,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserStudyPlan", (string)null);
+                    b.ToTable("ApplicationUserStudyPlan");
                 });
 
             modelBuilder.Entity("ContestProblem", b =>
@@ -482,7 +577,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("ProblemsId");
 
-                    b.ToTable("ContestProblem", (string)null);
+                    b.ToTable("ContestProblem");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -630,7 +725,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("ProblemsId");
 
-                    b.ToTable("MockAssesmentProblem", (string)null);
+                    b.ToTable("MockAssesmentProblem");
                 });
 
             modelBuilder.Entity("ProblemSession", b =>
@@ -645,7 +740,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("SessionsId");
 
-                    b.ToTable("ProblemSession", (string)null);
+                    b.ToTable("ProblemSession");
                 });
 
             modelBuilder.Entity("ProblemStudyPlan", b =>
@@ -660,7 +755,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("StudyPlansId");
 
-                    b.ToTable("ProblemStudyPlan", (string)null);
+                    b.ToTable("ProblemStudyPlan");
                 });
 
             modelBuilder.Entity("ProblemTag", b =>
@@ -675,7 +770,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("ProblemTag", (string)null);
+                    b.ToTable("ProblemTag");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Session", b =>
@@ -683,7 +778,7 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.HasOne("AlgoCode.Domain.Identity.ApplicationUser", "User")
                         .WithMany("Sessions")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -697,6 +792,10 @@ namespace AlgoCode.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AlgoCode.Domain.Entities.Session", "Session")
+                        .WithMany("Submissions")
+                        .HasForeignKey("SessionId");
+
                     b.HasOne("AlgoCode.Domain.Identity.ApplicationUser", "User")
                         .WithMany("Submissions")
                         .HasForeignKey("UserId")
@@ -704,6 +803,8 @@ namespace AlgoCode.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Problem");
+
+                    b.Navigation("Session");
 
                     b.Navigation("User");
                 });
@@ -717,6 +818,24 @@ namespace AlgoCode.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Problem");
+                });
+
+            modelBuilder.Entity("AlgoCode.Domain.Entities.UserProblemStatus", b =>
+                {
+                    b.HasOne("AlgoCode.Domain.Entities.Problem", null)
+                        .WithMany("UserProblemStatuses")
+                        .HasForeignKey("ProblemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AlgoCode.Domain.Identity.ApplicationUser", b =>
+                {
+                    b.HasOne("AlgoCode.Domain.Entities.Subscription", "Subscription")
+                        .WithMany("ApplicationUsers")
+                        .HasForeignKey("SubscriptionId");
+
+                    b.Navigation("Subscription");
                 });
 
             modelBuilder.Entity("ApplicationUserContest", b =>
@@ -910,6 +1029,18 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.Navigation("Submissions");
 
                     b.Navigation("TestCases");
+
+                    b.Navigation("UserProblemStatuses");
+                });
+
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Session", b =>
+                {
+                    b.Navigation("Submissions");
+                });
+
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Subscription", b =>
+                {
+                    b.Navigation("ApplicationUsers");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Identity.ApplicationUser", b =>

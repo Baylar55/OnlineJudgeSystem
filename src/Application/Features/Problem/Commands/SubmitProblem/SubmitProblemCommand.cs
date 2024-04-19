@@ -22,16 +22,10 @@
 
         public async Task<string> Handle(SubmitProblemCommand request, CancellationToken cancellationToken)
         {
-            // Find the active session
             var activeSession = await _context.Sessions.FirstOrDefaultAsync(s => s.IsActive, cancellationToken);
             if (activeSession == null)
-            {
-                // Handle if no active session found
-                // For example, return an error message
                 return "No active session found.";
-            }
 
-            // Create a new submission
             var submission = new Submission
             {
                 SourceCode = request.SourceCode,
@@ -41,14 +35,12 @@
                 ExecutionTime = request.ExecutionTime,
                 Status = request.Status,
                 UserId = request.UserId,
-                SessionId = activeSession.Id // Associate the submission with the active session
+                SessionId = activeSession.Id
             };
 
-            // Add the submission to the database
             await _context.Submissions.AddAsync(submission, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
-            // If the submission is accepted, update the user's problem status
             if (request.Status == SubmissionStatus.Accepted)
             {
                 var userProblemStatus = await _context.UserProblemStatuses
@@ -62,13 +54,12 @@
                 }
                 else
                 {
-                    // Create a new user problem status if not exists
                     userProblemStatus = new UserProblemStatus
                     {
                         UserId = request.UserId,
                         ProblemId = request.ProblemId,
                         Status = ProblemStatus.Solved,
-                        SessionId = activeSession.Id // Associate with the active session
+                        SessionId = activeSession.Id
                     };
 
                     await _context.UserProblemStatuses.AddAsync(userProblemStatus, cancellationToken);

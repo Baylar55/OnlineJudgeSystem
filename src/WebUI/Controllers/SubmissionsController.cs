@@ -24,11 +24,18 @@ namespace AlgoCode.WebUI.Controllers
         }
 
         [HttpGet("/Submissions/GetAllByProblemId/{problemId}")]
-        //[HttpGet]
         public async Task<IActionResult> GetAllByProblemId(int problemId)
         {
             var submissions = await Mediator.Send(new GetSubmissionsByProblemIdQuery { ProblemId = problemId });
             return Ok(submissions);
+        }
+
+        //get submission details
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var submission = await Mediator.Send(new GetSubmissionByIdQuery { Id = id });
+            return View(submission);
         }
     }
 }

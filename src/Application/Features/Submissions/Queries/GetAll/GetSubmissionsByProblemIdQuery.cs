@@ -26,7 +26,7 @@
                                                          .FirstOrDefaultAsync();
 
             var submissions = await _context.Submissions
-                                            .Where(x => x.ProblemId == request.ProblemId && x.SessionId==activeSessionId)
+                                            .Where(x => x.ProblemId == request.ProblemId && x.SessionId == activeSessionId)
                                             .ToListAsync(cancellationToken);
             return submissions.Select(x => new GetSubmissionsByProblemIdQueryResponse
             {
