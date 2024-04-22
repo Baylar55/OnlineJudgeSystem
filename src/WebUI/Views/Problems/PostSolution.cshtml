@@ -1,0 +1,37 @@
+﻿@using AlgoCode.Application.Features.Solutions.Commands.PostSolution
+@model PostSolutionCommand
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" asp-action="postsolution" asp-controller="problems" id="solution-form">
+                            <div disabled style="height:fit-content;">
+                                <h4 class="text-info">Submission Source Code</h4>
+                                <pre>
+                                    <code class="language-csharp">@Model.Description.TrimStart('\r', '\n')</code>    
+                                </pre>
+                            </div>
+                            <input type="hidden" asp-for="SubmissionId" />
+                            <div class="form-group">
+                                <label asp-for="Title" class="fw-bold fs-5">Title</label>
+                                <input id="title-input" class="form-control" placeholder="Enter your title" asp-for="Title" />
+                                <span class="text-danger" asp-validation-for="Title"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description" class="fw-bold fs-5">Description</label>
+                                <textarea id="editor" placeholder="Enter your description for solution" name="Description" class="form-control" asp-for="Description"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+                            <button id="submit-btn" type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/super-build/ckeditor.js"></script>
+<script src="~/admin/js/ckeditor.js"></script>

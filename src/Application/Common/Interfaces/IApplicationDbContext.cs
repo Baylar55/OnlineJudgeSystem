@@ -9,5 +9,6 @@ public interface IApplicationDbContext
     DbSet<Session> Sessions { get; }
     DbSet<UserProblemStatus> UserProblemStatuses { get; }
     DbSet<Subscription> Subscriptions { get; }
+    DbSet<Solution> Solutions { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

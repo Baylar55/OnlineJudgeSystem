@@ -166,91 +166,18 @@
                         {
                             <tr>
                                 <td><i class="fa-regular fa-circle-check"></i></td>
-                                <td><a asp-action="singleproblem" asp-controller="problems" asp-route-id="@problem.Id">@problem.Id  @problem.Title</a></td>
+                                <td>
+                                    <a asp-action="singleproblem" asp-controller="problems" asp-route-id="@problem.Id">@problem.Id.  @problem.Title</a> 
+                                    @if (problem.AccessLevel==AccessLevel.Premium)
+                                    {
+                                        <span class="badge" style="color:white !important;background-color:#ffa116;">Premium</span>
+                                    }
+                                </td>
                                 <td><i class="fa-solid fa-file-circle-check"></i></td>
                                 <td>40.3%</td>
                                 <td class="status-easy">@problem.Difficulty</td>
                             </tr>
                         }
-                        <tr>
-                            <td><i class="fa-regular fa-calendar-minus"></i></td>
-                            <td> Remove nth node from end of the element</a></td>
-                            <td><i class="fa-solid fa-file-video"></i></td>
-                            <td>21.5%</td>
-                            <td class="status-easy">Easy</td>
-                        </tr>
-
-                        <tr>
-                            <td><i class="fa-regular fa-circle-check"></i></td>
-                            <td>2. Longest Substring Without chars</td>
-                            <td><i class="fa-solid fa-file-circle-check"></i></td>
-                            <td>82.1%</td>
-                            <td class="status-hard">Hard</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>3. Reverse Integer</td>
-                            <td><i class="fa-regular fa-file-video"></i></td>
-                            <td>45.7%</td>
-                            <td class="status-easy">Easy</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-circle-half-stroke"></i></td>
-                            <td>4. Median of two sorted arrays</td>
-                            <td><i class="fa-solid fa-file-circle-check"></i></td>
-                            <td>51.3%</td>
-                            <td class="status-medium">Medium</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-regular fa-circle-check"></i></td>
-                            <td>5. Zigzag Conversion</td>
-                            <td><i class="fa-regular fa-file-video"></i></td>
-                            <td>55.4%</td>
-                            <td class="status-hard">Hard</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-circle-half-stroke"></i></td>
-                            <td>6. Regular Expression Matching</td>
-                            <td><i class="fa-regular fa-file-video"></i></td>
-                            <td>63.7%</td>
-                            <td class="status-medium">Medium</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-regular    fa-circle-check"></i></td>
-                            <td>7. Longest Palindromic Substring</td>
-                            <td><i class="fa-solid fa-file-circle-check"></i></td>
-                            <td>72.3%</td>
-                            <td class="status-hard">Hard</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-circle-half-stroke"></i></td>
-                            <td>8. Container With Most Water</td>
-                            <td><i class="fa-regular fa-file-video"></i></td>
-                            <td>80.1%</td>
-                            <td class="status-medium">Medium</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-regular fa-circle-check"></i></td>
-                            <td>9. Integer to Roman</td>
-                            <td><i class="fa-solid fa-file-circle-check"></i></td>
-                            <td>90.3%</td>
-                            <td class="status-hard">Hard</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-circle-half-stroke"></i></td>
-                            <td>10. Roman to Integer</td>
-                            <td><i class="fa-regular fa-file-video"></i></td>
-                            <td>95.7%</td>
-                            <td class="status-medium">Medium</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-regular fa-circle-check"></i></td>
-                            <td>11. Longest Common Prefix</td>
-                            <td><i class="fa-solid fa-file-circle-check"></i></td>
-                            <td>100%</td>
-                            <td class="status-hard">Hard</td>
-                        </tr>
-
                     </tbody>
                 </table>
                 <div class="pagination-container">

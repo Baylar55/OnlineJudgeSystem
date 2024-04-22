@@ -63,6 +63,7 @@ namespace AlgoCode.WebUI.Areas.Admin.Controllers
                 Point = response.Point,
                 Difficulty = Enum.TryParse(response.Difficulty, out ProblemDifficulty difficulty) ? difficulty : default,
                 AccessLevel = Enum.TryParse(response.AccessLevel, out AccessLevel accessLevel) ? accessLevel : default,
+                TagIds = response.Tags.Select(x => x.Id).ToList(),
             };
             ViewBag.SelectItems = new SelectList(tags.Tags, "Id", "Title");
             return View(mainModel);

@@ -192,6 +192,44 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.ToTable("Sessions");
                 });
 
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Solution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubmissionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubmissionId");
+
+                    b.ToTable("Solutions");
+                });
+
             modelBuilder.Entity("AlgoCode.Domain.Entities.StudyPlan", b =>
                 {
                     b.Property<int>("Id")
@@ -784,6 +822,17 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Solution", b =>
+                {
+                    b.HasOne("AlgoCode.Domain.Entities.Submission", "Submission")
+                        .WithMany("Solutions")
+                        .HasForeignKey("SubmissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Submission");
+                });
+
             modelBuilder.Entity("AlgoCode.Domain.Entities.Submission", b =>
                 {
                     b.HasOne("AlgoCode.Domain.Entities.Problem", "Problem")
@@ -1036,6 +1085,11 @@ namespace AlgoCode.Infrastructure.Migrations
             modelBuilder.Entity("AlgoCode.Domain.Entities.Session", b =>
                 {
                     b.Navigation("Submissions");
+                });
+
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Submission", b =>
+                {
+                    b.Navigation("Solutions");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.Subscription", b =>

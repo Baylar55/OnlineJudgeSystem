@@ -27,7 +27,7 @@
                 CreatedBy = entity.CreatedBy,
                 LastModified = entity.LastModified,
                 LastModifiedBy = entity.LastModifiedBy,
-                Tags = entity.Tags.Select(x => x.Title).ToList()
+                Tags = entity.Tags.ToList()
             };
         }
     }

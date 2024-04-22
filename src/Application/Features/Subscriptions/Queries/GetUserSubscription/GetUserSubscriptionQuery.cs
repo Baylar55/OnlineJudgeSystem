@@ -1,13 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlgoCode.Application.Features.Subscriptions.Queries.GetUserSubscription
+﻿namespace AlgoCode.Application.Features.Subscriptions.Queries.GetUserSubscription
 {
-    public class GetUserSubscriptionQuery:IRequest<SubscriptionStatus>
+    public class GetUserSubscriptionQuery : IRequest<SubscriptionStatus>
     {
         public string UserId { get; set; }
     }

@@ -13,5 +13,6 @@
         public ApplicationUser User { get; set; } = null!;
         public int? SessionId { get; set; }
         public Session Session { get; set; } = null!;
+        public ICollection<Solution>? Solutions { get; set; }
     }
 }

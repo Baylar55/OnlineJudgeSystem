@@ -2,7 +2,7 @@
 @model UpdateTestCaseCommand
 
 @{
-    string inputs = string.Join(", ", Model.Inputs.Select(x => "\"" + x + "\""));
+    string inputs = string.Join(", ", Model.Inputs.Select(x => "" + x + ""));
 }
     <div class="main-panel">
     <div class="content-wrapper">
@@ -15,7 +15,7 @@
                             <input type="hidden" asp-for="Id" />
                             <div class="form-group">
                                 <label asp-for="Inputs">Input</label>
-                                <input class="form-control" asp-for="Inputs" value="@inputs"/>
+                                <input class="form-control" asp-for="Inputs" value=@inputs/>
                                 <span class="text-danger" asp-validation-for="Inputs"></span>
                             </div>
 

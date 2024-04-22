@@ -7,6 +7,7 @@
 
     public class GetSubmissionsByProblemIdQueryResponse
     {
+        public int Id { get; set; }
         public string Language { get; set; }
         public string Status { get; set; }
         public DateTimeOffset SubmissionTime { get; set; }
@@ -30,6 +31,7 @@
                                             .ToListAsync(cancellationToken);
             return submissions.Select(x => new GetSubmissionsByProblemIdQueryResponse
             {
+                Id = x.Id,
                 Language = x.Language,
                 Status = x.Status.ToString(),
                 SubmissionTime = x.Created,

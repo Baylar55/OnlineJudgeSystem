@@ -3,7 +3,6 @@ using AlgoCode.Application.Features.Subscriptions.Commands.UpdateUserSubscriptio
 using AlgoCode.Application.Features.Subscriptions.Queries.GetAll;
 using AlgoCode.Application.Features.Subscriptions.Queries.GetUserSubscription;
 using AlgoCode.Domain.Identity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Stripe.Checkout;
 

@@ -1,8 +1,10 @@
 ﻿@using System.Security.Claims
 @using AlgoCode.Application.Features.Problem.Queries.GetById
-@model GetProblemByIdWithTestCaseQueryResponse
+@using AlgoCode.Domain.Constants
+@using AlgoCode.Application.DTOs.Problems
+@model SingleProblemDTO
 @{
-    string badgeClass = Model.Difficulty.ToLower() switch
+    string badgeClass = Model.GetProblemByIdWithTestCaseQueryResponse.Difficulty.ToLower() switch
     {
         "hard" => "bg-danger",
         "medium" => "bg-warning",
@@ -22,12 +24,53 @@
         integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @* <script src="https://kit.fontawesome.com/0aae8d5fb5.js" crossorigin="anonymous"></script> *@
-<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/htmlmixed/htmlmixed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
 <style>
+    .blurred-overlay {
+        position: fixed;
+        top: 13%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+        backdrop-filter: blur(5px); /* Apply blur effect */
+        display: none; /* Initially hidden */
+        justify-content: center;
+        align-items: center;
+        /* display: flex !important; */
+    }
+
+    .subscription-message {
+        text-align: center;
+        color: white;
+    }
+
+        .subscription-message i {
+            font-size: 50px;
+            color: #ffa116;
+        }
+
+        .subscription-message p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .subscription-message button {
+            padding: 10px 20px;
+            background-color: #ffa116;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .subscription-message button a {
+                color: white;
+            }
+
     .card-content {
         height: 100%;
     }
@@ -67,194 +110,200 @@
 @* </head>
 
 <body> *@
-<div class="container-fluid">
-    <div class="row">
-        <!-- Left Side: Problem Description -->
+<div class="problem-view">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Side: Problem Description -->
 
-        <div class="col-md-6">
-            <div class="card mt-3">
-                <div class="card-header bg-transparent">
-                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                        <li class="nav-item me-2" role="presentation">
-                            <button class="btn btn-sm active btn-outline-success border-0 fw-bold"
-                                    id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description"
-                                    type="button" role="tab" aria-controls="pills-description"
-                                    aria-selected="true">
-                                Description
-                            </button>
-                        </li>
-                        <li class="nav-item me-2" role="presentation">
-                            <button class="btn btn-sm btn-outline-success border-0 fw-bold" id="pills-solution-tab"
-                                    data-bs-toggle="pill" data-bs-target="#pills-solution" type="button" role="tab"
-                                    aria-controls="pills-solution" aria-selected="false">
-                                Solutions
-                            </button>
-                        </li>
-                        <li class="nav-item me-2" role="presentation">
-                            <button class="btn btn-sm btn-outline-success border-0 fw-bold"
-                                    id="pills-submission-tab" data-bs-toggle="pill" data-bs-target="#pills-submission"
-                                    type="button" role="tab" aria-controls="pills-submission"
-                                    aria-selected="false">
-                                Submissions
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
-                             aria-labelledby="pills-description-tab" tabindex="0">
-                            <div>
-                                <h4>
-                                    @Model.Id. @Model.Title
-                                </h4>
-                                <span class="badge @badgeClass mb-3">@Model.Difficulty</span>
-                                <span class="badge bg-secondary">@Model.Point Point</span>
-                                @foreach (var tag in Model.Tags)
-                                {
-                                    <span class="badge text-bg-light">@tag.Title</span>
-                                }
-                                @Html.Raw(@Model.Description)
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-submission" role="tabpanel"
-                             aria-labelledby="pills-submission-tab" tabindex="0">
-                            <div>
-                                <table class="table submission-table" align="center">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Runtime</th>
-                                            <th scope="col">Memory</th>
-                                            <th scope="col">Submitted at</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="rejected"><i class="fa-solid fa-ban me-2"></i>Rejected</td>
-                                            <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
-                                            <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
-                                            <td>2022-01-01 12:00:00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="accepted">
-                                                <i class="fa-regular fa-circle-check me-2"></i>Accepted
-                                            </td>
-                                            <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
-                                            <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
-                                            <td>2022-01-01 12:00:00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="accepted">
-                                                <i class="fa-regular fa-circle-check me-2"></i>Accepted
-                                            </td>
-                                            <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
-                                            <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
-                                            <td>2022-01-01 12:00:00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="rejected"><i class="fa-solid fa-ban me-2"></i>Rejected</td>
-                                            <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
-                                            <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
-                                            <td>2022-01-01 12:00:00</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-solution" role="tabpanel"
-                             aria-labelledby="pills-solution-tab" tabindex="0">
-                            <div id="editor">This is some solution content.</div>
-                        </div>
+            <div class="col-md-6">
+                <div class="card mt-3">
+                    <div class="card-header bg-transparent">
+                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                            <li class="nav-item me-2" role="presentation">
+                                <button class="btn btn-sm active btn-outline-success border-0 fw-bold"
+                                        id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description"
+                                        type="button" role="tab" aria-controls="pills-description"
+                                        aria-selected="true">
+                                    Description
+                                </button>
+                            </li>
+                            <li class="nav-item me-2" role="presentation">
+                                <button class="btn btn-sm btn-outline-success border-0 fw-bold" id="pills-solution-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-solution" type="button" role="tab"
+                                        aria-controls="pills-solution" aria-selected="false">
+                                    Solutions
+                                </button>
+                            </li>
+                            <li class="nav-item me-2" role="presentation">
+                                <button class="btn btn-sm btn-outline-success border-0 fw-bold"
+                                        id="pills-submission-tab" data-bs-toggle="pill" data-bs-target="#pills-submission"
+                                        type="button" role="tab" aria-controls="pills-submission"
+                                        aria-selected="false">
+                                    Submissions
+                                </button>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Side: Code Editor and Output -->
-
-        <div class="col-md-6">
-            <div class="row">
-                <!-- Top Right: Code Editor -->
-                <div class="col mt-2">
-                    <div class="h-50 mt-2">
-                        <div class="card" style="background-color: #262626;">
-                            <div>
-                                <div style="position: relative;transform: translateX(2%) translateY(25%);">
-                                    <p class="card-title text-white fw-bold" style="height: 37px;">
-                                        <i class="fa-solid fa-code me-1" style="color:green;"></i>
-                                        Code
-                                    </p>
-                                </div>
-                                <div id="monaco-editor" class="border-0" style="height: 300px;"></div>
-                            </div>
-                        </div>
-                        <div class="btn-container">
-                            <button type="button" class="mt-2 btn btn-outline-primary btn-sm" onclick="runCode()">
-                                <i class="fa-solid fa-play me-2"></i>Run
-                            </button>
-                            <button type="button" class="mt-2 btn btn-outline-success btn-sm" onclick="submitCode()">
-                                <i class="fa-solid fa-cloud-arrow-up me-2"></i>Submit
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <!-- Bottom Right: Output and Test Cases -->
-                <div class="col">
-                    <div class="h-50" style="width:625px;">
-                        <div class="card-body card-content">
-                            <div class="card mt-2" style="background-color: #262626;">
+                    <div class="card-body">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+                                 aria-labelledby="pills-description-tab" tabindex="0">
                                 <div>
-                                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                        <li class="nav-item me-2" role="presentation">
-                                            <button class="btn btn-compiler-test btn-sm active btn-outline-secondary border-0 fw-bold"
-                                                    id="pills-testcase-tab" data-bs-toggle="pill"
-                                                    data-bs-target="#pills-testcase" type="button" role="tab"
-                                                    aria-controls="pills-testcase" aria-selected="true">
-                                                <i class="fa-regular fa-square-check me-1"
-                                                   style="color:green;"></i>
-                                                Testcase
-                                            </button>
-                                        </li>
-                                        <li class="nav-item me-2" role="presentation">
-                                            <button class="btn btn-sm btn-compiler-test btn-outline-secondary border-0 fw-bold"
-                                                    id="pills-testresult-tab" data-bs-toggle="pill"
-                                                    data-bs-target="#pills-testresult" type="button" role="tab"
-                                                    aria-controls="pills-testresult" aria-selected="false">
-                                                <i class="fa-solid fa-terminal me-1" style="color:green;"></i>
-                                                Test Result
-                                            </button>
-                                        </li>
-                                    </ul>
+                                    <h4>
+                                        @Model.GetProblemByIdWithTestCaseQueryResponse.Id. @Model.GetProblemByIdWithTestCaseQueryResponse.Title
+                                    </h4>
+                                    <span class="badge @badgeClass mb-3">@Model.GetProblemByIdWithTestCaseQueryResponse.Difficulty</span>
+                                    <span class="badge bg-secondary">@Model.GetProblemByIdWithTestCaseQueryResponse.Point Point</span>
+                                    @foreach (var tag in Model.GetProblemByIdWithTestCaseQueryResponse.Tags)
+                                    {
+                                        <span class="badge text-bg-light">@tag.Title</span>
+                                    }
+                                    @Html.Raw(@Model.GetProblemByIdWithTestCaseQueryResponse.Description)
                                 </div>
-                                <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-testcase" role="tabpanel"
-                                         aria-labelledby="pills-testcase-tab" tabindex="0">
-                                        <div class="card border-0 mt-3" style="background-color: #262626;">
-                                            @foreach (var testcase in Model.TestCases)
-                                            {
-                                                <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                                    <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x =>  x ))">
-
-                                                    <label class="ms-3" for="floatingInput">Input</label>
-                                                </div>
-
-                                                <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                                    <input disabled class="form-control shadow-none border-0 text-white"
-                                                           id="floatingOutput" style="background-color: #353535;"
-                                                           placeholder="sample" value="@testcase.ExpectedOutput">
-                                                    <label class="ms-3" for="floatingOutput">Expected Output</label>
-                                                </div>
-                                            }
+                            </div>
+                            <div class="tab-pane fade" id="pills-submission" role="tabpanel"
+                                 aria-labelledby="pills-submission-tab" tabindex="0">
+                                <div>
+                                    <table class="table submission-table" align="center">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Runtime</th>
+                                                <th scope="col">Memory</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="rejected"><i class="fa-solid fa-ban me-2"></i>Rejected</td>
+                                                <td><i class="fa-regular fa-clock me-2"></i>5 seconds</td>
+                                                <td><i class="fa-solid fa-microchip me-2"></i>50 MB</td>
+                                                <td>2022-01-01 12:00:00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-solution" role="tabpanel"
+                                 aria-labelledby="pills-solution-tab" tabindex="0">
+                                @foreach (var solution in Model.GetAllSolutionsByProblemQueryResponse)
+                                {
+                                    <div class="problem-solution-box mb-3" style="border-bottom: 1px solid #a8a8a8;">
+                                        <div class="d-flex">
+                                            <div>
+                                                <img src="~/assets/img/user-1.jpg"
+                                                     style="
+                                            object-fit: cover;
+                                            height: 50px;
+                                            border-radius: 50%;
+                                            width: 50px;
+                                                " />
+                                            </div>
+                                            <div class="ms-3">
+                                                <span class="fs-6" style="color: gray;">@solution.User.UserName</span>
+                                                <p class="fw-bold" style="font-size: 14px;color: #53585b;">
+                                                    <a asp-action="solution" asp-controller="problems" asp-route-id="@solution.Id" class="text-decoration-none">@solution.Title</a>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <span class="badge text-bg-dark">C#</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="pills-testresult" role="tabpanel"
-                                         aria-labelledby="pills-testresult-tab" tabindex="0">
-                                        <div class="ms-3 mt-3 mb-3">
-                                            <h6 id="statusText"></h6>
-                                            <div id="resultContainer" class="text-white fw-bold"></div>
+                                }
+                            </div>
+                            <div id="solution-details-container"> </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Code Editor and Output -->
+
+            <div class="col-md-6">
+                <div class="row">
+                    <!-- Top Right: Code Editor -->
+                    <div class="col mt-2">
+                        <div class="h-50 mt-2">
+                            <div class="card" style="background-color: #262626;">
+                                <div>
+                                    <div style="position: relative;transform: translateX(2%) translateY(25%);">
+                                        <p class="card-title text-white fw-bold" style="height: 37px;">
+                                            <i class="fa-solid fa-code me-1" style="color:green;"></i>
+                                            Code
+                                        </p>
+                                    </div>
+                                    <div id="monaco-editor" class="border-0" style="height: 300px;"></div>
+                                </div>
+                            </div>
+                            <div class="btn-container">
+                                <button type="button" class="mt-2 btn btn-outline-primary btn-sm" onclick="runCode()">
+                                    <i class="fa-solid fa-play me-2"></i>Run
+                                </button>
+                                <button type="button" class="mt-2 btn btn-outline-success btn-sm" onclick="submitCode()">
+                                    <i class="fa-solid fa-cloud-arrow-up me-2"></i>Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Bottom Right: Output and Test Cases -->
+                    <div class="col">
+                        <div class="h-50" style="width:625px;">
+                            <div class="card-body card-content">
+                                <div class="card mt-2" style="background-color: #262626;">
+                                    <div>
+                                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                            <li class="nav-item me-2" role="presentation">
+                                                <button class="btn btn-compiler-test btn-sm active btn-outline-secondary border-0 fw-bold"
+                                                        id="pills-testcase-tab" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-testcase" type="button" role="tab"
+                                                        aria-controls="pills-testcase" aria-selected="true">
+                                                    <i class="fa-regular fa-square-check me-1"
+                                                       style="color:green;"></i>
+                                                    Testcase
+                                                </button>
+                                            </li>
+                                            <li class="nav-item me-2" role="presentation">
+                                                <button class="btn btn-sm btn-compiler-test btn-outline-secondary border-0 fw-bold"
+                                                        id="pills-testresult-tab" data-bs-toggle="pill"
+                                                        data-bs-target="#pills-testresult" type="button" role="tab"
+                                                        aria-controls="pills-testresult" aria-selected="false">
+                                                    <i class="fa-solid fa-terminal me-1" style="color:green;"></i>
+                                                    Test Result
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-testcase" role="tabpanel"
+                                             aria-labelledby="pills-testcase-tab" tabindex="0">
+                                            <div class="card border-0 mt-3" style="background-color: #262626;">
+                                                @foreach (var testcase in Model.GetProblemByIdWithTestCaseQueryResponse.TestCases)
+                                                {
+                                                    <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
+                                                        <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x =>  x ))">
+
+                                                        <label class="ms-3" for="floatingInput">Input</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
+                                                        <input disabled class="form-control shadow-none border-0 text-white"
+                                                               id="floatingOutput" style="background-color: #353535;"
+                                                               placeholder="sample" value="@testcase.ExpectedOutput">
+                                                        <label class="ms-3" for="floatingOutput">Expected Output</label>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-testresult" role="tabpanel"
+                                             aria-labelledby="pills-testresult-tab" tabindex="0">
+                                            <div class="ms-3 mt-3 mb-3">
+                                                <h6 id="statusText"></h6>
+                                                <div id="resultContainer" class="text-white fw-bold"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -263,9 +312,17 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" id="submissionStatus" value="1">
+            <div id="access-level" data-access-level="@Model.GetProblemByIdWithTestCaseQueryResponse.AccessLevel"></div>
         </div>
-        <input type="hidden" id="submissionStatus" value="1">
-
+    </div>
+</div>
+<div class="blurred-overlay">
+    <div class="subscription-message">
+        <div><i class="fa-solid fa-lock-keyhole"></i></div>
+        <p class="mb-1">Subscribe to unlock</p>
+        <span class="d-block mb-3">Thanks for using AlgoCode! To view this question you must subscribe to premium.</span>
+        <button><a asp-action="index" asp-controller="pricing" class="text-decoration-none">Subscribe Now</a></button>
     </div>
 </div>
 <script>
@@ -283,7 +340,7 @@
 
     var editorOptions = {
         value: [
-            `@Html.Raw(Model.CodeTemplate)`
+            `@Html.Raw(Model.GetProblemByIdWithTestCaseQueryResponse.CodeTemplate)`
         ].join('\n'),
         language: 'csharp',
         theme: 'vs-dark',
@@ -311,7 +368,7 @@
                 InputParameter: inputArray,
                 ExpectedOutput: outputValue
             }],
-            MethodName: `@Model.MethodName`,
+            MethodName: `@Model.GetProblemByIdWithTestCaseQueryResponse.MethodName`,
         };
 
         $.ajax({
@@ -322,24 +379,24 @@
             success: function (result) {
                 var testResultContainer = document.getElementById("resultContainer");
                 var htmlContent = `<div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                        <textarea disabled class="form-control shadow-none border-0 text-white"
-                                        id="floatingResult" style="background-color: #353535; height: 100px;"
-                                        placeholder="Result">${result.result}</textarea>
-                                        <label class="ms-3" for="floatingResult">Result</label>
-                                    </div>`;
+                                                        <textarea disabled class="form-control shadow-none border-0 text-white"
+                                                        id="floatingResult" style="background-color: #353535; height: 100px;"
+                                                        placeholder="Result">${result.result}</textarea>
+                                                        <label class="ms-3" for="floatingResult">Result</label>
+                                                    </div>`;
 
                 htmlContent += `<div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                        <input disabled class="form-control shadow-none border-0 text-white"
-                                        id="floatingExecutionTime" style="background-color: #353535;"
-                                        placeholder="Execution Time" value="${result.executionTime}">
-                                        <label class="ms-3" for="floatingExecutionTime">Execution Time</label>
-                                    </div>`;
+                                                        <input disabled class="form-control shadow-none border-0 text-white"
+                                                        id="floatingExecutionTime" style="background-color: #353535;"
+                                                        placeholder="Execution Time" value="${result.executionTime}">
+                                                        <label class="ms-3" for="floatingExecutionTime">Execution Time</label>
+                                                    </div>`;
                 htmlContent += `<div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                        <input disabled class="form-control shadow-none border-0 text-white"
-                                        id="floatingMemoryUsage" style="background-color: #353535;"
-                                        placeholder="Memory Usage" value="${result.memoryUsage}">
-                                        <label class="ms-3" for="floatingMemoryUsage">Memory Usage</label>
-                                    </div>`;
+                                                        <input disabled class="form-control shadow-none border-0 text-white"
+                                                        id="floatingMemoryUsage" style="background-color: #353535;"
+                                                        placeholder="Memory Usage" value="${result.memoryUsage}">
+                                                        <label class="ms-3" for="floatingMemoryUsage">Memory Usage</label>
+                                                    </div>`;
                 if (result.result.toLowerCase().includes("compilation error") || result.result.toLowerCase().includes("failed")) {
                     document.getElementById('submissionStatus').value = "1"; //Submission status = "Compilation Error"
                     document.getElementById('submissionStatus').value = "1"; //Submission status = "Compilation Error"
@@ -372,7 +429,7 @@
         var submissionData = {
             SourceCode: codeToSubmit,
             Language: "C#",
-            ProblemId: @Model.Id,
+            ProblemId: @Model.GetProblemByIdWithTestCaseQueryResponse.Id,
             MemoryUsage: memoryUsageValue,
             ExecutionTime: executionTimeValue,
             Status: submissionStatus,
@@ -397,7 +454,7 @@
     function fetchSubmissions() {
         $.ajax({
             type: 'GET',
-            url: '/Submissions/GetAllByProblemId/@Model.Id',
+            url: '/Submissions/GetAllByProblemId/@Model.GetProblemByIdWithTestCaseQueryResponse.Id',
             success: function (submissions) {
                 var tbody = document.querySelector('.submission-table tbody');
                 tbody.innerHTML = '';
@@ -405,13 +462,16 @@
                 submissions.forEach(function (submission) {
                     var row = document.createElement('tr');
                     row.innerHTML = `
-                                        <td class="${submission.status.toLowerCase()}">
-                                            <i class="fa-solid ${submission.status.toLowerCase() === 'accepted' ? 'fa-circle-check' : 'fa-ban'} me-2"></i>${submission.status}
-                                        </td>
-                                        <td><i class="fa-regular fa-clock me-2"></i>${submission.executionTime} seconds</td>
-                                        <td><i class="fa-solid fa-microchip me-2"></i>${submission.memoryUsage} MB</td>
-                                        <td>${submission.submittedAt}</td>
-                                    `;
+                            <input type="hidden" id="submissionId" value="${submission.id}">
+                                                        <td class="${submission.status.toLowerCase()}">
+                                                            <i class="fa-solid ${submission.status.toLowerCase() === 'accepted' ? 'fa-circle-check' : 'fa-ban'} me-2"></i>${submission.status}
+                                                        </td>
+                                                        <td><i class="fa-regular fa-clock me-2"></i>${submission.executionTime} seconds</td>
+                                                        <td><i class="fa-solid fa-microchip me-2"></i>${submission.memoryUsage} MB</td>
+                                                            <td>
+                                                           <a href="/Problems/PostSolution/${submission.id}" class="text-decoration-none btn btn-sm btn-primary">Share my solution</a>
+                                             </td>
+                                                    `;
                     tbody.appendChild(row);
                 });
             },
@@ -460,6 +520,45 @@
         }
     }
 </script>
+<script>
+    $(document).ready(function () {
+        var accessLevel = $('#access-level').data('access-level');
+
+        $.ajax({
+            url: '@Url.Action("GetSubscriptionStatus", "Pricing")',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+
+                if (accessLevel === 'Premium') {
+                    if (response.subscription === 1) {
+                        // User has an active subscription, so show the problem view
+                        $('.problem-view').show();
+                        $('.dark-footer').show();
+                        $('.blurred-overlay').hide();
+                        $('.blurred-overlay').css('display', 'none !important');
+                    } else {
+                        // User does not have an active subscription, so show the blurred overlay and subscription message
+                        $('.problem-view').hide();
+                        $('.dark-footer').hide();
+                        $('.blurred-overlay').show();
+                        $('.blurred-overlay').css('display', 'flex');
+                    }
+                }
+                else {
+                    $('.problem-view').show();
+                    $('.dark-footer').show();
+                    $('.blurred-overlay').hide();
+                    $('.blurred-overlay').css('display', 'none !important');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching subscription status:', error);
+            }
+        });
+    });
+</script>
+
 @* </body>
 
 </html>  *@

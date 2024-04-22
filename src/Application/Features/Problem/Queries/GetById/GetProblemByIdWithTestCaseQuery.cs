@@ -14,7 +14,7 @@
         public string CodeTemplate { get; set; }
         public int Point { get; set; }
         public string Difficulty { get; set; }
-        public string AccessLevel { get; set; }
+        public AccessLevel AccessLevel { get; set; }
         public DateTimeOffset Created { get; set; }
         public string? CreatedBy { get; set; }
         public DateTimeOffset? LastModified { get; set; }
@@ -41,7 +41,7 @@
                 CodeTemplate = entity.CodeTemplate,
                 Point = entity.Point,
                 Difficulty = entity.Difficulty.ToString(),
-                AccessLevel = entity.AccessLevel.ToString(),
+                AccessLevel = entity.AccessLevel,
                 Created = entity.Created,
                 CreatedBy = entity.CreatedBy,
                 LastModified = entity.LastModified,
