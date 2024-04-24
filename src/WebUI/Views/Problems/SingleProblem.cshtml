@@ -457,7 +457,7 @@
             url: '/Submissions/GetAllByProblemId/@Model.GetProblemByIdWithTestCaseQueryResponse.Id',
             success: function (submissions) {
                 var tbody = document.querySelector('.submission-table tbody');
-                tbody.innerHTML = '';
+                tbody.innerHTML = ' ';
 
                 submissions.forEach(function (submission) {
                     var row = document.createElement('tr');

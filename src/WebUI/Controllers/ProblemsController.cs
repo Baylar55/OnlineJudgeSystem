@@ -1,34 +1,56 @@
 ﻿using AlgoCode.Application.DTOs.Problems;
+using AlgoCode.Application.DTOs.Solutions;
+using AlgoCode.Application.Features.Comments.Queries.GetAll;
 using AlgoCode.Application.Features.Problem.Commands.CompileProblem;
 using AlgoCode.Application.Features.Problem.Commands.SubmitProblem;
 using AlgoCode.Application.Features.Problem.Queries.GetAll;
 using AlgoCode.Application.Features.Problem.Queries.GetById;
+using AlgoCode.Application.Features.Sessions.Queries.GetById;
 using AlgoCode.Application.Features.Solutions.Commands.PostSolution;
 using AlgoCode.Application.Features.Solutions.Queries.GetAll;
 using AlgoCode.Application.Features.Solutions.Queries.GetById;
 using AlgoCode.Application.Features.Submissions.Queries.GetById;
+using AlgoCode.Application.Features.Tags.Queries.GetAll;
 
 namespace AlgoCode.WebUI.Controllers
 {
     public class ProblemsController : BaseMVCController
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public ProblemsController(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
         [HttpGet]
-        public async Task<IActionResult> Index(int page)
+        public async Task<IActionResult> Index(int page, string title)
         {
             if (page < 1)
                 return RedirectToAction(nameof(Index), new { page = 1 });
-            var model = await Mediator.Send(new GetProblemsWithPaginationQuery()
+            var response = new ProblemsIndexDTO
             {
-                PageNumber = page
-            });
-            return View(model);
+                GetProblemsWithPaginationQueryResponse = await Mediator.Send(new GetProblemsWithPaginationQuery { PageNumber = page, Title = title }),
+                GetSessionDetailsByIdQueryResponse = await Mediator.Send(new GetSessionDetailsByIdQuery()),
+                GetAllTagsQueryResponse = await Mediator.Send(new GetAllTagsQuery())
+            };
+
+            return View(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string title)
+        {
+            var response = await Mediator.Send(new GetProblemsWithPaginationQuery { Title = title });
+            return Ok(response);
         }
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> CompileAndRun([FromBody] CompileProblemCommand command)
         {
-            if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
             var result = await Mediator.Send(command);
             return Ok(result);
         }
@@ -37,7 +59,8 @@ namespace AlgoCode.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Submit([FromBody] SubmitProblemCommand command)
         {
-            if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
             var result = await Mediator.Send(command);
             return Content(result);
         }
@@ -71,17 +94,24 @@ namespace AlgoCode.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> PostSolution(PostSolutionCommand command)
         {
-            if (!ModelState.IsValid) return View(command);
-            if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
+            if (!ModelState.IsValid)
+                return View(command);
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
             var result = await Mediator.Send(command);
             return Ok(result);
-        }     
+        }
 
         [HttpGet("/problems/solution/{solutionId}")]
         public async Task<IActionResult> GetSolution(int solutionId)
         {
-            var solution = await Mediator.Send(new GetSolutionByIdQuery { Id = solutionId });
-            return View(solution);
+            var response = new SolutionIndexDTO
+            {
+                GetSolutionByIdQueryResponse = await Mediator.Send(new GetSolutionByIdQuery { Id = solutionId }),
+                GetAllComentsQueryResponse = await Mediator.Send(new GetAllCommentsQuery { SolutionId = solutionId })
+            };
+
+            return View(response);
         }
     }
 }

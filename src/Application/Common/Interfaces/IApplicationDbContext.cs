@@ -10,5 +10,6 @@ public interface IApplicationDbContext
     DbSet<UserProblemStatus> UserProblemStatuses { get; }
     DbSet<Subscription> Subscriptions { get; }
     DbSet<Solution> Solutions { get; }
+    DbSet<Comment> Comments { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

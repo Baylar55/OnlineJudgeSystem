@@ -19,7 +19,7 @@
                 Title = solution.Title,
                 Description = solution.Description,
                 UserName = solution.Submission.User.UserName,
-                Created = solution.Created                
+                Created = solution.Created
             };
         }
     }

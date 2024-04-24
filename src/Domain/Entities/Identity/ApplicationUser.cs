@@ -11,6 +11,7 @@ public class ApplicationUser : IdentityUser
     public ICollection<StudyPlan>? StudyPlans { get; set; }
     public ICollection<MockAssesment>? MockAssesments { get; set; }
     public ICollection<Session> Sessions { get; set; } = new List<Session>();
+    public ICollection<Comment>? Comments { get; set; }
     public Subscription? Subscription { get; set; }
     public int? SubscriptionId { get; set; }
     public SubscriptionStatus SubscriptionStatus { get; set; } = SubscriptionStatus.Inactive;

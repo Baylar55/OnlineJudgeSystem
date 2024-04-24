@@ -6,17 +6,31 @@
         public GetProblemsWithPaginationQueryHandler(IApplicationDbContext context) => _context = context;
         public async Task<GetProblemsWithPaginationQueryResponse> Handle(GetProblemsWithPaginationQuery request, CancellationToken cancellationToken)
         {
-            var problems = await _context.Problems.OrderByDescending(p => p.Id)
-                                      .Skip((request.PageNumber - 1) * request.PageSize)
-                                      .Take(request.PageSize)
-                                      .ToListAsync();
-
+            var problems = new List<Domain.Entities.Problem>();
+            if (request.Title == null)
+            {
+                problems = await _context.Problems
+                                                 .OrderByDescending(p => p.Id)
+                                                 .Skip((request.PageNumber - 1) * request.PageSize)
+                                                 .Take(request.PageSize)
+                                                 .ToListAsync();
+            }
+            else
+            {
+                problems = await _context.Problems
+                                             .Where(p => p.Title.Contains(request.Title))
+                                             .OrderByDescending(p => p.Id)
+                                             .Skip((request.PageNumber - 1) * request.PageSize)
+                                             .Take(request.PageSize)
+                                             .ToListAsync();
+            }
             return new()
             {
                 Problems = problems,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
-                PageCount = (int)Math.Ceiling((await _context.Problems.CountAsync()) / (decimal)request.PageSize)
+                PageCount = (int)Math.Ceiling((await _context.Problems.CountAsync()) / (decimal)request.PageSize),
+
             };
         }
     }

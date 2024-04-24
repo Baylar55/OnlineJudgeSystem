@@ -22,6 +22,51 @@ namespace AlgoCode.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentCommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SolutionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentCommentId");
+
+                    b.HasIndex("SolutionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("AlgoCode.Domain.Entities.Contest", b =>
                 {
                     b.Property<int>("Id")
@@ -811,6 +856,31 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.ToTable("ProblemTag");
                 });
 
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("AlgoCode.Domain.Entities.Comment", "ParentComment")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentCommentId");
+
+                    b.HasOne("AlgoCode.Domain.Entities.Solution", "Solution")
+                        .WithMany("Comments")
+                        .HasForeignKey("SolutionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AlgoCode.Domain.Identity.ApplicationUser", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentComment");
+
+                    b.Navigation("Solution");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("AlgoCode.Domain.Entities.Session", b =>
                 {
                     b.HasOne("AlgoCode.Domain.Identity.ApplicationUser", "User")
@@ -871,11 +941,13 @@ namespace AlgoCode.Infrastructure.Migrations
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.UserProblemStatus", b =>
                 {
-                    b.HasOne("AlgoCode.Domain.Entities.Problem", null)
+                    b.HasOne("AlgoCode.Domain.Entities.Problem", "Problem")
                         .WithMany("UserProblemStatuses")
                         .HasForeignKey("ProblemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Problem");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Identity.ApplicationUser", b =>
@@ -1073,6 +1145,11 @@ namespace AlgoCode.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Comment", b =>
+                {
+                    b.Navigation("Replies");
+                });
+
             modelBuilder.Entity("AlgoCode.Domain.Entities.Problem", b =>
                 {
                     b.Navigation("Submissions");
@@ -1087,6 +1164,11 @@ namespace AlgoCode.Infrastructure.Migrations
                     b.Navigation("Submissions");
                 });
 
+            modelBuilder.Entity("AlgoCode.Domain.Entities.Solution", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
             modelBuilder.Entity("AlgoCode.Domain.Entities.Submission", b =>
                 {
                     b.Navigation("Solutions");
@@ -1099,6 +1181,8 @@ namespace AlgoCode.Infrastructure.Migrations
 
             modelBuilder.Entity("AlgoCode.Domain.Identity.ApplicationUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Sessions");
 
                     b.Navigation("Submissions");

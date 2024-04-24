@@ -1,5 +1,11 @@
-﻿@using AlgoCode.Application.Features.Problem.Queries.GetAll
-@model GetProblemsWithPaginationQueryResponse
+﻿@using AlgoCode.Application.DTOs.Problems
+@model ProblemsIndexDTO
+
+@{
+    var difficultyRoute = Context.Request.Query["difficulty-filter"];
+    var nameRoute = Context.Request.Query["Name"];
+}
+
 <div class="container mt-2" style="width: 1200px !important;">
     <div class="row">
         <div class="col-9">
@@ -99,49 +105,90 @@
                     </div>
                 </div>
             </div>
+            @* <form method="get" asp-action="index" asp-controller="problems"> *@
             <div class="horizontal-filter">
                 <div class="row">
                     <div class="btn-group-sm col-5 d-flex dropdown" style="margin-right:15px;">
+
                         <button type="button" class="btn btn-md btn-secondary dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                             Difficulty
                         </button>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-item">Easy</li>
-                            <li class="dropdown-item">Medium</li>
-                            <li class="dropdown-item">Hard</li>
+                            @foreach (var value in Enum.GetValues(typeof(ProblemDifficulty)))
+                            {
+                                @if (difficultyRoute == value)
+                                {
+                                    <li>
+                                        <a class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" checked type="checkbox" value="@value" name="difficulty-filter" id="difficulty-@value" />
+                                                <label class="form-check-label" for="difficulty-@value" data-id="@value">@value</label>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="@value" name="difficulty-filter" id="difficulty-@value" />
+                                                <label class="form-check-label" for="difficulty-@value" data-id="@value">@value</label>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
                         </ul>
                         <button type="button" class="btn btn-md btn-secondary dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                             Status
                         </button>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-item">To do</li>
-                            <li class="dropdown-item">Solved</li>
-                            <li class="dropdown-item">Unsolved</li>
-                            <li class="dropdown-item">Attempted</li>
+                            @foreach (var value in Enum.GetValues(typeof(ProblemStatus)))
+                            {
+                                <li>
+                                    <a class="dropdown-item">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Default radio
+                                            </label>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                         <button type="button" class="btn btn-md btn-secondary dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                             Tags
                         </button>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-item">Arrays</li>
-                            <li class="dropdown-item">Strings</li>
-                            <li class="dropdown-item">Linked List</li>
-                            <li class="dropdown-item">Stack</li>
+                            @foreach (var tag in Model.GetAllTagsQueryResponse.Tags)
+                            {
+                                <li>
+                                    <a class="dropdown-item">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="Checkme1" />
+                                            <label class="form-check-label" for="Checkme1">@tag.Title</label>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div>
                     <div class="col-4">
                         <div class="input-group-sm d-flex">
-                            <input type="search" class="form-control" placeholder="Search for questions">
+                            <input id="searchInput" type="search" class="form-control" placeholder="Search for questions">
                             <div class="input-group-append">
-                                <button class="btn btn-sm btn-secondary border border-top-0 border-left-0 rounded-0" type="button">
+                                <button id="searchButton" class="btn btn-sm btn-secondary border border-top-0 border-left-0 rounded-0" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-2 d-flex align-items-center justify-content-center btn shuffle-container">
                         <div class="shuffle d-flex">
                             <img src="assets/img/shuffle_icon.png" alt="">
@@ -150,6 +197,7 @@
                     </div>
                 </div>
             </div>
+            @* </form> *@
             <div class="problem-list">
                 <table class="table table-striped table-responsive table-borderless">
                     <thead>
@@ -161,21 +209,22 @@
                             <th>Difficulty</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach (var problem in Model.Problems)
+                    <tbody class="problem-list-body">
+                        @foreach (var problem in Model.GetProblemsWithPaginationQueryResponse.Problems)
                         {
                             <tr>
                                 <td><i class="fa-regular fa-circle-check"></i></td>
                                 <td>
-                                    <a asp-action="singleproblem" asp-controller="problems" asp-route-id="@problem.Id">@problem.Id.  @problem.Title</a> 
-                                    @if (problem.AccessLevel==AccessLevel.Premium)
+                                    <a asp-action="singleproblem" asp-controller="problems" asp-route-id="@problem.Id">@problem.Id.  @problem.Title</a>
+                                    @if (problem.AccessLevel == AccessLevel.Premium)
                                     {
                                         <span class="badge" style="color:white !important;background-color:#ffa116;">Premium</span>
                                     }
                                 </td>
                                 <td><i class="fa-solid fa-file-circle-check"></i></td>
                                 <td>40.3%</td>
-                                <td class="status-easy">@problem.Difficulty</td>
+                                <td class="status-@(problem.Difficulty.ToString().ToLower())">@problem.Difficulty</td>
+
                             </tr>
                         }
                     </tbody>
@@ -188,23 +237,23 @@
                                 {
                                     <li class="page-item">
                                         @{
-                                            var prevPage = Model.PageNumber - 1;
+                                            var prevPage = Model.GetProblemsWithPaginationQueryResponse.PageNumber - 1;
                                             <a class="page-link" itemprop="url" asp-action="index" asp-controller="problems" asp-route-page="@prevPage">
                                                 <i class="fa-solid fa-chevron-left"></i>
                                             </a>
                                         }
                                     </li>
-                                    @for (int i = 1; i <= Model.PageCount; i++)
+                                    @for (int i = 1; i <= Model.GetProblemsWithPaginationQueryResponse.PageCount; i++)
                                     {
                                         <li class="page-item">
-                                            <a asp-action="index" asp-controller="problems" asp-route-page="@i" class="@(Model.PageNumber==i ? "mkdf-pag-active disabled page-link" : "mkdf-pag-inactive page-link")">@i</a>
+                                            <a asp-action="index" asp-controller="problems" asp-route-page="@i" class="@(Model.GetProblemsWithPaginationQueryResponse.PageNumber==i ? "mkdf-pag-active disabled page-link" : "mkdf-pag-inactive page-link")">@i</a>
                                         </li>
                                     }
-                                    @if (Model.PageCount != Model.PageNumber)
+                                    @if (Model.GetProblemsWithPaginationQueryResponse.PageCount != Model.GetProblemsWithPaginationQueryResponse.PageNumber)
                                     {
                                         <li class="page-item">
                                             @{
-                                                var nextPage = @Model.PageNumber + 1;
+                                                var nextPage = @Model.GetProblemsWithPaginationQueryResponse.PageNumber + 1;
                                                 <a class="page-link" itemprop="url" asp-action="index" asp-controller="problems" asp-route-page="@nextPage">
                                                     <i class="fa-solid fa-chevron-right"></i>
                                                 </a>
@@ -268,16 +317,16 @@
                     </div>
                     <div class="col-6">
                         <div class="d-flex justify-content-end btn">
-                            <div class="session-name">Anonymous <i class="fa-solid fa-gear"></i></div>
+                            <div class="session-name">@Model.GetSessionDetailsByIdQueryResponse.Title<i class="fa-solid fa-gear"></i></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-5">
                         <div class="circle">
-                            <h3>29</h3>
+                            <h3>@Model.GetSessionDetailsByIdQueryResponse.SolvedProblemsCount</h3>
                             <hr>
-                            <span>2072</span>
+                            <span>@Model.GetSessionDetailsByIdQueryResponse.AllProblemsCount</span>
                         </div>
                     </div>
                     <div class="col-7 dataDifficulty">
@@ -286,8 +335,8 @@
                                 <p class="d-inline status-easy">Easy</p>
                             </div>
                             <div>
-                                <span>20</span>
-                                <span>/778</span>
+                                <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedEasyProblemsCount</span>
+                                <span>/@Model.GetSessionDetailsByIdQueryResponse.AllEasyProblemsCount</span>
                             </div>
                         </div>
                         <div class="difficulty-medium d-flex justify-content-between">
@@ -295,8 +344,8 @@
                                 <p class="d-inline status-medium">Medium</p>
                             </div>
                             <div>
-                                <span>12</span>
-                                <span>/561</span>
+                                <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedMediumProblemsCount</span>
+                                <span>/@Model.GetSessionDetailsByIdQueryResponse.AllMediumProblemsCount</span>
                             </div>
                         </div>
                         <div class="difficulty-hard d-flex justify-content-between">
@@ -304,8 +353,8 @@
                                 <p class="d-inline status-hard">Hard</p>
                             </div>
                             <div>
-                                <span>5</span>
-                                <span>/300</span>
+                                <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedHardProblemsCount</span>
+                                <span>/@Model.GetSessionDetailsByIdQueryResponse.AllHardProblemsCount</span>
                             </div>
                         </div>
                     </div>
@@ -314,3 +363,44 @@
         </div>
     </div>
 </div>
+<script src="~/assets/js/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#searchButton').click(function () {
+            var searchValue = $('#searchInput').val();
+            $.ajax({
+                url: '/problems/search',
+                type: 'POST',
+                data: { title: searchValue },
+                success: function (response) {
+
+                    $('.problem-list-body').empty();
+                    console.log(response.problems);
+                    response.problems.forEach(function (problem) {
+                        var difficultyNames = ['Easy', 'Medium', 'Hard'];
+                        var difficultyName = difficultyNames[problem.difficulty];
+                            var badge = problem.IsPremium ? '<span class="badge" style="color:white !important;background-color:#ffa116;">Premium</span>' : '';
+
+                        var body = document.createElement('tr');
+                        body.innerHTML = `<tr>
+                                        <td><i class="fa-regular fa-circle-check"></i></td>
+                                        <td>
+                                            <a asp-action="singleproblem" asp-controller="problems" asp-route-id="${problem.id}">${problem.id}.  ${problem.title}</a>
+                                        ${badge}
+                                        </td>
+                                        <td><i class="fa-solid fa-file-circle-check"></i></td>
+                                        <td>40.3%</td>
+                                                <td class="status-${difficultyName ? difficultyName.toLowerCase() : ''}">${difficultyName}</td>
+                                    </tr>`;
+
+                        $('.problem-list-body').append(body);
+                    });
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+</script>

@@ -1,5 +1,5 @@
-﻿@using AlgoCode.Application.Features.Solutions.Queries.GetById
-@model GetSolutionByIdQueryResponse
+﻿@using AlgoCode.Application.DTOs.Solutions
+@model SolutionIndexDTO
 
 <section class="gray pt-5">
     <div class="container">
@@ -17,7 +17,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="reviews-tab" data-toggle="pill" href="#reviews"
-                               role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                               role="tab" aria-controls="reviews" aria-selected="false">Comments</a>
                         </li>
                 </div>
                 <div>
@@ -27,8 +27,8 @@
                                 <img src="~/assets/img/user-1.jpg" class="d-block" style="width: 50px; height: 50px;">
                             </div>
                             <div style="margin-left: 20px;">
-                                <span>@Model.UserName</span>
-                                <p><i class="fa-light fa-calendar me-2"></i>@Model.Created.ToString("MMM d, yyyy")</p>
+                                <span>@Model.GetSolutionByIdQueryResponse.UserName</span>
+                                <p><i class="fa-light fa-calendar me-2"></i>@Model.GetSolutionByIdQueryResponse.Created.ToString("MMM d, yyyy")</p>
                             </div>
                         </div>
                     </li>
@@ -42,8 +42,9 @@
                          aria-labelledby="overview-tab">
                         <!-- Overview -->
                         <div class="edu_wraper">
-                            <h4 class="edu_title">@Model.Title</h4> 
-                            @Html.Raw(Model.Description)
+                            <h4 class="edu_title">@Model.GetSolutionByIdQueryResponse.Title</h4>
+                            <input type="hidden" id="solutionId" value="@Model.GetSolutionByIdQueryResponse.Id" />
+                                @Html.Raw(Model.GetSolutionByIdQueryResponse.Description)
                         </div>
                     </div>
 
@@ -53,118 +54,138 @@
                         <!-- Reviews -->
                         <div class="list-single-main-item fl-wrap">
                             <div class="list-single-main-item-title fl-wrap">
-                                <h3>Item Reviews - <span> 3 </span></h3>
+                                <h3>Comments - <span> 3 </span></h3>
                             </div>
-                            <div class="reviews-comments-wrap">
-                                <!-- reviews-comments-item -->
-                                <div class="reviews-comments-item">
-                                    <div class="review-comments-avatar">
-                                        <img src="~/assets/img/user-1.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="reviews-comments-item-text">
-                                        <h4>
-                                            <a href="#">Josaph Manrty</a><span class="reviews-comments-item-date">
-                                                <i class="ti-calendar theme-cl"></i>27 Oct 2019
-                                            </span>
-                                        </h4>
+                            <div class="reviews-comments-wrap d-block">
+                                <div class="comments-section">
+                                    <!-- reviews-comments-item -->
+                                        @foreach (var comment in Model.GetAllComentsQueryResponse.Comments)
+                                        {
+                                        <div class="reviews-comments-item">
+                                            <div class="review-comments-avatar">
+                                                <img src="~/assets/img/user-1.jpg" class="img-fluid" alt="">
+                                            </div>
+                                            <div class="reviews-comments-item-text-@comment.Id">
+                                                <h4>
+                                                    <a href="#">@comment.User.UserName</a><span class="reviews-comments-item-date">
+                                                        <i class="ti-calendar theme-cl"></i>@comment.Created.ToString("MMM d, yyyy")
+                                                    </span>
+                                                </h4>
 
-                                        <div class="listing-rating">
-                                            <i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i>
+                                                <div class="listing-rating">
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <input type="hidden" id="parentCommentId" value="@comment.Id" />
+                                                <p>
+                                                        @comment.Content
+                                                </p>
+                                                <div class="pull-left reviews-reaction">
+                                                    <a href="#" class="comment-like active">
+                                                        <i class="ti-thumb-up"></i> 12
+                                                    </a>
+                                                    <a href="#" class="comment-dislike active">
+                                                        <i class="ti-thumb-down"></i> 1
+                                                    </a>
+                                                    <a class="comment-reply active" data-comment-id="@comment.Id">
+                                                        <i class="fa-solid fa-reply"></i>
+                                                    </a>
+                                                </div>
+
+                                                <!--Comment Replies-->
+                                                    @if (comment.Replies != null)
+                                                    {
+                                                        @foreach (var reply in comment.Replies)
+                                                        {
+                                                            <input type="hidden" class="replyId" value="@reply.Id" />
+                                                        <div class="comment-replies-@comment.Id">
+                                                            <div class="reviews-comments-item" style="margin-top:25px;border-bottom:0;">
+                                                                <div class="review-comments-avatar">
+                                                                    <img src="~/assets/img/user-1.jpg" class="img-fluid" alt="">
+                                                                </div>
+                                                                <div class="reviews-comments-item-text" style="padding-right:0;">
+                                                                    <h4>
+                                                                        <a href="#">@reply.User.UserName</a><span class="reviews-comments-item-date">
+                                                                            <i class="ti-calendar theme-cl"></i>@reply.Created.ToString("MMM d, yyyy")
+                                                                        </span>
+                                                                    </h4>
+
+                                                                    <div class="listing-rating">
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                    <p>
+                                                                        @reply.Content
+                                                                    </p>
+                                                                    <div class="pull-left reviews-reaction">
+                                                                        <a href="#" class="comment-like active">
+                                                                            <i class="ti-thumb-up"></i> 12
+                                                                        </a>
+                                                                        <a href="#" class="comment-dislike active">
+                                                                            <i class="ti-thumb-down"></i> 1
+                                                                        </a>
+                                                                        <a class="comment-reply active" data-comment-id="@comment.Id">
+                                                                            <i class="fa-solid fa-reply"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        }
+                                                    }
+
+                                                <!--Comment Replies-->
+
+                                                <div class="comment-reply-form" id="commentReplyForm-@comment.Id" style="display:none;">
+                                                    <form id="commentForm-@comment.Id">
+                                                        <div class="row">
+
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <textarea style="margin-top:60px !important;" class="form-control ht-140" id="replycommentContent-@comment.Id" placeholder="Add a  for solution"></textarea>
+                                                                    <input type="hidden" class="deletethis" value="@comment.Id"/>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <button type="button" onclick="postReply()" class="btn theme-bg btn-md float-end">Post</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="clearfix"></div>
-                                        <p>
-                                            " Commodo est luctus eget. Proin in nunc laoreet justo volutpat
-                                            blandit enim. Sem felis, ullamcorper vel aliquam non, varius
-                                            eget justo. Duis quis nunc tellus sollicitudin mauris. "
-                                        </p>
-                                        <div class="pull-left reviews-reaction">
-                                            <a href="#" class="comment-like active">
-                                                <i class="ti-thumb-up"></i> 12
-                                            </a>
-                                            <a href="#" class="comment-dislike active">
-                                                <i class="ti-thumb-down"></i> 1
-                                            </a>
-                                            <a href="#" class="comment-love active">
-                                                <i class="ti-heart"></i>
-                                                07
-                                            </a>
-                                        </div>
-                                    </div>
+                                        }
+
                                 </div>
                                 <!--reviews-comments-item end-->
-                                <!-- reviews-comments-item -->
-                                <div class="reviews-comments-item">
-                                    <div class="review-comments-avatar">
-                                        <img src="~/assets/img/user-2.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="reviews-comments-item-text">
-                                        <h4>
-                                            <a href="#">Rita Chawla</a><span class="reviews-comments-item-date">
-                                                <i class="ti-calendar theme-cl"></i>2 Nov May 2019
-                                            </span>
-                                        </h4>
+                                <!-- Submit Reviews -->
 
-                                        <div class="listing-rating">
-                                            <i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star"></i>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <p>
-                                            " Commodo est luctus eget. Proin in nunc laoreet justo volutpat
-                                            blandit enim. Sem felis, ullamcorper vel aliquam non, varius
-                                            eget justo. Duis quis nunc tellus sollicitudin mauris. "
-                                        </p>
-                                        <div class="pull-left reviews-reaction">
-                                            <a href="#" class="comment-like active">
-                                                <i class="ti-thumb-up"></i> 12
-                                            </a>
-                                            <a href="#" class="comment-dislike active">
-                                                <i class="ti-thumb-down"></i> 1
-                                            </a>
-                                            <a href="#" class="comment-love active">
-                                                <i class="ti-heart"></i>
-                                                07
-                                            </a>
-                                        </div>
+                                <div class="edu_wraper mt-5">
+                                    <div class="review-form-box form-submit">
+                                        <form id="commentForm">
+                                            <div class="row">
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <textarea style="margin-top:60px !important;" class="form-control ht-140" id="commentContent" placeholder="Add a comment for solution"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn theme-bg btn-md float-end">Post</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <!--reviews-comments-item end-->
-                                <!-- reviews-comments-item -->
-                                <div class="reviews-comments-item">
-                                    <div class="review-comments-avatar">
-                                        <img src="~/assets/img/user-3.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="reviews-comments-item-text">
-                                        <h4>
-                                            <a href="#">Adam Wilsom</a><span class="reviews-comments-item-date">
-                                                <i class="ti-calendar theme-cl"></i>10 Nov 2019
-                                            </span>
-                                        </h4>
 
-                                        <div class="listing-rating">
-                                            <i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <p>
-                                            " Commodo est luctus eget. Proin in nunc laoreet justo volutpat
-                                            blandit enim. Sem felis, ullamcorper vel aliquam non, varius
-                                            eget justo. Duis quis nunc tellus sollicitudin mauris. "
-                                        </p>
-                                        <div class="pull-left reviews-reaction">
-                                            <a href="#" class="comment-like active">
-                                                <i class="ti-thumb-up"></i> 12
-                                            </a>
-                                            <a href="#" class="comment-dislike active">
-                                                <i class="ti-thumb-down"></i> 1
-                                            </a>
-                                            <a href="#" class="comment-love active">
-                                                <i class="ti-heart"></i>
-                                                07
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--reviews-comments-item end-->
-
+                                <!-- Submit Reviews end -->
                             </div>
                         </div>
 
@@ -178,4 +199,126 @@
 
     </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $('#commentForm').submit(function (event) {
+            event.preventDefault();
+            var commentContent = $('#commentContent').val();
+            var solutionId = $('#solutionId').val();
+            $.ajax({
+                url: '/solutions/post',
+                type: 'POST',
+                data: { content: commentContent, solutionId: solutionId },
+                success: function (response) {
+                    var newComment = `
+                            <div class="reviews-comments-item">
+                             <div class="review-comments-avatar">
+                                 <img src="~/assets/img/user-1.jpg" class="img-fluid" alt="">
+                             </div>
+                             <div class="reviews-comments-item-text">
+                                 <h4>
+                                     <a href="#">${response.userName}</a><span class="reviews-comments-item-date">
+                                         <i class="ti-calendar theme-cl"></i>27 Oct 2019
+                                     </span>
+                                 </h4>
 
+                                 <div class="listing-rating">
+
+                                 </div>
+                                 <div class="clearfix"></div>
+                                 <p>
+                                    ${response.content}
+                                 </p>
+                                 <div class="pull-left reviews-reaction">
+                                     <a href="#" class="comment-like active">
+                                         <i class="ti-thumb-up"></i> 12
+                                     </a>
+                                     <a href="#" class="comment-dislike active">
+                                         <i class="ti-thumb-down"></i> 1
+                                     </a>
+                                     <a href="#" class="comment-reply active">
+                                         <i class="fa-solid fa-reply"></i>
+                                     </a>
+                                 </div>
+                              </div>
+                            </div>`;
+                    $('.comments-section').append(newComment);
+
+                    $('#commentContent').val('');
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+    var commentId;
+    $(document).ready(function () {
+        
+        $('.comment-reply').click(function (event) {
+            commentId = $(this).data('comment-id');
+            $('#commentReplyForm-' + commentId).toggle();
+        });
+
+    });
+    function postReply() {
+        var solutionId = $('#solutionId').val();
+        var parentCommentId = commentId;
+        var textareaId = "#replycommentContent-" + parentCommentId;
+        var commentContent = $(textareaId).val();
+        var commentreplies = ".reviews-comments-item-text-" + parentCommentId;
+        let today = new Date();
+        let formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            var formData = {
+            content: commentContent,
+            solutionId: solutionId,
+            parentCommentId: parentCommentId
+        }
+        $.ajax({
+            url: '/solutions/post',
+            type: 'POST',
+            data: formData,
+            success: function (response) {
+                console.log("data: "+commentreplies);
+                var reply = `
+                        <div class="reviews-comments-item" style="margin-top:25px;border-bottom:0;">
+                          <div class="review-comments-avatar">
+                              <img src="/assets/img/user-1.jpg" class="img-fluid" alt="">
+                          </div>
+                          <div class="reviews-comments-item-text" style="padding-right:0;">
+                              <h4>
+                                  <a href="#">${response.userName}</a><span class="reviews-comments-item-date">
+                                      <i class="ti-calendar theme-cl"></i>${formattedDate}
+                                  </span>
+                              </h4>
+
+                              <div class="listing-rating">
+                              </div>
+                              <div class="clearfix"></div>
+                              <p>
+                                  ${response.content}
+                              </p>
+                              <div class="pull-left reviews-reaction">
+                                  <a href="#" class="comment-like active">
+                                      <i class="ti-thumb-up"></i> 12
+                                  </a>
+                                  <a href="#" class="comment-dislike active">
+                                      <i class="ti-thumb-down"></i> 1
+                                  </a>
+                                  <a class="comment-reply active" data-comment-id="${response.id}">
+                                      <i class="fa-solid fa-reply"></i>
+                                  </a>
+                              </div>
+                          </div>
+                        </div>`;
+                $('#commentReplyForm-' + parentCommentId).css('display', 'none');
+                $(commentreplies).append(reply);
+                $('#commentContent').val('');
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    };
+</script>
