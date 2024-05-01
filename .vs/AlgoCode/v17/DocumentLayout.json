@@ -3,24 +3,72 @@
   "WorkspaceRootPath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\controllers\\problemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\controllers\\problemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\problem\\queries\\getall\\getproblemswithpaginationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\problem\\queries\\getall\\getproblemswithpaginationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\problem\\queries\\getall\\getproblemswithpaginationquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\problem\\queries\\getall\\getproblemswithpaginationquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93E3574C-9DB6-40E3-A053-AAF2A12BB1A7}|src\\Infrastructure\\Infrastructure.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\infrastructure\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E3574C-9DB6-40E3-A053-AAF2A12BB1A7}|src\\Infrastructure\\Infrastructure.csproj|solutionrelative:src\\infrastructure\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\problem\\commands\\compileproblem\\compileproblemcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\problem\\commands\\compileproblem\\compileproblemcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\controllers\\pricingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\controllers\\pricingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\views\\pricing\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\pricing\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\views\\problems\\singleproblem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\problems\\singleproblem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\controllers\\solutionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\controllers\\solutionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\areas\\admin\\views\\problems\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\areas\\admin\\views\\problems\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\areas\\admin\\controllers\\problemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\areas\\admin\\controllers\\problemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\problem\\queries\\getbyid\\getproblembysolutionidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\problem\\queries\\getbyid\\getproblembysolutionidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\problem\\queries\\getbyid\\getproblembysolutionidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\problem\\queries\\getbyid\\getproblembysolutionidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\controllers\\solutionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\controllers\\solutionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,32 +83,188 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ProblemsController.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\ProblemsController.cs",
+              "RelativeDocumentMoniker": "src\\WebUI\\Controllers\\ProblemsController.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\ProblemsController.cs",
+              "RelativeToolTip": "src\\WebUI\\Controllers\\ProblemsController.cs",
+              "ViewState": "AQIAAAcAAAAAMzMzMzMLwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T07:29:09.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetProblemsWithPaginationQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Queries\\GetAll\\GetProblemsWithPaginationQueryHandler.cs",
+              "RelativeDocumentMoniker": "src\\Application\\Features\\Problem\\Queries\\GetAll\\GetProblemsWithPaginationQueryHandler.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Queries\\GetAll\\GetProblemsWithPaginationQueryHandler.cs",
+              "RelativeToolTip": "src\\Application\\Features\\Problem\\Queries\\GetAll\\GetProblemsWithPaginationQueryHandler.cs",
+              "ViewState": "AQIAAAgAAACgmpmZmZklwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T07:28:52.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetProblemsWithPaginationQuery.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Queries\\GetAll\\GetProblemsWithPaginationQuery.cs",
+              "RelativeDocumentMoniker": "src\\Application\\Features\\Problem\\Queries\\GetAll\\GetProblemsWithPaginationQuery.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Queries\\GetAll\\GetProblemsWithPaginationQuery.cs",
+              "RelativeToolTip": "src\\Application\\Features\\Problem\\Queries\\GetAll\\GetProblemsWithPaginationQuery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T07:28:46.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DbInitializer.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Infrastructure\\DbInitializer.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\DbInitializer.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Infrastructure\\DbInitializer.cs",
+              "RelativeToolTip": "src\\Infrastructure\\DbInitializer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T07:26:18.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "src\\WebUI\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "src\\WebUI\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-01T06:37:53.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CompileProblemCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Commands\\CompileProblem\\CompileProblemCommandHandler.cs",
+              "RelativeDocumentMoniker": "src\\Application\\Features\\Problem\\Commands\\CompileProblem\\CompileProblemCommandHandler.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Commands\\CompileProblem\\CompileProblemCommandHandler.cs",
+              "RelativeToolTip": "src\\Application\\Features\\Problem\\Commands\\CompileProblem\\CompileProblemCommandHandler.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAgwCUAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T06:37:05.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PricingController.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\PricingController.cs",
+              "RelativeDocumentMoniker": "src\\WebUI\\Controllers\\PricingController.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\PricingController.cs",
+              "RelativeToolTip": "src\\WebUI\\Controllers\\PricingController.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBwAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T06:23:28.426Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Pricing\\Index.cshtml",
+              "RelativeDocumentMoniker": "src\\WebUI\\Views\\Pricing\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Pricing\\Index.cshtml",
+              "RelativeToolTip": "src\\WebUI\\Views\\Pricing\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-01T06:23:24.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "src\\WebUI\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "src\\WebUI\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAANEAAAAAAAAAAAAAANcAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-01T06:09:29.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\Application\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\Application\\DependencyInjection.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T06:05:59.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Areas\\Admin\\Views\\Problems\\Index.cshtml",
+              "RelativeDocumentMoniker": "src\\WebUI\\Areas\\Admin\\Views\\Problems\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Areas\\Admin\\Views\\Problems\\Index.cshtml",
+              "RelativeToolTip": "src\\WebUI\\Areas\\Admin\\Views\\Problems\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-01T05:59:46.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ProblemsController.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Areas\\Admin\\Controllers\\ProblemsController.cs",
+              "RelativeDocumentMoniker": "src\\WebUI\\Areas\\Admin\\Controllers\\ProblemsController.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Areas\\Admin\\Controllers\\ProblemsController.cs",
+              "RelativeToolTip": "src\\WebUI\\Areas\\Admin\\Controllers\\ProblemsController.cs",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAmwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T05:59:33.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "SingleProblem.cshtml",
               "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Problems\\SingleProblem.cshtml",
               "RelativeDocumentMoniker": "src\\WebUI\\Views\\Problems\\SingleProblem.cshtml",
               "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Problems\\SingleProblem.cshtml",
               "RelativeToolTip": "src\\WebUI\\Views\\Problems\\SingleProblem.cshtml",
-              "ViewState": "AQIAAMwBAAAAAAAAAAAnwNcBAACGAAAA",
+              "ViewState": "AQIAAHkBAAAAAAAAAAAAACEBAAAMAQAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-05-01T04:28:36.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 13,
               "Title": "GetProblemBySolutionIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Queries\\GetById\\GetProblemBySolutionIdQuery.cs",
               "RelativeDocumentMoniker": "src\\Application\\Features\\Problem\\Queries\\GetById\\GetProblemBySolutionIdQuery.cs",
               "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Queries\\GetById\\GetProblemBySolutionIdQuery.cs",
               "RelativeToolTip": "src\\Application\\Features\\Problem\\Queries\\GetById\\GetProblemBySolutionIdQuery.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAyAAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAA9wBMAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-01T03:21:58.625Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 14,
               "Title": "GetSolutionByIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQueryHandler.cs",
@@ -73,7 +277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 15,
               "Title": "GetSolutionByIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQuery.cs",
               "RelativeDocumentMoniker": "src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQuery.cs",
@@ -86,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 16,
               "Title": "SolutionsController.cs",
               "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\SolutionsController.cs",
               "RelativeDocumentMoniker": "src\\WebUI\\Controllers\\SolutionsController.cs",
@@ -94,8 +298,7 @@
               "RelativeToolTip": "src\\WebUI\\Controllers\\SolutionsController.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAxwAEAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T23:50:51.011Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-30T23:50:51.011Z"
             }
           ]
         }

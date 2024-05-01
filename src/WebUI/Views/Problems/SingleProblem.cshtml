@@ -287,7 +287,7 @@
                                                 @foreach (var testcase in Model.GetProblemByIdWithTestCaseQueryResponse.TestCases)
                                                 {
                                                     <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                                        <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x => x.ToString().Replace("\"", "")))">
+                                                        <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x =>  x ))">
 
                                                         <label class="ms-3" for="floatingInput">Input</label>
                                                     </div>
