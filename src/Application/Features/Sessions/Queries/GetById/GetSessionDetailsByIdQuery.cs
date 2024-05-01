@@ -30,10 +30,11 @@
                                         .ThenInclude(p => p.UserProblemStatuses)
                                         .FirstOrDefaultAsync(s => s.IsActive, cancellationToken);
 
-            if (session == null)
-                return null;
+            if (session == null) return null;
 
-            var userProblemStatuses = session.Submissions.SelectMany(sub => sub.Problem.UserProblemStatuses);
+            var userProblemStatuses = _context.UserProblemStatuses
+                                              .Where(ups => ups.SessionId == session.Id)
+                                              .ToList();
             var solvedProblemsCount = userProblemStatuses.Count(u => u.Status == ProblemStatus.Solved);
 
             var solvedEasyProblemsCount = userProblemStatuses.Count(u => u.Status == ProblemStatus.Solved && u.Problem.Difficulty == ProblemDifficulty.Easy);

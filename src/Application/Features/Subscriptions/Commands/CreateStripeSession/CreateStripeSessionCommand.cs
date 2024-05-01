@@ -32,7 +32,7 @@ namespace AlgoCode.Application.Features.Subscriptions.Commands.CreateStripeSessi
                 Metadata = new Dictionary<string, string>
                 {
                     { "SubscriptionId", request.SubscriptionId.ToString() },
-                },
+                }
             };
 
             var subscription = subscriptions.FirstOrDefault(x => x.Id == request.SubscriptionId);

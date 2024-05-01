@@ -1,5 +1,4 @@
 ﻿using AlgoCode.Application.Common.Interfaces;
-using AlgoCode.Domain.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Reflection;
 
@@ -17,6 +16,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Subscription> Subscriptions => Set<Subscription>();
     public DbSet<Solution> Solutions => Set<Solution>();
     public DbSet<Comment> Comments => Set<Comment>();
+    public DbSet<Contest> Contests => Set<Contest>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

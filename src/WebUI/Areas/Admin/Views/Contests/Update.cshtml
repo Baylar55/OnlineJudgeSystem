@@ -1,0 +1,61 @@
+﻿@using AlgoCode.Application.Features.Contests.Commands.UpdateContest
+@model UpdateContestCommand
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data" asp-area="admin" asp-action="update" asp-controller="contests">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <input class="form-control" asp-for="Title" />
+                                <span class="text-danger" asp-validation-for="Title"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <textarea id="editor" class="form-control" asp-for="Description"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Photo">Photo</label>
+                                <input class="form-control" asp-for="Photo">
+                                <span class="text-danger" asp-validation-for="Photo"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ProblemIds">Problems</label>
+                                <select class="form-control" asp-for="ProblemIds" asp-items="@ViewBag.SelectItems"></select>
+                                <span class="form-text text-danger" asp-validation-for="ProblemIds"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="StartTime">Start Time</label>
+                                <input type="datetime-local" class="form-control" asp-for="StartTime" />
+                                <span class="text-danger" asp-validation-for="StartTime"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="EndTime">End Time</label>
+                                <input type="datetime-local" class="form-control" asp-for="EndTime" />
+                                <span class="text-danger" asp-validation-for="EndTime"></span>
+                            </div>
+
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" asp-for="IsActive" />
+                                <label class="form-check-label" asp-for="IsActive">Is Active</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/super-build/ckeditor.js"></script>
+<script src="~/admin/js/ckeditor.js"></script>

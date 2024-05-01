@@ -110,7 +110,7 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contest");
+                    b.ToTable("Contests");
                 });
 
             modelBuilder.Entity("AlgoCode.Domain.Entities.MockAssesment", b =>

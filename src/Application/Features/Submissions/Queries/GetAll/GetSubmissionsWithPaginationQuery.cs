@@ -8,14 +8,6 @@
 
     public class GetSubmissionsWithPaginationQueryResponse
     {
-        //public int Id { get; set; }
-        //public string ProblemName { get; set; }
-        //public string SourceCode { get; set; }
-        //public string Language { get; set; }
-        //public string Status { get; set; }
-        //public string SubmissionTime { get; set; }
-        //public string MemoryUsage { get; set; }
-        //public string ExecutionTime { get; set; }
         public ICollection<Submission>? Submissions { get; set; }
         public List<string> ProblemTitles { get; set; }
         public int PageNumber { get; set; }

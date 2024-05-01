@@ -1,0 +1,151 @@
+﻿@using AlgoCode.Application.Features.Contests.Queries.GetById
+@model GetContestByIdQueryResponse
+<section style="background-color:#fafafa; padding-inline:75px;">
+    <div class="mb-3 ms-2">
+        <h1>@Model.Title</h1>
+    </div>
+    <div class="d-flex flex-wrap">
+        <div class="col-lg-9 col-md-12 mt-3 mb-3">
+            <p>@Html.Raw(Model.Description)</p>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <h3 class="text-300">
+                <i class="fa fa-trophy text-orange" style="color:orange;" aria-hidden="true"></i>
+                &nbsp;Prize
+            </h3>
+            <ul class="list-group" style="margin-top: 20px">
+                <li class="list-group-item">
+                    <b>1st</b>
+                    <span class="pull-right float-end float-end">
+                        5,000 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <b>2nd</b>
+                    <span class="pull-right float-end">
+                        2,500 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <b>3rd</b>
+                    <span class="pull-right float-end">
+                        1,000 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <b>4</b> - <b>50th</b>
+                    <span class="pull-right float-end">
+                        300 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <b>51</b> - <b>100th</b>
+                    <span class="pull-right float-end">
+                        100 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <b>101</b> - <b>200th</b>
+                    <span class="pull-right float-end">
+                        50 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <b>Participate</b>
+                    <span class="pull-right float-end">
+                        5 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <b>First Time Participate</b>
+                    <span class="pull-right float-end">
+                        200 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <span style="
+    position: absolute;
+    color: rgb(245, 0, 87);
+    font-size: 10px;
+    transform: translate(-8px, -9px);
+"></span>
+                    <b>Participate Biweekly + Weekly Contests in Same Week</b>
+                    <span class="pull-right float-end">
+                        35 <i class="fa-solid fa-coins" style="color:orange;"></i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="d-flex justify-content-between" style="padding-inline:80px;padding-block:20px;">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Problems List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Problem Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Problems is not null)
+                        {
+                            @foreach (var problem in Model.Problems)
+                            {
+                                <tr>
+                                    <td style="color:#40a9FF;"><a asp-action="singleproblem" asp-controller="problems" asp-route-id="@problem.Id">@problem.Title</a></td>
+                                    <td>@problem.Point</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Ranking</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Score</th>
+                            <th>Finish Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Ksorjmas</td>
+                            <td>18</td>
+                            <td>0:08:07</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Ksorjmas</td>
+                            <td>18</td>
+                            <td>0:08:07</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Ksorjmas</td>
+                            <td>18</td>
+                            <td>0:08:07</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

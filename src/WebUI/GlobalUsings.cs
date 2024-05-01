@@ -1,6 +1,9 @@
 ﻿global using AlgoCode.Application.Common.Interfaces;
 global using AlgoCode.Domain.Constants;
+global using AlgoCode.Domain.Identity;
+global using AlgoCode.Infrastructure;
 global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.Rendering;
 global using WebUI.Controllers.Base;

@@ -32,21 +32,21 @@
                         @foreach (var problem in Model.Problems)
                         {
                             <tr>
-                                <td>@problem.Id</td>
-                                <td>@problem.Title</td>
-                                <td>@problem.Point</td>
-                                <td>@problem.Created</td>
-                                <td>@problem.LastModified</td>
+                                <td>@problem.Problem.Id</td>
+                                <td>@problem.Problem.Title</td>
+                                <td>@problem.Problem.Point</td>
+                                <td>@problem.Problem.Created</td>
+                                <td>@problem.Problem.LastModified</td>
                                 <td class="text-center">
-                                    <a asp-action="update" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Id" class="btn btn-primary">Update</a>
+                                    <a asp-action="update" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Problem.Id" class="btn btn-primary">Update</a>
                                 </td>
                                 <td class="text-center">
                                     <form method="post">
-                                        <button asp-action="delete" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Id" class="btn btn-danger">Delete</button>
+                                        <button asp-action="delete" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Problem.Id" class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
                                 <td width="20px" class="text-center">
-                                    <a asp-action="details" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Id" class="btn btn-info">Details</a>
+                                    <a asp-action="details" asp-controller="problems" asp-area="admin" asp-route-id="@problem.Problem.Id" class="btn btn-info">Details</a>
                                 </td>
                             </tr>
                         }

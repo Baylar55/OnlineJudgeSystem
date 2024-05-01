@@ -21,9 +21,9 @@ namespace AlgoCode.Application.Features.Tags.Commands.CreateTag
             }
             var entity = new Tag { Title = request.Title };
 
-            entity.AddDomainEvent(new TagCreatedEvent(entity));
+            //entity.AddDomainEvent(new TagCreatedEvent(entity));
 
-            _context.Tags.Add(entity);
+            _context.Tags.Select(x => new Tag { });
 
             await _context.SaveChangesAsync(cancellationToken);
 

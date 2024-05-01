@@ -1,4 +1,5 @@
 ﻿using AlgoCode.Application.Features.Comments.Commands.PostComment;
+using AlgoCode.Application.Features.Solutions.Commands.DeleteSolution;
 
 namespace AlgoCode.WebUI.Controllers
 {
@@ -15,5 +16,14 @@ namespace AlgoCode.WebUI.Controllers
             var result = await Mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await Mediator.Send(new DeleteSolutionCommand{ Id = id });
+            return RedirectToAction("Index", "Problems");
+        }
+
+
     }
 }

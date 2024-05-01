@@ -1,7 +1,4 @@
-﻿using AlgoCode.Domain.Constants;
-using AlgoCode.Domain.Identity;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

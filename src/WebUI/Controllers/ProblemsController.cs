@@ -5,6 +5,7 @@ using AlgoCode.Application.Features.Problem.Commands.CompileProblem;
 using AlgoCode.Application.Features.Problem.Commands.SubmitProblem;
 using AlgoCode.Application.Features.Problem.Queries.GetAll;
 using AlgoCode.Application.Features.Problem.Queries.GetById;
+using AlgoCode.Application.Features.Problem.Queries.GetRandom;
 using AlgoCode.Application.Features.Sessions.Queries.GetById;
 using AlgoCode.Application.Features.Solutions.Commands.PostSolution;
 using AlgoCode.Application.Features.Solutions.Queries.GetAll;
@@ -99,7 +100,7 @@ namespace AlgoCode.WebUI.Controllers
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");
             var result = await Mediator.Send(command);
-            return Ok(result);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet("/problems/solution/{solutionId}")]
@@ -112,6 +113,12 @@ namespace AlgoCode.WebUI.Controllers
             };
 
             return View(response);
+        }
+
+        public async Task<IActionResult> SelectRandomProblem()
+        {
+            var randomProblemId = await Mediator.Send(new GetRandomProblemQuery());
+            return RedirectToAction("SingleProblem", new { id = randomProblemId });
         }
     }
 }

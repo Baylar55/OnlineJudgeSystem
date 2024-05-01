@@ -11,5 +11,6 @@ public interface IApplicationDbContext
     DbSet<Subscription> Subscriptions { get; }
     DbSet<Solution> Solutions { get; }
     DbSet<Comment> Comments { get; }
+    DbSet<Contest> Contests { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

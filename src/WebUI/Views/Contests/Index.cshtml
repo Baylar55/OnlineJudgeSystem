@@ -1,0 +1,369 @@
+﻿@using AlgoCode.Application.DTOs.Contests
+@model ContestsIndexDTO
+<!-- ============================ Page Title Start================================== -->
+<section class="page-title" style="padding:50px 0 50px !important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <div class="breadcrumbs-wrap text-center">
+                    <i class="fa-solid fa-trophy-star" style="font-size:100px; color:#FDB131;"></i>
+                    <h1 class="breadcrumb-title mt-4">AlgoCode Contests</h1>
+                    <p>Contest every week. Compete with the best programmers around the world</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ Upcoming Contests ================================== -->
+<section class="gray">
+    <div class="container">
+
+
+        <div class="row justify-content-center">
+
+            <!-- Single Grid -->
+            @foreach (var upcomingContest in Model.GetAllUpcomingContestsQueryResponse)
+            {
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                    <div class="crs_grid shadow_none brd">
+                        <div class="crs_grid_thumb">
+                            <input type="hidden" id="contestStartTime_@upcomingContest.Id" value="@upcomingContest.StartTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")" />
+                            <a href="course-detail.html" class="crs_detail_link">
+                                <img src="~/assets/images/@upcomingContest.ImageUrl" class="img-fluid" alt="">
+                            </a>
+                            <div class="crs_video_ico">
+                                <i class="fa-regular fa-calendar"></i>
+                            </div>
+                        </div>
+                        <div class="crs_grid_caption mt-3" style="background-color:white; margin-top:-5px !important;">
+                            <div class="crs_title">
+                                <h4><a href="course-detail.html" class="crs_title_link" style="color:black;">@upcomingContest.Title</a></h4>
+                            </div>
+                            <div class="crs_info_detail">
+                                <ul>
+                                    <li style="color:black;"><i class="fa-regular fa-clock"></i><span id="timer_@upcomingContest.Id">Starts in 4d 21h 10m 3s</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        
+
+    </div>
+</section>
+<!-- ============================ Upcoming Contests ================================== -->
+
+<section class="past-contest-rank-container">
+    <div class="container">
+        <div class="row">
+            <div class="past-contest-container col-7">
+                <div class="past-contests-title" style="background-color:#f2f3f4;">
+                    <h3>Past Contests</h3>
+                </div>
+                @foreach (var passedContest in Model.GetAllPassedContestsWithPaginationQueryResponse.Contests)
+                {
+                    <div class="past-contest-item">
+                        <div class="contest-img">
+                            <img src="~/assets/images/@passedContest.CoverPhoto" alt="">
+                        </div>
+                        <div class="contest-content">
+                            <div class="contest-name">
+                                <a asp-action="details" asp-controller="contests" asp-route-id="@passedContest.Id">@passedContest.Title</a>  
+                            </div>
+                            <div class="contest-date">
+                                <p>@passedContest.EndTime.ToString("f")</p>
+                            </div>
+                        </div>
+                        <div class="contest-type">
+                            <div>Virtual</div>
+                        </div>
+                    </div>
+                }
+
+                <div class="past-contest-item">
+                    <div class="contest-img">
+                        <img src="./assets/img/contest-388.png" alt="">
+                    </div>
+                    <div class="contest-content">
+                        <div class="contest-name">
+                            <h6>Weekly Contest 388</h6>
+                        </div>
+                        <div class="contest-date">
+                            <p>Oct 8, 2023 6:30 PM PDT</p>
+                        </div>
+                    </div>
+                    <div class="contest-type">
+                        <div>Virtual</div>
+                    </div>
+                </div>
+                <div class="past-contest-item">
+                    <div class="contest-img">
+                        <img src="./assets/img/contest-388.png" alt="">
+                    </div>
+                    <div class="contest-content">
+                        <div class="contest-name">
+                            <h6>Weekly Contest 388</h6>
+                        </div>
+                        <div class="contest-date">
+                            <p>Oct 8, 2023 6:30 PM PDT</p>
+                        </div>
+                    </div>
+                    <div class="contest-type">
+                        <div>Virtual</div>
+                    </div>
+                </div>
+                <div class="past-contest-item">
+                    <div class="contest-img">
+                        <img src="./assets/img/contest-388.png" alt="">
+                    </div>
+                    <div class="contest-content">
+                        <div class="contest-name">
+                            <h6>Weekly Contest 388</h6>
+                        </div>
+                        <div class="contest-date">
+                            <p>Oct 8, 2023 6:30 PM PDT</p>
+                        </div>
+                    </div>
+                    <div class="contest-type">
+                        <div>Virtual</div>
+                    </div>
+                </div>
+                <div class="past-contest-item">
+                    <div class="contest-img">
+                        <img src="./assets/img/contest-388.png" alt="">
+                    </div>
+                    <div class="contest-content">
+                        <div class="contest-name">
+                            <h6>Weekly Contest 388</h6>
+                        </div>
+                        <div class="contest-date">
+                            <p>Oct 8, 2023 6:30 PM PDT</p>
+                        </div>
+                    </div>
+                    <div class="contest-type">
+                        <div>Virtual</div>
+                    </div>
+                </div>
+                <div class="past-contest-item">
+                    <div class="contest-img">
+                        <img src="./assets/img/contest-388.png" alt="">
+                    </div>
+                    <div class="contest-content">
+                        <div class="contest-name">
+                            <h6>Weekly Contest 388</h6>
+                        </div>
+                        <div class="contest-date">
+                            <p>Oct 8, 2023 6:30 PM PDT</p>
+                        </div>
+                    </div>
+                    <div class="contest-type">
+                        <div>Virtual</div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="pagination d-flex justify-content-center">
+                        @{
+                            if (Model is not null)
+                            {
+                                @if (Model.GetAllPassedContestsWithPaginationQueryResponse.PageNumber > 1)
+                                {
+                                    <li class="page-item">
+                                        @{
+                                            var prevPage = Model.GetAllPassedContestsWithPaginationQueryResponse.PageNumber - 1;
+                                            <a class="page-link" itemprop="url" asp-action="index" asp-controller="contests" asp-route-page="@prevPage">
+                                                <i class="fa-solid fa-chevron-left"></i>
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @for (int i = 1; i <= Model.GetAllPassedContestsWithPaginationQueryResponse.PageCount; i++)
+                                {
+                                    <li class="page-item">
+                                        <a asp-action="index" asp-controller="contests" asp-route-page="@i" class="@(Model.GetAllPassedContestsWithPaginationQueryResponse.PageNumber==i ? "mkdf-pag-active disabled page-link" : "mkdf-pag-inactive page-link")">@i</a>
+                                    </li>
+                                }
+                                @if (Model.GetAllPassedContestsWithPaginationQueryResponse.PageCount != Model.GetAllPassedContestsWithPaginationQueryResponse.PageNumber)
+                                {
+                                    <li class="page-item">
+                                        @{
+                                            var nextPage = @Model.GetAllPassedContestsWithPaginationQueryResponse.PageNumber + 1;
+                                            <a class="page-link" itemprop="url" asp-action="index" asp-controller="contests" asp-route-page="@nextPage">
+                                                <i class="fa-solid fa-chevron-right"></i>
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="user-rank-container col-4">
+                <div class="global-rank-title">
+                    <h3><i class="fa-solid fa-trophy"></i> Global Ranking</h3>
+                </div>
+                <div class="global-rank-list">
+                    <div class="global-rank-item">
+                        <div class="global-rank-number">1</div>
+                        <div class="userrank-img">
+                            <img src="./assets/img/user-1.jpg" alt="" srcset="">
+                        </div>
+                        <div class="userrank-info">
+                            <div class="userrank-name">
+                                <p>Anonymous</p>
+                            </div>
+                            <div class="userrank-rating">
+                                <p>Rating: 3686</p>
+                                <p>Attended: 51</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="global-rank-item">
+                        <div class="global-rank-number">2</div>
+                        <div class="userrank-img">
+                            <img src="./assets/img/user-1.jpg" alt="" srcset="">
+                        </div>
+                        <div class="userrank-info">
+                            <div class="userrank-name">
+                                <p>Anonymous</p>
+                            </div>
+                            <div class="userrank-rating">
+                                <p>Rating: 3686</p>
+                                <p>Attended: 51</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="global-rank-item">
+                        <div class="global-rank-number">3</div>
+                        <div class="userrank-img">
+                            <img src="./assets/img/user-1.jpg" alt="" srcset="">
+                        </div>
+                        <div class="userrank-info">
+                            <div class="userrank-name">
+                                <p>Anonymous</p>
+                            </div>
+                            <div class="userrank-rating">
+                                <p>Rating: 3686</p>
+                                <p>Attended: 51</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="global-rank-item">
+                        <div class="global-rank-number">4</div>
+                        <div class="userrank-img">
+                            <img src="./assets/img/user-1.jpg" alt="" srcset="">
+                        </div>
+                        <div class="userrank-info">
+                            <div class="userrank-name">
+                                <p>Anonymous</p>
+                            </div>
+                            <div class="userrank-rating">
+                                <p>Rating: 3686</p>
+                                <p>Attended: 51</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="global-rank-item">
+                        <div class="global-rank-number">5</div>
+                        <div class="userrank-img">
+                            <img src="./assets/img/user-1.jpg" alt="" srcset="">
+                        </div>
+                        <div class="userrank-info">
+                            <div class="userrank-name">
+                                <p>Anonymous</p>
+                            </div>
+                            <div class="userrank-rating">
+                                <p>Rating: 3686</p>
+                                <p>Attended: 51</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="global-rank-item">
+                        <div class="global-rank-number">6</div>
+                        <div class="userrank-img">
+                            <img src="./assets/img/user-1.jpg" alt="" srcset="">
+                        </div>
+                        <div class="userrank-info">
+                            <div class="userrank-name">
+                                <p>Anonymous</p>
+                            </div>
+                            <div class="userrank-rating">
+                                <p>Rating: 3686</p>
+                                <p>Attended: 51</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="global-rank-item">
+                        <div class="global-rank-number">7</div>
+                        <div class="userrank-img">
+                            <img src="./assets/img/user-1.jpg" alt="" srcset="">
+                        </div>
+                        <div class="userrank-info">
+                            <div class="userrank-name">
+                                <p>Anonymous</p>
+                            </div>
+                            <div class="userrank-rating">
+                                <p>Rating: 3686</p>
+                                <p>Attended: 51</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="global-rank-item">
+                        <div class="global-rank-number">8</div>
+                        <div class="userrank-img">
+                            <img src="./assets/img/user-1.jpg" alt="" srcset="">
+                        </div>
+                        <div class="userrank-info">
+                            <div class="userrank-name">
+                                <p>Anonymous</p>
+                            </div>
+                            <div class="userrank-rating">
+                                <p>Rating: 3686</p>
+                                <p>Attended: 51</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</section>
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('[id^="contestStartTime_"]').each(function () {
+            var contestID = this.id.split('_')[1];
+            var startTime = new Date($(this).val());
+            var timer = setInterval(function () {
+                var now = new Date();
+                var diffMs = (startTime - now);
+                var diffDays = Math.floor(diffMs / 86400000); // days
+                var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+                var diffMins = Math.floor(((diffMs % 86400000) % 3600000) / 60000); // minutes
+                var diffSecs = Math.round((((diffMs % 86400000) % 3600000) % 60000) / 1000); // seconds
+                if (diffMs < 0) {
+                    clearInterval(timer);
+                    $('#timer_' + contestID).text('Contest has started!');
+                } else {
+                    if (diffSecs === 0) {
+                        diffMins--; // Decrease minute only when seconds reach 0
+                    }
+                    if (diffMins < 0) {
+                        diffMins = 59; // Reset minutes to 59 when it goes negative
+                    }
+                    $('#timer_' + contestID).text('Starts in ' + diffDays + 'd ' + diffHrs + 'h ' + diffMins + 'm ' + diffSecs + 's');
+                }
+            }, 1000);
+        });
+    });
+
+</script>

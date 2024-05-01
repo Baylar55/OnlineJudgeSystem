@@ -208,6 +208,9 @@
                                             <div>
                                                 <span class="badge text-bg-dark">C#</span>
                                             </div>
+                                            <form method="post">
+                                                <button  asp-action="delete" asp-controller="solutions" asp-route-id="@solution.Id" class="btn btn-danger ms-5">Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                 }
@@ -284,7 +287,7 @@
                                                 @foreach (var testcase in Model.GetProblemByIdWithTestCaseQueryResponse.TestCases)
                                                 {
                                                     <div class="form-floating mb-3 mt-2 ps-3 pe-3 text-white">
-                                                        <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x =>  x ))">
+                                                        <input disabled class="form-control shadow-none border-0 text-white" id="floatingInput" style="background-color: #353535;" placeholder="sample" value="@String.Join(", ", testcase.InputParameter.Select(x => x.ToString().Replace("\"", "")))">
 
                                                         <label class="ms-3" for="floatingInput">Input</label>
                                                     </div>
@@ -466,7 +469,7 @@
                                                         <td class="${submission.status.toLowerCase()}">
                                                             <i class="fa-solid ${submission.status.toLowerCase() === 'accepted' ? 'fa-circle-check' : 'fa-ban'} me-2"></i>${submission.status}
                                                         </td>
-                                                        <td><i class="fa-regular fa-clock me-2"></i>${submission.executionTime} seconds</td>
+                                                        <td><i class="fa-regular fa-clock me-2"></i>${submission.executionTime} milli seconds</td>
                                                         <td><i class="fa-solid fa-microchip me-2"></i>${submission.memoryUsage} MB</td>
                                                             <td>
                                                            <a href="/Problems/PostSolution/${submission.id}" class="text-decoration-none btn btn-sm btn-primary">Share my solution</a>

@@ -7,6 +7,7 @@ using AlgoCode.Application.Features.TestCases.Queries.GetById;
 namespace AlgoCode.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("admin/testcases")]
     public class TestCasesController : BaseMVCController
     {

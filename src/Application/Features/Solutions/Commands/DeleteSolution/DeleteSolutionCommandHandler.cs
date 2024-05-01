@@ -1,4 +1,6 @@
-﻿namespace AlgoCode.Application.Features.Solutions.Commands.DeleteSolution
+﻿using AlgoCode.Domain.Entities;
+
+namespace AlgoCode.Application.Features.Solutions.Commands.DeleteSolution
 {
     public class DeleteSolutionCommandHandler : IRequestHandler<DeleteSolutionCommand, ValidationResultModel>
     {
@@ -18,6 +20,10 @@
                 validationResult.Errors.Add("", ["Solution not found"]);
                 return validationResult;
             }
+
+            _context.Comments.RemoveRange(_context.Comments.Where(c => c.SolutionId == solution.Id));
+            await _context.SaveChangesAsync(cancellationToken);
+
 
             _context.Solutions.Remove(solution);
             await _context.SaveChangesAsync(cancellationToken);

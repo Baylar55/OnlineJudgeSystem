@@ -1,6 +1,4 @@
-﻿using AlgoCode.Domain.Identity;
-
-namespace AlgoCode.Infrastructure.Data.Configurations
+﻿namespace AlgoCode.Infrastructure.Data.Configurations
 {
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

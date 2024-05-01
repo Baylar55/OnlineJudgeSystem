@@ -14,7 +14,7 @@
                 .WithOne(s => s.Problem);
 
             builder.HasMany(p => p.Tags)
-                .WithMany(t => t.Problems);
+               .WithMany(t => t.Problems);
 
             builder.HasMany(p => p.StudyPlans)
                 .WithMany(sp => sp.Problems);

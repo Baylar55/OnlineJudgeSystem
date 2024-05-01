@@ -1,7 +1,6 @@
-﻿using AlgoCode.Application.Features.AppUser.Commands.LoginUser;
+﻿using AlgoCode.Application.Common.Attributes;
+using AlgoCode.Application.Features.AppUser.Commands.LoginUser;
 using AlgoCode.Application.Features.AppUser.Commands.RegisterUser;
-using AlgoCode.Domain.Identity;
-using Microsoft.AspNetCore.Identity;
 
 namespace AlgoCode.WebUI.Controllers
 {
@@ -12,6 +11,7 @@ namespace AlgoCode.WebUI.Controllers
         public AccountController(SignInManager<ApplicationUser> signInManager) => _signInManager = signInManager;
 
         [HttpGet]
+        [OnlyAnonymous]
         public IActionResult Register()
         {
             return View();
@@ -31,6 +31,7 @@ namespace AlgoCode.WebUI.Controllers
 
 
         [HttpGet]
+        [OnlyAnonymous]
         public IActionResult Login()
         {
             return View();

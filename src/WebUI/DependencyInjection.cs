@@ -16,6 +16,7 @@ namespace AlgoCode.WebUI
             services.AddHttpContextAccessor();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IConfigurationManager, ConfigurationManager>();
+            services.AddSingleton<IFileService, FileService>();
 
             services.AddDbContext<ApplicationDbContext>();
 

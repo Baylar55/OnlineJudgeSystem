@@ -1,11 +1,9 @@
 ﻿using AlgoCode.Application.Common.Interfaces;
 using AlgoCode.Application.Features.Tags.Commands.CreateTag;
-using AlgoCode.Domain.Identity;
 using AlgoCode.Infrastructure.Data;
 using AlgoCode.Infrastructure.Data.Interceptors;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

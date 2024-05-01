@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\comments\\queries\\getall\\getallrepliesbycommentidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\comments\\queries\\getall\\getallrepliesbycommentidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\comments\\queries\\getall\\getallcommentsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\comments\\queries\\getall\\getallcommentsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\comments\\commands\\postcomment\\postcommentcommandrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\comments\\commands\\postcomment\\postcommentcommandrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\views\\problems\\getsolution.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\problems\\getsolution.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\solutions\\commands\\postsolution\\postsolutioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\solutions\\commands\\postsolution\\postsolutioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\views\\problems\\singleproblem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\problems\\singleproblem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\webui\\controllers\\solutionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\controllers\\solutionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\solutions\\queries\\getbyid\\getsolutionbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\desktop\\algocode\\src\\application\\features\\problem\\queries\\getbyid\\getproblembysolutionidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\problem\\queries\\getbyid\\getproblembysolutionidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,78 +35,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GetAllRepliesByCommentIdQuery.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Comments\\Queries\\GetAll\\GetAllRepliesByCommentIdQuery.cs",
-              "RelativeDocumentMoniker": "src\\Application\\Features\\Comments\\Queries\\GetAll\\GetAllRepliesByCommentIdQuery.cs",
-              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Comments\\Queries\\GetAll\\GetAllRepliesByCommentIdQuery.cs",
-              "RelativeToolTip": "src\\Application\\Features\\Comments\\Queries\\GetAll\\GetAllRepliesByCommentIdQuery.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T20:59:12.989Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GetAllCommentsQuery.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Comments\\Queries\\GetAll\\GetAllCommentsQuery.cs",
-              "RelativeDocumentMoniker": "src\\Application\\Features\\Comments\\Queries\\GetAll\\GetAllCommentsQuery.cs",
-              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Comments\\Queries\\GetAll\\GetAllCommentsQuery.cs",
-              "RelativeToolTip": "src\\Application\\Features\\Comments\\Queries\\GetAll\\GetAllCommentsQuery.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T12:00:38.297Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SolutionsController.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\SolutionsController.cs",
-              "RelativeDocumentMoniker": "src\\WebUI\\Controllers\\SolutionsController.cs",
-              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\SolutionsController.cs",
-              "RelativeToolTip": "src\\WebUI\\Controllers\\SolutionsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T21:41:05.264Z",
+              "Title": "SingleProblem.cshtml",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Problems\\SingleProblem.cshtml",
+              "RelativeDocumentMoniker": "src\\WebUI\\Views\\Problems\\SingleProblem.cshtml",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Problems\\SingleProblem.cshtml",
+              "RelativeToolTip": "src\\WebUI\\Views\\Problems\\SingleProblem.cshtml",
+              "ViewState": "AQIAAMwBAAAAAAAAAAAnwNcBAACGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-01T04:28:36.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "PostSolutionCommand.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Solutions\\Commands\\PostSolution\\PostSolutionCommand.cs",
-              "RelativeDocumentMoniker": "src\\Application\\Features\\Solutions\\Commands\\PostSolution\\PostSolutionCommand.cs",
-              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Solutions\\Commands\\PostSolution\\PostSolutionCommand.cs",
-              "RelativeToolTip": "src\\Application\\Features\\Solutions\\Commands\\PostSolution\\PostSolutionCommand.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "GetProblemBySolutionIdQuery.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Queries\\GetById\\GetProblemBySolutionIdQuery.cs",
+              "RelativeDocumentMoniker": "src\\Application\\Features\\Problem\\Queries\\GetById\\GetProblemBySolutionIdQuery.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Problem\\Queries\\GetById\\GetProblemBySolutionIdQuery.cs",
+              "RelativeToolTip": "src\\Application\\Features\\Problem\\Queries\\GetById\\GetProblemBySolutionIdQuery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T08:08:32.09Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PostCommentCommandRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Comments\\Commands\\PostComment\\PostCommentCommandRequest.cs",
-              "RelativeDocumentMoniker": "src\\Application\\Features\\Comments\\Commands\\PostComment\\PostCommentCommandRequest.cs",
-              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Comments\\Commands\\PostComment\\PostCommentCommandRequest.cs",
-              "RelativeToolTip": "src\\Application\\Features\\Comments\\Commands\\PostComment\\PostCommentCommandRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T21:18:29.141Z",
+              "WhenOpened": "2024-05-01T03:21:58.625Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "GetSolution.cshtml",
-              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Problems\\GetSolution.cshtml",
-              "RelativeDocumentMoniker": "src\\WebUI\\Views\\Problems\\GetSolution.cshtml",
-              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Views\\Problems\\GetSolution.cshtml",
-              "RelativeToolTip": "src\\WebUI\\Views\\Problems\\GetSolution.cshtml",
-              "ViewState": "AQIAABUBAAAAAAAAAAAYwB4BAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T04:58:21.153Z",
+              "Title": "GetSolutionByIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQueryHandler.cs",
+              "RelativeToolTip": "src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQueryHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T03:22:24.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetSolutionByIdQuery.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQuery.cs",
+              "RelativeDocumentMoniker": "src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQuery.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQuery.cs",
+              "RelativeToolTip": "src\\Application\\Features\\Solutions\\Queries\\GetById\\GetSolutionByIdQuery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T03:22:23.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SolutionsController.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\SolutionsController.cs",
+              "RelativeDocumentMoniker": "src\\WebUI\\Controllers\\SolutionsController.cs",
+              "ToolTip": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\WebUI\\Controllers\\SolutionsController.cs",
+              "RelativeToolTip": "src\\WebUI\\Controllers\\SolutionsController.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwAEAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-30T23:50:51.011Z",
               "EditorCaption": ""
             }
           ]

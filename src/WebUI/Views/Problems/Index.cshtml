@@ -192,7 +192,7 @@
                     <div class="col-2 d-flex align-items-center justify-content-center btn shuffle-container">
                         <div class="shuffle d-flex">
                             <img src="assets/img/shuffle_icon.png" alt="">
-                            <span>Select Random</span>
+                            <a asp-action="SelectRandomProblem" asp-controller="problems" class="shuffle-text"><span>Select Random</span></a>
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
                 <table class="table table-striped table-responsive table-borderless">
                     <thead>
                         <tr>
-                            <th>Status</th>
+                            <th width="20">Status</t>
                             <th>Title</th>
                             <th>Solution</th>
                             <th>Acceptance</th>
@@ -213,17 +213,25 @@
                         @foreach (var problem in Model.GetProblemsWithPaginationQueryResponse.Problems)
                         {
                             <tr>
-                                <td><i class="fa-regular fa-circle-check"></i></td>
+                                <td width="20">@if(@problem.UserProblemStatus==ProblemStatus.Solved)
+                                    {
+                                        <i class="fa-regular fa-circle-check"></i>
+                                    }
+                                    else if (@problem.UserProblemStatus == ProblemStatus.Attempted)
+                                    {
+                                        <i class="fa-solid fa-circle-half-stroke"></i>
+                                    }
+                                </td>
                                 <td>
-                                    <a asp-action="singleproblem" asp-controller="problems" asp-route-id="@problem.Id">@problem.Id.  @problem.Title</a>
-                                    @if (problem.AccessLevel == AccessLevel.Premium)
+                                    <a asp-action="singleproblem" asp-controller="problems" asp-route-id="@problem.Problem.Id">@problem.Problem.Id.  @problem.Problem.Title</a>
+                                    @if (problem.Problem.AccessLevel == AccessLevel.Premium)
                                     {
                                         <span class="badge" style="color:white !important;background-color:#ffa116;">Premium</span>
                                     }
                                 </td>
                                 <td><i class="fa-solid fa-file-circle-check"></i></td>
-                                <td>40.3%</td>
-                                <td class="status-@(problem.Difficulty.ToString().ToLower())">@problem.Difficulty</td>
+                                <td>@problem.ProblemAcceptanceRate %</td>
+                                <td class="status-@(problem.Problem.Difficulty.ToString().ToLower())">@problem.Problem.Difficulty</td>
 
                             </tr>
                         }

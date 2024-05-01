@@ -2,10 +2,10 @@
 {
     public class TagCreatedEvent : BaseEvent
     {
-        public TagCreatedEvent(Tag tag)
+        public TagCreatedEvent(Problem tag)
         {
             Tag = tag;
         }
-        public Tag Tag { get; set; }
+        public Problem Tag { get; set; }
     }
 }

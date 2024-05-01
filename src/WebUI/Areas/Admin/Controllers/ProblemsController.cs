@@ -7,8 +7,8 @@ using AlgoCode.Application.Features.Tags.Queries.GetAll;
 
 namespace AlgoCode.WebUI.Areas.Admin.Controllers
 {
-    //[Authorize(Roles = "Admin")]
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("admin/problems")]
     public class ProblemsController : BaseMVCController
     {

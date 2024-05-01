@@ -1,4 +1,3 @@
-using AlgoCode.Infrastructure;
 using AlgoCode.WebUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,11 +27,19 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
       name: "areas",
-      pattern: "{area:exists}/{controller=Tags}/{action=Index}/{id?}"
+      pattern: "{area:exists}/{controller=Account}/{action=Login}/{id?}"
     );
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=problems}/{action=index}/{id?}");
+    pattern: "{controller=home}/{action=index}/{id?}");
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using (var scope = scopeFactory.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+    await DbInitializer.SeedAsync(userManager, roleManager);
+}
 
 app.Run();
