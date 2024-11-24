@@ -13,6 +13,7 @@ public static class DependencyInjection
         {
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
         });
+
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         return services;
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QB1zhydrQc3tR6QTsZE7MFiVtjWmF3QCYOsEyjM7qOfN0Nh/gA9d6TAKBp/kogtVDtwbPIGLs8lllY4pV5vdvg==",
+  "dgSpecHash": "QWzzgwl4j8o=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Baylar\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
@@ -25,5 +25,16 @@
     "C:\\Users\\Baylar\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Extensions.Caching.Memory' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-qj66-m88j-hmgj",
+      "libraryId": "Microsoft.Extensions.Caching.Memory",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

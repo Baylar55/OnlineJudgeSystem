@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlgoCode.WebUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9d936bae17abec57e3efd11f786167efb39396e4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5e5be2e335f9d4923048f8eadeaf7deb396dc5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("AlgoCode.WebUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AlgoCode.WebUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

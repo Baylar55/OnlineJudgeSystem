@@ -2346,19 +2346,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Baylar\\.nuget\\packages\\": {}
+    "C:\\Users\\Baylar\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Application\\Application.csproj",
       "projectName": "AlgoCode.Application",
-      "projectPath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\Baylar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\obj\\",
+      "outputPath": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Application\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\Baylar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2372,8 +2377,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Domain\\Domain.csproj"
+            "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Domain.csproj"
             }
           }
         }
@@ -2386,8 +2391,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
-      }
+        "auditMode": "all"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -2438,8 +2444,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Extensions.Caching.Memory' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-qj66-m88j-hmgj",
+      "libraryId": "Microsoft.Extensions.Caching.Memory",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

@@ -1,45 +1,34 @@
 ﻿namespace AlgoCode.Application.Features.Sessions.Queries.GetAll
 {
-    public class GetSessionsQuery : IRequest<ICollection<GetSessionsQueryResponse>>
-    {
-    }
+    public record GetSessionsQuery() : IRequest<ICollection<GetSessionsQueryResponse>>;
 
-    public class GetSessionsQueryResponse
-    {
-        public Session Session { get; set; }
-        public int AcceptedQuestionsCount { get; set; }
-        public int SubmittedQuestionsCount { get; set; }
-        public int AcceptedSubmissionsCount { get; set; }
-        public int SubmissionsCount { get; set; }
-
-    }
+    public record GetSessionsQueryResponse(Session Session, int AcceptedQuestionsCount, int SubmittedQuestionsCount, int AcceptedSubmissionsCount, int SubmissionsCount);
 
     public class GetSessionsQueryHandler : IRequestHandler<GetSessionsQuery, ICollection<GetSessionsQueryResponse>>
     {
         private readonly IApplicationDbContext _context;
+        private readonly IHttpContextAccessor _accessor;
 
-        public GetSessionsQueryHandler(IApplicationDbContext context) => _context = context;
+        public GetSessionsQueryHandler(IApplicationDbContext context, IHttpContextAccessor accessor)
+        {
+            _accessor = accessor;
+            _context = context;
+        }
 
         public async Task<ICollection<GetSessionsQueryResponse>> Handle(GetSessionsQuery request, CancellationToken cancellationToken)
         {
-            var sessions = await _context.Sessions.ToListAsync(cancellationToken);
-            var responseList = new List<GetSessionsQueryResponse>();
+            var userId = _accessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            foreach (var session in sessions)
-            {
-                var response = new GetSessionsQueryResponse
-                {
-                    Session = session,
-                    AcceptedQuestionsCount = await CalculateNumberOfAcceptedQuestions(session.Id),
-                    AcceptedSubmissionsCount = await CalculateNumberOfAcceptedSubmissions(session.Id),
-                    SubmittedQuestionsCount = await CalculateNumberOfSubmittedQuestions(session.Id),
-                    SubmissionsCount = await CalculateTotalNumberOfSubmissions(session.Id)
-                };
+            var sessions = await _context.Sessions.Where(s => s.UserId == userId).ToListAsync(cancellationToken);
 
-                responseList.Add(response);
-            }
+            var responseTasks = sessions.Select(async x => new GetSessionsQueryResponse(x,
+                await CalculateNumberOfAcceptedQuestions(x.Id),
+                await CalculateNumberOfSubmittedQuestions(x.Id),
+                await CalculateNumberOfAcceptedSubmissions(x.Id),
+                await CalculateTotalNumberOfSubmissions(x.Id)
+            )).ToList();
 
-            return responseList;
+            return await Task.WhenAll(responseTasks);
         }
 
         private async Task<int> CalculateNumberOfAcceptedQuestions(int sessionId)

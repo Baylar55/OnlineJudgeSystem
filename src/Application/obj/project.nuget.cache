@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/5oJncqTeDf0os+wAnkGAlC9Pu8j/Yk3s5f+B9cYM6TLXEm8snpNKuMEKs+H7d2FBjUFjZv2brgfhk+joTjaxw==",
+  "dgSpecHash": "3AhGOYCU7gU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Application\\Application.csproj",
+  "projectFilePath": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Baylar\\.nuget\\packages\\ardalis.guardclauses\\4.5.0\\ardalis.guardclauses.4.5.0.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\fluentvalidation\\11.9.0\\fluentvalidation.11.9.0.nupkg.sha512",
@@ -47,5 +47,16 @@
     "C:\\Users\\Baylar\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\Baylar\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Extensions.Caching.Memory' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-qj66-m88j-hmgj",
+      "libraryId": "Microsoft.Extensions.Caching.Memory",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

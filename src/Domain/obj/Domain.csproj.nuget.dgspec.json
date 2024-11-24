@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Domain\\Domain.csproj": {}
+    "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Domain\\Domain.csproj": {
+    "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Domain.csproj",
         "projectName": "AlgoCode.Domain",
-        "projectPath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Baylar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Baylar\\Desktop\\AlgoCode\\src\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\Baylar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,8 +42,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -70,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
