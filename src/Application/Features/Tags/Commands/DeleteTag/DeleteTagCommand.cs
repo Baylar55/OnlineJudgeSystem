@@ -1,26 +1,19 @@
 ﻿using Ardalis.GuardClauses;
 
-namespace AlgoCode.Application.Features.Tags.Commands.DeleteTag
+namespace AlgoCode.Application.Features.Tags.Commands.DeleteTag;
+
+public record DeleteTagCommand(int Id) : IRequest;
+
+public class DeleteTagCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteTagCommand>
 {
-    public class DeleteTagCommand : IRequest
+    public async Task Handle(DeleteTagCommand request, CancellationToken cancellationToken)
     {
-        public int Id { get; set; }
-    }
+        var entity = await context.Tags.FindAsync([request.Id], cancellationToken: cancellationToken);
+        
+        Guard.Against.NotFound(request.Id, entity);
 
-    public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand>
-    {
-        private readonly IApplicationDbContext _context;
+        context.Tags.Remove(entity);
 
-        public DeleteTagCommandHandler(IApplicationDbContext context) => _context = context;
-
-        public async Task Handle(DeleteTagCommand request, CancellationToken cancellationToken)
-        {
-            var entity = await _context.Tags.FindAsync(request.Id, cancellationToken);
-            Guard.Against.NotFound(request.Id, entity);
-
-            _context.Tags.Remove(entity);
-
-            await _context.SaveChangesAsync(cancellationToken);
-        }
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

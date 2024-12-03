@@ -1,43 +1,18 @@
-﻿namespace AlgoCode.Application.Features.Submissions.Queries.GetById
+﻿namespace AlgoCode.Application.Features.Submissions.Queries.GetById;
+
+public record GetSubmissionByIdQuery(int Id) : IRequest<GetSubmissionByIdQueryResponse>;
+
+public record GetSubmissionByIdQueryResponse(int Id, DateTimeOffset Created, string ProblemName, string SourceCode,
+    string Language, string Status, DateTimeOffset SubmissionTime, double MemoryUsage, long ExecutionTime);
+
+
+public class GetSubmissionByIdQueryHandler(IApplicationDbContext context) : IRequestHandler<GetSubmissionByIdQuery, GetSubmissionByIdQueryResponse>
 {
-    public class GetSubmissionByIdQuery : IRequest<GetSubmissionByIdQueryResponse>
+    public async Task<GetSubmissionByIdQueryResponse> Handle(GetSubmissionByIdQuery request, CancellationToken cancellationToken)
     {
-        public int Id { get; set; }
-    }
+        var submission = await context.Submissions.Include(x => x.Problem).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken)
+                                              ?? throw new NotFoundException(request.Id.ToString(), nameof(Submission));
 
-    public class GetSubmissionByIdQueryResponse
-    {
-        public int Id { get; set; }
-        public DateTimeOffset Created { get; set; }
-        public string ProblemName { get; set; }
-        public string SourceCode { get; set; }
-        public string Language { get; set; }
-        public string Status { get; set; }
-        public DateTimeOffset SubmissionTime { get; set; }
-        public double MemoryUsage { get; set; }
-        public long ExecutionTime { get; set; }
-    }
-
-    public class GetSubmissionByIdQueryHandler : IRequestHandler<GetSubmissionByIdQuery, GetSubmissionByIdQueryResponse>
-    {
-        private readonly IApplicationDbContext _context;
-        public GetSubmissionByIdQueryHandler(IApplicationDbContext context) => _context = context;
-
-        public async Task<GetSubmissionByIdQueryResponse> Handle(GetSubmissionByIdQuery request, CancellationToken cancellationToken)
-        {
-            var entity = await _context.Submissions.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-            return new GetSubmissionByIdQueryResponse
-            {
-                ProblemName = _context.Problems.FirstOrDefault(x => x.Id == entity.ProblemId).Title,
-                Id = entity.Id,
-                Created = entity.Created,
-                MemoryUsage = entity.MemoryUsage,
-                SourceCode = entity.SourceCode,
-                Language = entity.Language,
-                Status = entity.Status.ToString(),
-                SubmissionTime = entity.Created,
-                ExecutionTime = entity.ExecutionTime
-            };
-        }
+        return submission.Adapt<GetSubmissionByIdQueryResponse>();
     }
 }

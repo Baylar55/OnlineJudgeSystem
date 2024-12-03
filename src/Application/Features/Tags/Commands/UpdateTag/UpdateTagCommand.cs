@@ -1,8 +1,3 @@
-﻿namespace AlgoCode.Application.Features.Tags.Commands.UpdateTag
-{
-    public class UpdateTagCommand : IRequest<ValidationResultModel>
-    {
-        public int Id { get; set; }
-        public string? Title { get; set; }
-    }
-}
+﻿namespace AlgoCode.Application.Features.Tags.Commands.UpdateTag;
+
+public record UpdateTagCommand(int Id, string Title) : IRequest<ValidationResultModel>;

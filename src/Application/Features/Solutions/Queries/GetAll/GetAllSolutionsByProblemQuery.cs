@@ -1,7 +1,3 @@
-﻿namespace AlgoCode.Application.Features.Solutions.Queries.GetAll
-{
-    public class GetAllSolutionsByProblemQuery : IRequest<List<GetAllSolutionsByProblemQueryResponse>>
-    {
-        public int ProblemId { get; set; }
-    }
-}
+﻿namespace AlgoCode.Application.Features.Solutions.Queries.GetAll;
+
+public record GetAllSolutionsByProblemQuery(int ProblemId) : IRequest<List<GetAllSolutionsByProblemQueryResponse>>;

@@ -1,38 +1,35 @@
-﻿using AlgoCode.Application.Features.AppUser.Commands.LoginAdmin;
-using AlgoCode.Application.Features.AppUser.Commands.LoginUser;
+﻿namespace AlgoCode.WebUI.Areas.Admin.Controllers;
 
-namespace AlgoCode.WebUI.Areas.Admin.Controllers
+[Area("Admin")]
+public class AccountController(SignInManager<ApplicationUser> signInManager) : BaseMVCController
 {
-    [Area("Admin")]
-    public class AccountController : BaseMVCController
+    [AllowAnonymous]
+    [HttpGet]
+    public IActionResult Login()
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        return View();
+    }
 
-        public AccountController(SignInManager<ApplicationUser> signInManager) => _signInManager = signInManager;
-
-        [HttpGet]
-        public IActionResult Login()
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginAdminCommand command)
+    {
+        var validationResult = await Mediator.Send(command);
+        
+        if (validationResult.Errors.Count != 0)
         {
-            return View();
+            ErrorHandlingService.AddErrorsToModelState(validationResult);
+            return View(command);
         }
+        
+        return RedirectToAction("Index", "Problems");
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginAdminCommand command)
-        {
-            var validationResult = await Mediator.Send(command);
-            if (!validationResult.IsValid)
-            {
-                ErrorHandlingService.AddErrorsToModelState(validationResult);
-                return View(command);
-            }
-            return RedirectToAction("Index", "Problems");
-        }
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> Logout()
+    {
+        await signInManager.SignOutAsync();
 
-        [HttpGet]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Login));
-        }
+        return RedirectToAction(nameof(Login));
     }
 }

@@ -1,12 +1,11 @@
-﻿namespace AlgoCode.Domain.Constants
+﻿namespace AlgoCode.Domain.Constants;
+
+public enum SubmissionStatus
 {
-    public enum SubmissionStatus
-    {
-        Accepted,
-        CompilationError,
-        RuntimeError,
-        WrongAnswer,
-        TimeLimitExceeded,
-        MemoryLimitExceeded
-    }
+    Accepted,
+    CompilationError,
+    RuntimeError,
+    WrongAnswer,
+    TimeLimitExceeded,
+    MemoryLimitExceeded
 }

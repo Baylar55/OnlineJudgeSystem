@@ -1,11 +1,3 @@
-﻿namespace AlgoCode.Application.Features.Subscriptions.Commands.CreateSubscription
-{
-    public class CreateSubscriptionCommand : IRequest<ValidationResultModel>
-    {
+﻿namespace AlgoCode.Application.Features.Subscriptions.Commands.CreateSubscription;
 
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public SubscriptionType Duration { get; set; }
-        public decimal Price { get; set; }
-    }
-}
+public record CreateSubscriptionCommand(string Title, string Description, SubscriptionType Duration, decimal Price) : IRequest<ValidationResultModel>;

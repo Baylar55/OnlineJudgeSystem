@@ -1,29 +1,27 @@
-﻿using AlgoCode.Application.Features.Comments.Commands.PostComment;
-using AlgoCode.Application.Features.Solutions.Commands.DeleteSolution;
+﻿namespace AlgoCode.WebUI.Controllers;
 
-namespace AlgoCode.WebUI.Controllers
+[Authorize]
+public class SolutionsController : BaseMVCController
 {
-    public class SolutionsController : BaseMVCController
+    [AllowAnonymous]
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromForm] PostCommentCommandRequest command)
-        {
-            var result = await Mediator.Send(command);
-            return Ok(result);
-        }
+    [HttpPost]
+    public async Task<IActionResult> Post([FromForm] PostCommentCommandRequest command)
+    {
+        return Ok(await Mediator.Send(command));
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var result = await Mediator.Send(new DeleteSolutionCommand{ Id = id });
-            return RedirectToAction("Index", "Problems");
-        }
+    //TODO: Add the update method for solution
 
+    [HttpPost]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await Mediator.Send(new DeleteSolutionCommand(id));
 
+        return RedirectToAction("Index", "Problems");
     }
 }

@@ -1,30 +1,23 @@
-﻿namespace AlgoCode.Application.Features.Submissions.Queries.GetAll
+﻿using AlgoCode.Domain.Entities.Identity;
+
+namespace AlgoCode.Application.Features.Submissions.Queries.GetAll;
+
+public record GetLastSubmissionsByUserQuery: IRequest<List<Submission>>;
+
+public class GetLastSubmissionsByUserQueryHandler(IHttpContextAccessor accessor, UserManager<ApplicationUser> userManager, IApplicationDbContext context) : IRequestHandler<GetLastSubmissionsByUserQuery, List<Submission>>
 {
-	public class GetLastSubmissionsByUserQuery: IRequest<List<Submission>> { }
+    private const int MaxSubmissionToRetrieve = 3;
 
-	public class GetLastSubmissionsByUserQueryHandler : IRequestHandler<GetLastSubmissionsByUserQuery, List<Submission>>
+    public async Task<List<Submission>> Handle(GetLastSubmissionsByUserQuery request, CancellationToken cancellationToken)
 	{
-		private readonly IHttpContextAccessor _httpContextAccessor;
-		private readonly UserManager<ApplicationUser> _userManager;
-		private readonly IApplicationDbContext _context;
+		var userId = accessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+		
+		var user = await userManager.FindByIdAsync(userId!);
 
-		public GetLastSubmissionsByUserQueryHandler(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, IApplicationDbContext context)
-		{
-			_httpContextAccessor = httpContextAccessor;
-			_userManager = userManager;
-			_context = context;
-		}
-
-		public async Task<List<Submission>> Handle(GetLastSubmissionsByUserQuery request, CancellationToken cancellationToken)
-		{
-			var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-			var user = await _userManager.FindByIdAsync(userId);
-
-			return await _context.Submissions.Include(s => s.Problem)
-								 .Where(s => s.UserId == user.Id)
-								 .OrderByDescending(s => s.Id)
-								 .Take(3)
-								 .ToListAsync();
-		}
+		return await context.Submissions.Include(s => s.Problem)
+							 .Where(s => s.UserId == user!.Id)
+							 .OrderByDescending(s => s.Id)
+							 .Take(MaxSubmissionToRetrieve)
+							 .ToListAsync(cancellationToken);
 	}
 }

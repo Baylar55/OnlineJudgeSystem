@@ -1,15 +1,4 @@
-﻿namespace AlgoCode.Application.Features.Problem.Commands.UpdateProblem
-{
-    public class UpdateProblemCommand : IRequest<ValidationResultModel>
-    {
-        public int Id { get; set; }
-        public string Title { get; set; } = null!;
-        public string Description { get; set; } = null!;
-        public ProblemDifficulty Difficulty { get; set; }
-        public AccessLevel AccessLevel { get; set; }
-        public int Point { get; set; }
-        public string CodeTemplate { get; set; } = null!;
-        public string MethodName { get; set; } = null!;
-        public List<int> TagIds { get; set; }
-    }
-}
+﻿namespace AlgoCode.Application.Features.Problem.Commands.UpdateProblem;
+
+public record UpdateProblemCommand(int Id, string Title, string Description, ProblemDifficulty Difficulty, AccessLevel AccessLevel,
+    int Point, string CodeTemplate, string MethodName, List<int> TagIds) : IRequest<ValidationResultModel>;

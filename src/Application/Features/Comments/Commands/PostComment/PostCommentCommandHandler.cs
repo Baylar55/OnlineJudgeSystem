@@ -1,53 +1,33 @@
-﻿
+﻿using AlgoCode.Domain.Entities.Identity;
 
-using Microsoft.AspNetCore.Http;
+namespace AlgoCode.Application.Features.Comments.Commands.PostComment;
 
-namespace AlgoCode.Application.Features.Comments.Commands.PostComment
+public class PostCommentCommandHandler(IApplicationDbContext context, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContext) : IRequestHandler<PostCommentCommandRequest, PostCommentCommandResponse>
 {
-    public class PostCommentCommandHandler : IRequestHandler<PostCommentCommandRequest, PostCommentCommandResponse>
+    public async Task<PostCommentCommandResponse> Handle(PostCommentCommandRequest request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IHttpContextAccessor _httpContext;
+        if (httpContext.HttpContext?.User?.Identity?.IsAuthenticated != true) throw new UnauthorizedAccessException("You must be logged in to post a comment.");
 
-        public PostCommentCommandHandler(IApplicationDbContext context, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContext)
+        string? userName = httpContext.HttpContext.User.Identity.Name;
+
+        var user = await userManager.FindByNameAsync(userName!);
+
+        var comment = request.Adapt<Comment>();
+
+        comment.UserId = user!.Id;
+
+        if (request.ParentCommentId != null)
         {
-            _context = context;
-            _userManager = userManager;
-            _httpContext = httpContext;
+            comment.ParentCommentId = request.ParentCommentId;
         }
 
-        public async Task<PostCommentCommandResponse> Handle(PostCommentCommandRequest request, CancellationToken cancellationToken)
+        context.Comments.Add(comment);
+        await context.SaveChangesAsync(cancellationToken);
+
+        return comment.Adapt<PostCommentCommandResponse>() with
         {
-            //get the current user
-            string userName = _httpContext.HttpContext.User.Identity.Name;
-            var user = await _userManager.FindByNameAsync(userName);
-
-            var comment = new Comment
-            {
-                Content = request.Content,
-                UserId = user.Id,
-                SolutionId = request.SolutionId,
-            };
-
-            if (request.ParentCommentId != null)
-            {
-                comment.ParentCommentId = request.ParentCommentId;
-            }
-
-            _context.Comments.Add(comment);
-            await _context.SaveChangesAsync(cancellationToken);
-
-            return new PostCommentCommandResponse
-            {
-                Id = comment.Id,
-                Content = comment.Content,
-                UserName = user.UserName,
-                UserPhoto = user.PhotoName,
-                SolutionId = comment.SolutionId,
-                ParentCommentId = comment.ParentCommentId,
-                Created = comment.Created
-            };
-        }
+            UserName = user.UserName!,
+            UserPhoto = user.PhotoName
+        };
     }
 }

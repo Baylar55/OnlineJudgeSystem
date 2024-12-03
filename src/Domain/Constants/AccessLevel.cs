@@ -1,8 +1,7 @@
-﻿namespace AlgoCode.Domain.Constants
+﻿namespace AlgoCode.Domain.Constants;
+
+public enum AccessLevel
 {
-    public enum AccessLevel
-    {
-        Free,
-        Premium
-    }
+    Free,
+    Premium
 }

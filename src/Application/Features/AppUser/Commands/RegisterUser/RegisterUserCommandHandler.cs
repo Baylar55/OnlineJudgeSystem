@@ -1,59 +1,49 @@
-﻿namespace AlgoCode.Application.Features.AppUser.Commands.RegisterUser
+﻿using AlgoCode.Domain.Entities.Identity;
+
+namespace AlgoCode.Application.Features.AppUser.Commands.RegisterUser;
+
+public class RegisterUserCommandHandler(UserManager<ApplicationUser> userManager, IApplicationDbContext context) : IRequestHandler<RegisterUserCommand, ValidationResultModel>
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IApplicationDbContext _context;
+        ApplicationUser? dbEmail = await userManager.FindByEmailAsync(request.Email);
+        ApplicationUser? dbUserName = await userManager.FindByNameAsync(request.UserName);
 
-        public RegisterUserCommandHandler(UserManager<ApplicationUser> userManager, IApplicationDbContext context)
+        var validationResult = new ValidationResultModel();
+
+        if (dbUserName != null)
         {
-            _userManager = userManager;
-            _context = context;
-        }
-
-        public async Task<ValidationResultModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
-        {
-            ApplicationUser? dbEmail = await _userManager.FindByEmailAsync(request.Email);
-            ApplicationUser? dbUserName = await _userManager.FindByNameAsync(request.UserName);
-            var validationResult = new ValidationResultModel();
-            if (dbEmail != null)
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add("Email", new List<string> { "This email is already exist." });
-                return validationResult;
-            }
-
-            if (dbUserName != null)
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add("UserName", new List<string> { "This username is already exist." });
-                return validationResult;
-            }
-
-            ApplicationUser user = new ApplicationUser
-            {
-                Email = request.Email,
-                UserName = request.UserName
-            };
-
-            var result = await _userManager.CreateAsync(user, request.Password);
-
-            if (!result.Succeeded)
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add(string.Empty, result.Errors.Select(e => e.Description).ToList());
-                return validationResult;
-            }
-
-            Session defaultSession = new Session
-            {
-                Title = "Default",
-                UserId = user.Id,
-                IsActive = true
-            };
-            await _context.Sessions.AddAsync(defaultSession);
-            await _context.SaveChangesAsync(cancellationToken);
+            validationResult.Errors.Add("UserName", ["This username is already exist."]);
             return validationResult;
         }
+
+        if (dbEmail != null)
+        {
+            validationResult.Errors.Add("Email", ["This email is already exist."]);
+            return validationResult;
+        }
+
+        var user = request.Adapt<ApplicationUser>();
+
+        var result = await userManager.CreateAsync(user, request.Password);
+
+        if (!result.Succeeded)
+        {
+            validationResult.Errors.Add(string.Empty, result.Errors.Select(e => e.Description).ToList());
+            return validationResult;
+        }
+
+        Session defaultSession = new()
+        {
+            Title = "Default",
+            UserId = user.Id,
+            IsActive = true
+        };
+
+        await context.Sessions.AddAsync(defaultSession, cancellationToken);
+
+        await context.SaveChangesAsync(cancellationToken);
+        
+        return validationResult;
     }
 }

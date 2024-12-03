@@ -1,9 +1,8 @@
-﻿namespace AlgoCode.Domain.Constants
+﻿namespace AlgoCode.Domain.Constants;
+
+public enum ProblemDifficulty
 {
-    public enum ProblemDifficulty
-    {
-        Easy,
-        Medium,
-        Hard
-    }
+    Easy,
+    Medium,
+    Hard
 }

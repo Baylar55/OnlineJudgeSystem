@@ -1,6 +1,8 @@
 ﻿@using AlgoCode.Application.Features.Tags.Queries.GetAll
 @model GetTagsWithPaginationQueryResponse
-
+@{
+    int counter = (Model.PageNumber - 1) * Model.PageSize;
+}
 <header>
     <style>
         td {
@@ -18,7 +20,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Title</th>
                         <th>Created At</th>
                         <th>Modified At</th>
@@ -26,10 +28,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var tag in Model.Tags)
+                    @foreach (var tag in Model?.Tags)
                     {
                         <tr>
-                            <td>@tag.Id</td>
+                            <td>@(++counter)</td>
                             <td>@tag.Title</td>
                             <td>@tag.Created</td>
                             <td>@tag.LastModified</td>
@@ -45,7 +47,7 @@
                     }
                 </tbody>
             </table>
-            <div class="pagination d-flex justify-content-center">
+            <ul class="pagination d-flex justify-content-center">
                 @{
                     @if (Model.PageNumber > 1)
                     {
@@ -60,7 +62,7 @@
                     }
                     @for (int i = 1; i <= Model.PageCount; i++)
                     {
-                        <li class="page-item">
+                        <li class="page-item @(Model.PageNumber == i ? "active" : "")">
                             <a asp-action="index" asp-area="admin" asp-controller="tags" asp-route-page="@i" class="@(Model.PageNumber==i ? "mkdf-pag-active disabled page-link" : "mkdf-pag-inactive page-link")">@i</a>
                         </li>
                     }
@@ -76,7 +78,7 @@
                         </li>
                     }
                 }
-            </div>
+            </ul>
         </div>
     </div>
 </div>

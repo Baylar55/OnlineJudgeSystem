@@ -1,17 +1,14 @@
-namespace WebUI.Controllers
+namespace AlgoCode.WebUI.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    public IActionResult Index()
     {
-        private readonly ILogger<HomeController> _logger;
+        return View();
+    }
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
+    public IActionResult Error()
+    {
+        return View();
     }
 }

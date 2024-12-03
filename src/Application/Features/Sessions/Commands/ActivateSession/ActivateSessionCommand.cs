@@ -1,34 +1,23 @@
-﻿namespace AlgoCode.Application.Features.Sessions.Commands.ActivateSession
+﻿namespace AlgoCode.Application.Features.Sessions.Commands.ActivateSession;
+
+public record ActivateSessionCommand(int SessionId) : IRequest<ValidationResultModel>;
+
+public class ActivateSessionCommandHandler(IApplicationDbContext context) : IRequestHandler<ActivateSessionCommand, ValidationResultModel>
 {
-    public class ActivateSessionCommand : IRequest<ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(ActivateSessionCommand request, CancellationToken cancellationToken)
     {
-        public int SessionId { get; set; }
-    }
+        var validationResult = new ValidationResultModel();
 
-    public class ActivateSessionCommandHandler : IRequestHandler<ActivateSessionCommand, ValidationResultModel>
-    {
-        private readonly IApplicationDbContext _context;
-        public ActivateSessionCommandHandler(IApplicationDbContext context) => _context = context;
+        var sessionToActivate = await context.Sessions.FindAsync([request.SessionId], cancellationToken: cancellationToken) ?? throw new NotFoundException(request.SessionId.ToString(), nameof(Session));
 
-        public async Task<ValidationResultModel> Handle(ActivateSessionCommand request, CancellationToken cancellationToken)
-        {
-            var validationResult = new ValidationResultModel();
-            var sessionToActivate = await _context.Sessions.FindAsync(request.SessionId);
+        var activeSession = await context.Sessions.FirstOrDefaultAsync(x => x.IsActive, cancellationToken);
 
-            if (sessionToActivate == null)
-            {
-                validationResult.Errors.Add("Session", ["Session not found"]);
-                return validationResult;
-            }
+        if (activeSession != null) activeSession.IsActive = false;
 
-            var activeSession = await _context.Sessions.FirstOrDefaultAsync(x => x.IsActive, cancellationToken);
-            if (activeSession != null)
-                activeSession.IsActive = false;
+        sessionToActivate.IsActive = true;
 
-            sessionToActivate.IsActive = true;
-            await _context.SaveChangesAsync(cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
 
-            return validationResult;
-        }
+        return validationResult;
     }
 }

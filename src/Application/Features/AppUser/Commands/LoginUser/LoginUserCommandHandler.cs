@@ -1,34 +1,28 @@
-﻿namespace AlgoCode.Application.Features.AppUser.Commands.LoginUser
+﻿using AlgoCode.Domain.Entities.Identity;
+
+namespace AlgoCode.Application.Features.AppUser.Commands.LoginUser;
+
+public class LoginUserCommandHandler(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : IRequestHandler<LoginUserCommand, ValidationResultModel>
 {
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        var validationResult = new ValidationResultModel();
+        var user = await userManager.FindByNameAsync(request.Username);
 
-        public LoginUserCommandHandler(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        if (user == null)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
-
-        public async Task<ValidationResultModel> Handle(LoginUserCommand request, CancellationToken cancellationToken)
-        {
-            var validationResult = new ValidationResultModel();
-            var user = await _userManager.FindByNameAsync(request.Username);
-            if (user == null)
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add(string.Empty, new List<string> { "Username or password is incorrect." });
-                return validationResult;
-            }
-            var result = await _signInManager.PasswordSignInAsync(user, request.Password, false, false);
-            if (!result.Succeeded)
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add(string.Empty, new List<string> { "Username or password is incorrect." });
-                return validationResult;
-            }
+            validationResult.Errors.Add(string.Empty, ["Username or password is incorrect."]);
             return validationResult;
         }
+        
+        var result = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
+        
+        if (!result.Succeeded)
+        {
+            validationResult.Errors.Add(string.Empty, ["Username or password is incorrect."]);
+            return validationResult;
+        }
+        
+        return validationResult;
     }
 }

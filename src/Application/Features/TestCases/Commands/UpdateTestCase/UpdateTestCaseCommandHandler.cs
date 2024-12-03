@@ -1,30 +1,17 @@
-﻿namespace AlgoCode.Application.Features.TestCases.Commands.UpdateTestCase
+﻿namespace AlgoCode.Application.Features.TestCases.Commands.UpdateTestCase;
+
+public class UpdateTestCaseCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateTestCaseCommand, ValidationResultModel>
 {
-    public class UpdateTestCaseCommandHandler : IRequestHandler<UpdateTestCaseCommand, ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(UpdateTestCaseCommand request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
-        public UpdateTestCaseCommandHandler(IApplicationDbContext context) => _context = context;
+        var testCase = await context.TestCases.FindAsync([request.Id], cancellationToken) ?? throw new NotFoundException(request.Id.ToString(), nameof(TestCase));
 
-        public async Task<ValidationResultModel> Handle(UpdateTestCaseCommand request, CancellationToken cancellationToken)
-        {
-            var response = new ValidationResultModel();
+        testCase.ProblemId = request.ProblemId;
+        testCase.InputParameter = request.Inputs;
+        testCase.ExpectedOutput = request.ExpectedOutput;
 
-            var testCase = await _context.TestCases.FindAsync(request.Id);
+        await context.SaveChangesAsync(cancellationToken);
 
-            if (testCase == null)
-            {
-                response.Errors.Add("Id", ["TestCase Not Found."]);
-                return response;
-            }
-
-            testCase.ProblemId = request.ProblemId;
-            testCase.InputParameter = request.Inputs;
-            testCase.ExpectedOutput = request.ExpectedOutput;
-
-            _context.TestCases.Update(testCase);
-            await _context.SaveChangesAsync(cancellationToken);
-
-            return response;
-        }
+        return new();
     }
 }

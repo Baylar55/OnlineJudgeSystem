@@ -1,50 +1,34 @@
-﻿namespace AlgoCode.Application.Features.Submissions.Queries.GetAll
+﻿namespace AlgoCode.Application.Features.Submissions.Queries.GetAll;
+
+public record GetSubmissionsWithPaginationQuery(int PageNumber = 1, int PageSize = 10) : IRequest<GetSubmissionsWithPaginationQueryResponse>;
+
+public record GetSubmissionsWithPaginationQueryResponse(ICollection<Submission>? Submissions, List<string> ProblemTitles, int PageNumber, int PageSize, int PageCount);
+
+public class GetSubmissionsWithPaginationQueryHandler(IApplicationDbContext context) : IRequestHandler<GetSubmissionsWithPaginationQuery, GetSubmissionsWithPaginationQueryResponse>
 {
-    public class GetSubmissionsWithPaginationQuery : IRequest<GetSubmissionsWithPaginationQueryResponse>
+    public async Task<GetSubmissionsWithPaginationQueryResponse> Handle(GetSubmissionsWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
-    }
+        var activeSessionId = context.Sessions.Where(s => s.IsActive).Select(s => s.Id).FirstOrDefault();
 
-    public class GetSubmissionsWithPaginationQueryResponse
-    {
-        public ICollection<Submission>? Submissions { get; set; }
-        public List<string> ProblemTitles { get; set; }
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
-        public int PageCount { get; set; }
-    }
+        var submissions = await context.Submissions.Where(s => s.SessionId == activeSessionId)
+                                                   .OrderByDescending(s => s.Id)
+                                                   .Skip((request.PageNumber - 1) * request.PageSize)
+                                                   .Take(request.PageSize)
+                                                   .Select(s => new
+                                                   {
+                                                       Submission = s,
+                                                       ProblemTitle = s.Problem.Title
+                                                   })
+                                                   .ToListAsync(cancellationToken);
 
-    public class GetSubmissionsWithPaginationQueryHandler : IRequestHandler<GetSubmissionsWithPaginationQuery, GetSubmissionsWithPaginationQueryResponse>
-    {
-        private readonly IApplicationDbContext _context;
-        public GetSubmissionsWithPaginationQueryHandler(IApplicationDbContext context) => _context = context;
+        var pageCount = (int)Math.Ceiling((await context.Submissions.CountAsync(cancellationToken)) / (decimal)request.PageSize);
 
-        public async Task<GetSubmissionsWithPaginationQueryResponse> Handle(GetSubmissionsWithPaginationQuery request, CancellationToken cancellationToken)
-        {
-            var activeSessionId = _context.Sessions.Where(s => s.IsActive).Select(s => s.Id).FirstOrDefault();
-
-            var submissions = await _context.Submissions.Where(s => s.SessionId == activeSessionId)
-                                                        .OrderByDescending(s => s.Id)
-                                                        .Skip((request.PageNumber - 1) * request.PageSize)
-                                                        .Take(request.PageSize)
-                                                        .Select(s => new
-                                                        {
-                                                            Submission = s,
-                                                            ProblemTitle = s.Problem.Title
-                                                        })
-                                                        .ToListAsync();
-
-            var pageCount = (int)Math.Ceiling((await _context.Submissions.CountAsync()) / (decimal)request.PageSize);
-
-            return new()
-            {
-                Submissions = submissions.Select(x => x.Submission).ToList(),
-                ProblemTitles = submissions.Select(x => x.ProblemTitle).ToList(),
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                PageCount = pageCount
-            };
-        }
+        return new GetSubmissionsWithPaginationQueryResponse(
+            Submissions: submissions.Adapt<List<Submission>>(),
+            ProblemTitles: submissions.Select(s => s.ProblemTitle).ToList(),
+            PageNumber: request.PageNumber,
+            PageSize: request.PageSize,
+            PageCount: pageCount
+        );
     }
 }

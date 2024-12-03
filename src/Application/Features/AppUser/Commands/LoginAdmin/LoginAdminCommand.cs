@@ -1,55 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AlgoCode.Domain.Entities.Identity;
 
-namespace AlgoCode.Application.Features.AppUser.Commands.LoginAdmin
+namespace AlgoCode.Application.Features.AppUser.Commands.LoginAdmin;
+
+public record LoginAdminCommand(string Username, string Password): IRequest<ValidationResultModel>;
+
+public class LoginAdminCommandHandler(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : IRequestHandler<LoginAdminCommand, ValidationResultModel>
 {
-    public class LoginAdminCommand: IRequest<ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(LoginAdminCommand request, CancellationToken cancellationToken)
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
+        var validationResult = new ValidationResultModel();
+        var user = await userManager.FindByNameAsync(request.Username);
 
-    public class LoginAdminCommandHandler: IRequestHandler<LoginAdminCommand, ValidationResultModel>
-    {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-
-        public LoginAdminCommandHandler(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        if (user == null)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
-
-        public async Task<ValidationResultModel> Handle(LoginAdminCommand request, CancellationToken cancellationToken)
-        {
-            var validationResult = new ValidationResultModel();
-            var user = await _userManager.FindByNameAsync(request.Username);
-            if (user == null)
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add(string.Empty, new List<string> { "Username or password is incorrect." });
-                return validationResult;
-            }
-
-            if(!await _userManager.IsInRoleAsync(user, UserRoles.Admin.ToString()))
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add(string.Empty, new List<string> { "Username or password is incorrect." });
-                return validationResult;
-            }
-
-            var result = await _signInManager.PasswordSignInAsync(user, request.Password, false, false);
-            
-            if (!result.Succeeded)
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add(string.Empty, new List<string> { "Username or password is incorrect." });
-                return validationResult;
-            }
+            validationResult.Errors.Add(string.Empty, ["Username or password is incorrect."]);
             return validationResult;
         }
+
+        if(!await userManager.IsInRoleAsync(user, UserRoles.Admin.ToString()))
+        {
+            validationResult.Errors.Add(string.Empty, ["Username or password is incorrect."]);
+            return validationResult;
+        }
+
+        var result = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
+        
+        if (!result.Succeeded)
+        {
+            validationResult.Errors.Add(string.Empty, ["Username or password is incorrect."]);
+            return validationResult;
+        }
+        
+        return validationResult;
     }
 }

@@ -1,29 +1,21 @@
 ﻿namespace AlgoCode.Application.Features.Solutions.Commands.UpdateSolution
 {
-    public class UpdateSolutionCommandHandler : IRequestHandler<UpdateSolutionCommand, ValidationResultModel>
+    public class UpdateSolutionCommandHandler(IApplicationDbContext context, IHttpContextAccessor httpContextAccessor) : IRequestHandler<UpdateSolutionCommand, ValidationResultModel>
     {
-        private readonly IApplicationDbContext _context;
-
-        public UpdateSolutionCommandHandler(IApplicationDbContext context) => _context = context;
-
         public async Task<ValidationResultModel> Handle(UpdateSolutionCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = new ValidationResultModel();
-            var solution = await _context.Solutions
+            var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var solution = await context.Solutions
                 .Include(s => s.Submission)
-                .FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken);
+                .Where(s => s.Submission.UserId == userId)
+                .FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken) ?? throw new NotFoundException(request.Id.ToString(), nameof(Solution));
 
-            if (solution == null)
-            {
-                validationResult.Errors.Add("", ["Solution not found"]);
-                return validationResult;
-            }
+            solution = request.Adapt(solution);
 
-            solution.Title = request.Title;
-            solution.Description = request.Description;
+            await context.SaveChangesAsync(cancellationToken);
 
-            await _context.SaveChangesAsync(cancellationToken);
-            return validationResult;
+            return new ValidationResultModel();
         }
     }
 }

@@ -1,25 +1,14 @@
-﻿namespace AlgoCode.Application.Features.Subscriptions.Queries.GetUserSubscription
+﻿using AlgoCode.Domain.Entities.Identity;
+
+namespace AlgoCode.Application.Features.Subscriptions.Queries.GetUserSubscription;
+
+public record GetUserSubscriptionQuery(string UserId) : IRequest<SubscriptionStatus>;
+
+public class GetUserSubscriptionQueryHandler(UserManager<ApplicationUser> userManager) : IRequestHandler<GetUserSubscriptionQuery, SubscriptionStatus>
 {
-    public class GetUserSubscriptionQuery : IRequest<SubscriptionStatus>
+    public async Task<SubscriptionStatus> Handle(GetUserSubscriptionQuery request, CancellationToken cancellationToken)
     {
-        public string UserId { get; set; }
-    }
-
-    public class GetUserSubscriptionQueryHandler : IRequestHandler<GetUserSubscriptionQuery, SubscriptionStatus>
-    {
-        private readonly IApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public GetUserSubscriptionQueryHandler(IApplicationDbContext context, UserManager<ApplicationUser> userManager)
-        {
-            _context = context;
-            _userManager = userManager;
-        }
-
-        public async Task<SubscriptionStatus> Handle(GetUserSubscriptionQuery request, CancellationToken cancellationToken)
-        {
-            var user = await _userManager.FindByIdAsync(request.UserId);
-            var status = user.SubscriptionStatus;
-            return user.SubscriptionStatus;
-        }
+        var user = await userManager.FindByIdAsync(request.UserId);
+        return user.SubscriptionStatus;
     }
 }

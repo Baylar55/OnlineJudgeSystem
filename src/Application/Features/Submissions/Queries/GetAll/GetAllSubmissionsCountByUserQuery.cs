@@ -1,36 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AlgoCode.Domain.Entities.Identity;
 
-namespace AlgoCode.Application.Features.Submissions.Queries.GetAll
+namespace AlgoCode.Application.Features.Submissions.Queries.GetAll;
+
+public record GetAllSubmissionsCountByUserQuery : IRequest<int>;
+
+public class GetAllSubmissionsCountByUserQueryHandler(IHttpContextAccessor accessor, UserManager<ApplicationUser> userManager, IApplicationDbContext context) : IRequestHandler<GetAllSubmissionsCountByUserQuery, int>
 {
-	public class GetAllSubmissionsCountByUserQuery: IRequest<int> { }
+    public async Task<int> Handle(GetAllSubmissionsCountByUserQuery request, CancellationToken cancellationToken)
+    {
+        var userId = accessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        
+        var user = await userManager.FindByIdAsync(userId!);
 
-	public class GetAllSubmissionsCountByUserQueryHandler : IRequestHandler<GetAllSubmissionsCountByUserQuery, int>
-	{
-		private readonly IHttpContextAccessor _httpContextAccessor;
-		private readonly UserManager<ApplicationUser> _userManager;
-		private readonly IApplicationDbContext _context;
-
-		public GetAllSubmissionsCountByUserQueryHandler(IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager, IApplicationDbContext context)
-		{
-			_httpContextAccessor = httpContextAccessor;
-			_userManager = userManager;
-			_context = context;
-		}
-
-		public async Task<int> Handle(GetAllSubmissionsCountByUserQuery request, CancellationToken cancellationToken)
-		{
-			var userId= _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-			var user = await _userManager.FindByIdAsync(userId);
-
-			return await _context.Submissions
-								 .Where(s => s.UserId == user.Id)
-								 .CountAsync();
-		}
-	}
+        return await context.Submissions
+                             .Where(s => s.UserId == user!.Id)
+                             .CountAsync(cancellationToken);
+    }
 }

@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AlgoCode.Application.Common.Config;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace AlgoCode.Application;
 
 public static class DependencyInjection
 {
@@ -15,6 +16,9 @@ public static class DependencyInjection
         });
 
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+        MappingConfig.ConfigureMappings();
+
         return services;
     }
 }

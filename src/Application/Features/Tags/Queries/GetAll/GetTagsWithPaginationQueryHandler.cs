@@ -1,24 +1,16 @@
-﻿namespace AlgoCode.Application.Features.Tags.Queries.GetAll
+﻿namespace AlgoCode.Application.Features.Tags.Queries.GetAll;
+
+public class GetTagsWithPaginationQueryHandler(IApplicationDbContext context) : IRequestHandler<GetTagsWithPaginationQuery, GetTagsWithPaginationQueryResponse>
 {
-    public class GetTagsWithPaginationQueryHandler : IRequestHandler<GetTagsWithPaginationQuery, GetTagsWithPaginationQueryResponse>
+    public async Task<GetTagsWithPaginationQueryResponse> Handle(GetTagsWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
+        var tags = await context.Tags.OrderByDescending(p => p.Id)
+                                  .Skip((request.PageNumber - 1) * request.PageSize)
+                                  .Take(request.PageSize)
+                                  .ToListAsync(cancellationToken);
 
-        public GetTagsWithPaginationQueryHandler(IApplicationDbContext context) => _context = context;
+        var pageCount = (int)Math.Ceiling((await context.Tags.CountAsync(cancellationToken)) / (decimal)request.PageSize);
 
-        public async Task<GetTagsWithPaginationQueryResponse> Handle(GetTagsWithPaginationQuery request, CancellationToken cancellationToken)
-        {
-            var tags = await _context.Tags.OrderByDescending(p => p.Id)
-                                      .Skip((request.PageNumber - 1) * request.PageSize)
-                                      .Take(request.PageSize)
-                                      .ToListAsync();
-            return new()
-            {
-                Tags = tags,
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                PageCount = (int)Math.Ceiling((await _context.Tags.CountAsync()) / (decimal)request.PageSize)
-            };
-        }
+        return new GetTagsWithPaginationQueryResponse(tags, request.PageNumber, request.PageSize, pageCount);
     }
 }

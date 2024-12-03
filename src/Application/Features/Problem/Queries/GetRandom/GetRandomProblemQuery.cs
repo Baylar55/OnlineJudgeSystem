@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace AlgoCode.Application.Features.Problem.Queries.GetRandom;
 
-namespace AlgoCode.Application.Features.Problem.Queries.GetRandom
+public record GetRandomProblemQuery(): IRequest<int>;
+
+public class GetRandomProblemQueryHandler(IApplicationDbContext context) : IRequestHandler<GetRandomProblemQuery, int>
 {
-    public class GetRandomProblemQuery: IRequest<int> { }
-
-    public class GetRandomProblemQueryHandler : IRequestHandler<GetRandomProblemQuery, int>
+    public async Task<int> Handle(GetRandomProblemQuery request, CancellationToken cancellationToken)
     {
-       private readonly IApplicationDbContext _context;
-        public GetRandomProblemQueryHandler(IApplicationDbContext context) => _context = context;
+        var problems = await context.Problems.ToListAsync(cancellationToken);
 
-        public async Task<int> Handle(GetRandomProblemQuery request, CancellationToken cancellationToken)
-        {
-            var problems = _context.Problems.ToList();
-            var random = new Random();
-            var index = random.Next(0, problems.Count);
-            return problems[index].Id;
-        }
+        var random = new Random();
+
+        var index = random.Next(0, problems.Count);
+
+        return problems[index].Id;
     }
 }

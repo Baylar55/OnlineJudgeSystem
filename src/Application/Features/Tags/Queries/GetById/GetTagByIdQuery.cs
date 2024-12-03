@@ -1,7 +1,3 @@
-﻿namespace AlgoCode.Application.Features.Tags.Queries.GetById
-{
-    public class GetTagByIdQuery : IRequest<GetTagByIdQueryResponse>
-    {
-        public int Id { get; set; }
-    }
-}
+﻿namespace AlgoCode.Application.Features.Tags.Queries.GetById;
+
+public record GetTagByIdQuery(int Id) : IRequest<GetTagByIdQueryResponse>;

@@ -2,25 +2,24 @@
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace AlgoCode.WebUI.Services
+namespace AlgoCode.WebUI.Services;
+
+public class ErrorHandlingService : IErrorHandlingService
 {
-    public class ErrorHandlingService : IErrorHandlingService
+    private readonly ModelStateDictionary modelstate;
+
+    public ErrorHandlingService(IActionContextAccessor accessor)
     {
-        private readonly ModelStateDictionary modelstate;
+        modelstate = accessor.ActionContext.ModelState;
+    }
+    public void AddErrorsToModelState(ValidationResultModel validationResult)
+    {
 
-        public ErrorHandlingService(IActionContextAccessor accessor)
+        foreach (var error in validationResult.Errors)
         {
-            modelstate = accessor.ActionContext.ModelState;
-        }
-        public void AddErrorsToModelState(ValidationResultModel validationResult)
-        {
-
-            foreach (var error in validationResult.Errors)
+            foreach (var errorMessage in error.Value)
             {
-                foreach (var errorMessage in error.Value)
-                {
-                    modelstate.AddModelError(error.Key, errorMessage);
-                }
+                modelstate.AddModelError(error.Key, errorMessage);
             }
         }
     }

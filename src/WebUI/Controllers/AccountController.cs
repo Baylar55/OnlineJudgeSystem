@@ -1,59 +1,55 @@
-﻿using AlgoCode.Application.Common.Attributes;
-using AlgoCode.Application.Features.AppUser.Commands.LoginUser;
-using AlgoCode.Application.Features.AppUser.Commands.RegisterUser;
+﻿namespace AlgoCode.WebUI.Controllers;
 
-namespace AlgoCode.WebUI.Controllers
+public class AccountController(SignInManager<ApplicationUser> signInManager) : BaseMVCController
 {
-    public class AccountController : BaseMVCController
+    [HttpGet]
+    [OnlyAnonymous]
+    public IActionResult Register()
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        return View();
+    }
 
-        public AccountController(SignInManager<ApplicationUser> signInManager) => _signInManager = signInManager;
+    [HttpPost]
+    public async Task<IActionResult> Register(RegisterUserCommand command)
+    {
+        var validationResult = await Mediator.Send(command);
 
-        [HttpGet]
-        [OnlyAnonymous]
-        public IActionResult Register()
+        if (validationResult.Errors.Count != 0)
         {
-            return View();
+            ErrorHandlingService.AddErrorsToModelState(validationResult);
+            return View(command);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterUserCommand command)
+        return RedirectToAction("Login", "Account");
+    }
+
+
+    [HttpGet]
+    [OnlyAnonymous]
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginUserCommand command)
+    {
+        var validationResult = await Mediator.Send(command);
+
+        if (validationResult.Errors.Count != 0)
         {
-            var validationResult = await Mediator.Send(command);
-            if (!validationResult.IsValid)
-            {
-                ErrorHandlingService.AddErrorsToModelState(validationResult);
-                return View(command);
-            }
-            return RedirectToAction("Login", "Account");
+            ErrorHandlingService.AddErrorsToModelState(validationResult);
+            return View(command);
         }
 
+        return RedirectToAction("Index", "Problems");
+    }
 
-        [HttpGet]
-        [OnlyAnonymous]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginUserCommand command)
-        {
-            var validationResult = await Mediator.Send(command);
-            if (!validationResult.IsValid)
-            {
-                ErrorHandlingService.AddErrorsToModelState(validationResult);
-                return View(command);
-            }
-            return RedirectToAction("Index", "Problems");
-        }
-
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
-        }
-
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        await signInManager.SignOutAsync();
+        return RedirectToAction("Login", "Account");
     }
 }

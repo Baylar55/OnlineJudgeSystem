@@ -1,8 +1,3 @@
-﻿namespace AlgoCode.Application.Features.Tags.Commands.CreateTag
-{
+﻿namespace AlgoCode.Application.Features.Tags.Commands.CreateTag;
 
-    public class CreateTagCommand : IRequest<ValidationResultModel>
-    {
-        public string? Title { get; set; }
-    }
-}
+public record CreateTagCommand(string Title) : IRequest<ValidationResultModel>;

@@ -1,7 +1,3 @@
-﻿namespace AlgoCode.Application.Features.Subscriptions.Commands.DeleteSubscription
-{
-    public class DeleteSubscriptionCommand : IRequest<ValidationResultModel>
-    {
-        public int Id { get; set; }
-    }
-}
+﻿namespace AlgoCode.Application.Features.Subscriptions.Commands.DeleteSubscription;
+
+public record DeleteSubscriptionCommand(int Id) : IRequest<ValidationResultModel>;

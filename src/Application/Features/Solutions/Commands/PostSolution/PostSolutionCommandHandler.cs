@@ -1,35 +1,22 @@
-﻿namespace AlgoCode.Application.Features.Solutions.Commands.PostSolution
+﻿namespace AlgoCode.Application.Features.Solutions.Commands.PostSolution;
+
+public class PostSolutionCommandHandler(IApplicationDbContext context) : IRequestHandler<PostSolutionCommand, ValidationResultModel>
 {
-    public class PostSolutionCommandHandler : IRequestHandler<PostSolutionCommand, ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(PostSolutionCommand request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
+        var submission = await context.Submissions
+                                      .Include(s => s.Problem)
+                                      .Include(s => s.User)
+                                      .FirstOrDefaultAsync(s => s.Id == request.SubmissionId, cancellationToken) 
+                                      ?? throw new NotFoundException(request.SubmissionId.ToString(), nameof(Submission));
 
-        public PostSolutionCommandHandler(IApplicationDbContext context) => _context = context;
+        var solution = request.Adapt<Solution>();
+        solution.SubmissionId = submission.Id;
 
-        public async Task<ValidationResultModel> Handle(PostSolutionCommand request, CancellationToken cancellationToken)
-        {
-            var validationResult = new ValidationResultModel();
-            var submission = await _context.Submissions
-                .Include(s => s.Problem)
-                .Include(s => s.User)
-                .FirstOrDefaultAsync(s => s.Id == request.SubmissionId, cancellationToken);
+        await context.Solutions.AddAsync(solution, cancellationToken);
 
-            if (submission == null)
-            {
-                validationResult.Errors.Add("", ["Submission not found"]);
-                return validationResult;
-            }
-
-            var solution = new Solution
-            {
-                Title = request.Title,
-                Description = request.Description,
-                SubmissionId = submission.Id
-            };
-
-            await _context.Solutions.AddAsync(solution);
-            await _context.SaveChangesAsync(cancellationToken);
-            return validationResult;
-        }
+        await context.SaveChangesAsync(cancellationToken);
+        
+        return new ValidationResultModel();
     }
 }

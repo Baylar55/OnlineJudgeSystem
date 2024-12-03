@@ -1,33 +1,24 @@
-﻿using AlgoCode.Domain.Entities;
+﻿namespace AlgoCode.Application.Features.Solutions.Commands.DeleteSolution;
 
-namespace AlgoCode.Application.Features.Solutions.Commands.DeleteSolution
+public class DeleteSolutionCommandHandler(IApplicationDbContext context, IHttpContextAccessor httpContextAccessor) : IRequestHandler<DeleteSolutionCommand, ValidationResultModel>
 {
-    public class DeleteSolutionCommandHandler : IRequestHandler<DeleteSolutionCommand, ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(DeleteSolutionCommand request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
+        var validationResult = new ValidationResultModel();
 
-        public DeleteSolutionCommandHandler(IApplicationDbContext context) => _context = context;
+        var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public async Task<ValidationResultModel> Handle(DeleteSolutionCommand request, CancellationToken cancellationToken)
-        {
-            var validationResult = new ValidationResultModel();
-            var solution = await _context.Solutions
-                .Include(s => s.Submission)
-                .FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken);
+        var solution = await context.Solutions
+            .Include(s => s.Submission)
+            .Where(s => s.Submission.UserId == userId)
+            .FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken) ?? throw new NotFoundException(request.Id.ToString(), nameof(Solution));
 
-            if (solution == null)
-            {
-                validationResult.Errors.Add("", ["Solution not found"]);
-                return validationResult;
-            }
-
-            _context.Comments.RemoveRange(_context.Comments.Where(c => c.SolutionId == solution.Id));
-            await _context.SaveChangesAsync(cancellationToken);
-
-
-            _context.Solutions.Remove(solution);
-            await _context.SaveChangesAsync(cancellationToken);
-            return validationResult;
-        }
+        context.Comments.RemoveRange(context.Comments.Where(c => c.SolutionId == solution.Id));
+        
+        context.Solutions.Remove(solution);
+        
+        await context.SaveChangesAsync(cancellationToken);
+        
+        return validationResult;
     }
 }

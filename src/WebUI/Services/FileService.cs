@@ -1,42 +1,39 @@
-﻿namespace AlgoCode.WebUI.Services
+﻿namespace AlgoCode.WebUI.Services;
+
+public class FileService(IWebHostEnvironment webHostEnvironment) : IFileService
 {
-    public class FileService : IFileService
+    public async Task<string> UploadAsync(IFormFile file)
     {
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        var fileName = $"{Guid.NewGuid()}_{file.FileName}";
 
-        public FileService(IWebHostEnvironment webHostEnvironment) => _webHostEnvironment = webHostEnvironment;
+        var path = Path.Combine(webHostEnvironment.WebRootPath, "assets/images", fileName);
 
-        public async Task<string> UploadAsync(IFormFile file)
+        using (FileStream fileStream = new(path, FileMode.Create, FileAccess.ReadWrite))
         {
-            var fileName = $"{Guid.NewGuid()}_{file.FileName}";
-            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", fileName);
-            using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
-            {
-                await file.CopyToAsync(fileStream);
-            }
-
-            return fileName;
+            await file.CopyToAsync(fileStream);
         }
 
-        public void Delete(string fileName)
-        {
-            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets", "images", fileName);
-            if (File.Exists(path))
-                File.Delete(path);
-        }
+        return fileName;
+    }
 
-        public bool IsImage(IFormFile file)
-        {
-            if (file.ContentType.Contains("image/"))
-                return true;
-            return false;
-        }
+    public void Delete(string fileName)
+    {
+        var path = Path.Combine(webHostEnvironment.WebRootPath, "assets", "images", fileName);
 
-        public bool CheckSize(IFormFile file, int size)
-        {
-            if (file.Length / 1024 > size)
-                return false;
-            return true;
-        }
+        if (File.Exists(path)) File.Delete(path);
+    }
+
+    public bool IsImage(IFormFile file)
+    {
+        if (file.ContentType.Contains("image/")) return true;
+
+        return false;
+    }
+
+    public bool CheckSize(IFormFile file, int size)
+    {
+        if (file.Length / 1024 > size) return false;
+        
+        return true;
     }
 }

@@ -208,9 +208,12 @@
                                             <div>
                                                 <span class="badge text-bg-dark">C#</span>
                                             </div>
-                                            <form method="post">
-                                                <button  asp-action="delete" asp-controller="solutions" asp-route-id="@solution.Id" class="btn btn-danger ms-5">Delete</button>
-                                            </form>
+                                            @if (solution.User.Id == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                                            {
+                                                <form method="post">
+                                                    <button asp-action="delete" asp-controller="solutions" asp-route-id="@solution.Id" class="btn btn-danger ms-5">Delete</button>
+                                                </form>
+                                            }
                                         </div>
                                     </div>
                                 }

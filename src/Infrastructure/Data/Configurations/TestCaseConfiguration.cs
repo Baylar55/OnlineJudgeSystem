@@ -1,12 +1,11 @@
-﻿namespace AlgoCode.Infrastructure.Data.Configurations
+﻿namespace AlgoCode.Infrastructure.Data.Configurations;
+
+public class TestCaseConfiguration : IEntityTypeConfiguration<TestCase>
 {
-    public class TestCaseConfiguration : IEntityTypeConfiguration<TestCase>
+    public void Configure(EntityTypeBuilder<TestCase> builder)
     {
-        public void Configure(EntityTypeBuilder<TestCase> builder)
-        {
-            builder.HasOne(tc => tc.Problem)
-                   .WithMany(p => p.TestCases)
-                   .HasForeignKey(tc => tc.ProblemId);
-        }
+        builder.HasOne(tc => tc.Problem)
+               .WithMany(p => p.TestCases)
+               .HasForeignKey(tc => tc.ProblemId);
     }
 }

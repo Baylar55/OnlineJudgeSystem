@@ -1,10 +1,3 @@
-﻿namespace AlgoCode.Application.Features.AppUser.Commands.RegisterUser
-{
-    public class RegisterUserCommand : IRequest<ValidationResultModel>
-    {
-        public string Email { get; set; } = null!;
-        public string UserName { get; set; } = null!;
-        public string Password { get; set; } = null!;
-        public string ConfirmPassword { get; set; } = null!;
-    }
-}
+﻿namespace AlgoCode.Application.Features.AppUser.Commands.RegisterUser;
+
+public record RegisterUserCommand(string Email, string UserName, string Password, string ConfirmPassword) : IRequest<ValidationResultModel>;

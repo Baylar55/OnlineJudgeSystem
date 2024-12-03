@@ -60,6 +60,9 @@ public class CustomExceptionHandler : IExceptionHandler
             Title = "The specified resource was not found.",
             Detail = exception.Message
         });
+
+        httpContext.Response.Redirect("/Home/Error");
+
     }
 
     private async Task HandleUnauthorizedAccessException(HttpContext httpContext, Exception ex)

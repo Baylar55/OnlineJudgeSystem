@@ -1,9 +1,5 @@
-﻿namespace AlgoCode.Application.Features.Subscriptions.Queries.GetAll
-{
-    public class GetAllSubscriptionsQuery : IRequest<GetAllSubscriptionsQueryResponse> { }
+﻿namespace AlgoCode.Application.Features.Subscriptions.Queries.GetAll;
 
-    public class GetAllSubscriptionsQueryResponse
-    {
-        public List<Subscription>? Subscriptions { get; set; }
-    }
-}
+public record GetAllSubscriptionsQuery() : IRequest<GetAllSubscriptionsQueryResponse>;
+
+public record GetAllSubscriptionsQueryResponse(List<Subscription>? Subscriptions);

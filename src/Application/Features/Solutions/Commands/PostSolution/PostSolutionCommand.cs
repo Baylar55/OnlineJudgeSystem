@@ -1,9 +1,3 @@
-﻿namespace AlgoCode.Application.Features.Solutions.Commands.PostSolution
-{
-    public class PostSolutionCommand : IRequest<ValidationResultModel>
-    {
-        public int SubmissionId { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-    }
-}
+﻿namespace AlgoCode.Application.Features.Solutions.Commands.PostSolution;
+
+public record PostSolutionCommand(int SubmissionId, string Title, string Description) : IRequest<ValidationResultModel>;

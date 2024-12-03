@@ -1,8 +1,7 @@
-﻿namespace AlgoCode.Domain.Constants
+﻿namespace AlgoCode.Domain.Constants;
+
+public enum UserRoles
 {
-    public enum UserRoles
-    {
-        Admin,
-        User
-    }
+    Admin,
+    User
 }

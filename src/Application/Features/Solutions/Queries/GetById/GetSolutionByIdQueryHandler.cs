@@ -1,26 +1,15 @@
-﻿namespace AlgoCode.Application.Features.Solutions.Queries.GetById
+﻿namespace AlgoCode.Application.Features.Solutions.Queries.GetById;
+
+public class GetSolutionByIdQueryHandler(IApplicationDbContext context) : IRequestHandler<GetSolutionByIdQuery, GetSolutionByIdQueryResponse>
 {
-    public class GetSolutionByIdQueryHandler : IRequestHandler<GetSolutionByIdQuery, GetSolutionByIdQueryResponse>
+    public async Task<GetSolutionByIdQueryResponse> Handle(GetSolutionByIdQuery request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
+        var solution = await context.Solutions
+                                     .Include(x => x.Submission)
+                                     .ThenInclude(x => x.User)
+                                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken)
+                                     ?? throw new NotFoundException(request.Id.ToString(), nameof(Solution));
 
-        public GetSolutionByIdQueryHandler(IApplicationDbContext context) => _context = context;
-
-        public async Task<GetSolutionByIdQueryResponse> Handle(GetSolutionByIdQuery request, CancellationToken cancellationToken)
-        {
-            var solution = await _context.Solutions
-                                         .Include(x => x.Submission)
-                                         .ThenInclude(x => x.User)
-                                         .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-
-            return new GetSolutionByIdQueryResponse
-            {
-                Id = solution.Id,
-                Title = solution.Title,
-                Description = solution.Description,
-                UserName = solution.Submission.User.UserName,
-                Created = solution.Created
-            };
-        }
+        return solution.Adapt<GetSolutionByIdQueryResponse>();
     }
 }

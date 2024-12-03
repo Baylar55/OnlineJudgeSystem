@@ -1,11 +1,3 @@
-﻿namespace AlgoCode.Application.Features.Subscriptions.Commands.UpdateSubscription
-{
-    public class UpdateSubscriptionCommand : IRequest<ValidationResultModel>
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public SubscriptionType Duration { get; set; }
-        public decimal Price { get; set; }
-    }
-}
+﻿namespace AlgoCode.Application.Features.Subscriptions.Commands.UpdateSubscription;
+
+public record UpdateSubscriptionCommand(int Id, string Title, string Description, SubscriptionType Duration, decimal Price) : IRequest<ValidationResultModel>;

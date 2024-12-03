@@ -1,13 +1,12 @@
-﻿namespace AlgoCode.Application.Features.Tags.Commands.UpdateTag
+﻿namespace AlgoCode.Application.Features.Tags.Commands.UpdateTag;
+
+public class UpdateTagCommandValidator : AbstractValidator<UpdateTagCommand>
 {
-    public class UpdateTagCommandValidator : AbstractValidator<UpdateTagCommand>
+    public UpdateTagCommandValidator()
     {
-        public UpdateTagCommandValidator()
-        {
-            RuleFor(p => p.Title)
-                .NotEmpty().WithMessage("Title is required.")
-                .NotNull()
-                .MaximumLength(70).WithMessage("Title must not exceed 70 characters.");
-        }
+        RuleFor(p => p.Title)
+            .NotEmpty().WithMessage("Title is required.")
+            .NotNull()
+            .MaximumLength(70).WithMessage("Title must not exceed 70 characters.");
     }
 }

@@ -1,24 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace AlgoCode.Application.Filters
-{
-    public class ValidationFilter : IActionFilter
-    {
-        public void OnActionExecuting(ActionExecutingContext context)
-        {
-            if (!context.ModelState.IsValid)
-            {
-                var errors = context.ModelState
-               .Where(x => x.Value.Errors.Any())
-               .ToDictionary(
-                   kvp => kvp.Key,
-                   kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-               );
+namespace AlgoCode.Infrastructure.Filters;
 
-                context.Result = new BadRequestObjectResult(errors);
-            }
+public class ValidationFilter : IActionFilter
+{
+    public void OnActionExecuting(ActionExecutingContext context)
+    {
+        if (!context.ModelState.IsValid)
+        {
+            var errors = context.ModelState
+           .Where(x => x.Value.Errors.Any())
+           .ToDictionary(
+               kvp => kvp.Key,
+               kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+           );
+
+            context.Result = new BadRequestObjectResult(errors);
         }
-        public void OnActionExecuted(ActionExecutedContext context) { }
     }
+    public void OnActionExecuted(ActionExecutedContext context) { }
 }

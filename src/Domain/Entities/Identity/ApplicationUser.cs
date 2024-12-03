@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace AlgoCode.Domain.Identity;
+namespace AlgoCode.Domain.Entities.Identity;
 
 public class ApplicationUser : IdentityUser
 {

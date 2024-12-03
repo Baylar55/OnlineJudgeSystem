@@ -1,10 +1,9 @@
-﻿namespace AlgoCode.Domain.Constants
+﻿namespace AlgoCode.Domain.Constants;
+
+public enum SubscriptionStatus
 {
-    public enum SubscriptionStatus
-    {
-        Active = 1,
-        Inactive = 2,
-        Expired = 3,
-        Canceled = 4
-    }
+    Active = 1,
+    Inactive = 2,
+    Expired = 3,
+    Canceled = 4
 }

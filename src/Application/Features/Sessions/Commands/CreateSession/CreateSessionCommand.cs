@@ -1,55 +1,36 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+﻿namespace AlgoCode.Application.Features.Sessions.Commands.CreateSession;
 
-namespace AlgoCode.Application.Features.Sessions.Commands.CreateSession
+public record CreateSessionCommand(string Title, string UserId, bool IsActive) : IRequest<ValidationResultModel>;
+
+public class CreateSessionCommandHandler(IApplicationDbContext context, IHttpContextAccessor httpContextAccessor) : IRequestHandler<CreateSessionCommand, ValidationResultModel>
 {
-    public class CreateSessionCommand : IRequest<ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(CreateSessionCommand request, CancellationToken cancellationToken)
     {
-        public string Title { get; set; } = null!;
-        public string UserId { get; set; } = null!;
-        public bool IsActive { get; set; } = false;
-    }
+        var validationResult = new ValidationResultModel();
 
-    public class CreateSessionCommandHandler : IRequestHandler<CreateSessionCommand, ValidationResultModel>
-    {
-        private readonly IApplicationDbContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public CreateSessionCommandHandler(IApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        int sessionCount = await context.Sessions.CountAsync(x => x.UserId == userId, cancellationToken);
+
+        if (sessionCount >= 5)
         {
-            _context = context;
-            _httpContextAccessor = httpContextAccessor;
-        }
-
-        public async Task<ValidationResultModel> Handle(CreateSessionCommand request, CancellationToken cancellationToken)
-        {
-            var validationResult = new ValidationResultModel();
-
-            int sessionCount = await _context.Sessions.CountAsync(x => x.UserId == _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier), cancellationToken);
-            if (sessionCount >= 5)
-            {
-                validationResult.Errors.Add("Session", ["You can't create more than 5 sessions"]);
-                return validationResult;
-            }
-
-            bool isExist = await _context.Sessions.AnyAsync(x => x.Title.Trim().ToLower() == request.Title.Trim().ToLower(), cancellationToken);
-
-            if (isExist)
-            {
-                validationResult.Errors.Add("Title", ["Session with this title already exists"]);
-                return validationResult;
-            }
-
-            Session session = new()
-            {
-                Title = request.Title,
-                IsActive = request.IsActive,
-                UserId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier),
-            };
-
-            await _context.Sessions.AddAsync(session, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
+            validationResult.Errors.Add("Session", ["You can't create more than 5 sessions"]);
             return validationResult;
         }
+
+        bool isExist = await context.Sessions.AnyAsync(x => x.Title.Trim().ToLower() == request.Title.Trim().ToLower(), cancellationToken);
+
+        if (isExist)
+        {
+            validationResult.Errors.Add("Title", ["Session with this title already exists"]);
+            return validationResult;
+        }
+
+        Session session = request.Adapt<Session>();
+        session.UserId = userId!;
+
+        await context.Sessions.AddAsync(session, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+        return validationResult;
     }
 }

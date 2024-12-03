@@ -17,7 +17,7 @@ namespace AlgoCode.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -913,7 +913,8 @@ namespace AlgoCode.Infrastructure.Migrations
 
                     b.HasOne("AlgoCode.Domain.Entities.Session", "Session")
                         .WithMany("Submissions")
-                        .HasForeignKey("SessionId");
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AlgoCode.Domain.Identity.ApplicationUser", "User")
                         .WithMany("Submissions")

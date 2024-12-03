@@ -1,14 +1,13 @@
-﻿namespace AlgoCode.Infrastructure.Data.Configurations
-{
-    public class StudyPlanConfiguration : IEntityTypeConfiguration<StudyPlan>
-    {
-        public void Configure(EntityTypeBuilder<StudyPlan> builder)
-        {
-            builder.HasMany(sp => sp.Users)
-                .WithMany(u => u.StudyPlans);
+﻿namespace AlgoCode.Infrastructure.Data.Configurations;
 
-            builder.HasMany(sp => sp.Problems)
-                .WithMany(p => p.StudyPlans);
-        }
+public class StudyPlanConfiguration : IEntityTypeConfiguration<StudyPlan>
+{
+    public void Configure(EntityTypeBuilder<StudyPlan> builder)
+    {
+        builder.HasMany(sp => sp.Users)
+            .WithMany(u => u.StudyPlans);
+
+        builder.HasMany(sp => sp.Problems)
+            .WithMany(p => p.StudyPlans);
     }
 }

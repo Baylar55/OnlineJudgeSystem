@@ -1,30 +1,19 @@
-﻿namespace AlgoCode.Application.Features.Comments.Queries.GetAll
+﻿namespace AlgoCode.Application.Features.Comments.Queries.GetAll;
+
+public record GetAllRepliesByCommentIdQuery(int CommentId) : IRequest<GetAllRepliesByCommentIdQueryResponse>;
+
+public record GetAllRepliesByCommentIdQueryResponse(List<Comment> Replies);
+
+public class GetAllRepliesByCommentIdQueryHandler(IApplicationDbContext context) : IRequestHandler<GetAllRepliesByCommentIdQuery, GetAllRepliesByCommentIdQueryResponse>
 {
-    public class GetAllRepliesByCommentIdQuery : IRequest<GetAllRepliesByCommentIdQueryResponse>
+    public async Task<GetAllRepliesByCommentIdQueryResponse> Handle(GetAllRepliesByCommentIdQuery request, CancellationToken cancellationToken)
     {
-        public int CommentId { get; set; }
-    }
+        var replies = await context.Comments
+                                     .Include(c => c.User)
+                                     .Include(c => c.Replies)
+                                     .Where(c => c.ParentCommentId == request.CommentId)
+                                     .ToListAsync(cancellationToken);
 
-    public class GetAllRepliesByCommentIdQueryResponse
-    {
-        public List<Comment> Replies { get; set; }
-    }
-
-    public class GetAllRepliesByCommentIdQueryHandler : IRequestHandler<GetAllRepliesByCommentIdQuery, GetAllRepliesByCommentIdQueryResponse>
-    {
-        private readonly IApplicationDbContext _context;
-
-        public GetAllRepliesByCommentIdQueryHandler(IApplicationDbContext context) => _context = context;
-
-        public async Task<GetAllRepliesByCommentIdQueryResponse> Handle(GetAllRepliesByCommentIdQuery request, CancellationToken cancellationToken)
-        {
-            var replies = await _context.Comments
-                                         .Include(c => c.User)
-                                         .Include(c => c.Replies)
-                                         .Where(c => c.ParentCommentId == request.CommentId)
-                                         .ToListAsync(cancellationToken);
-
-            return new GetAllRepliesByCommentIdQueryResponse { Replies = replies };
-        }
+        return new GetAllRepliesByCommentIdQueryResponse (replies);
     }
 }

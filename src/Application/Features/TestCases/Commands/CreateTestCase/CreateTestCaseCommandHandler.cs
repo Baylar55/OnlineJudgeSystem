@@ -1,23 +1,15 @@
-﻿namespace AlgoCode.Application.Features.TestCases.Commands.CreateTestCase
+﻿namespace AlgoCode.Application.Features.TestCases.Commands.CreateTestCase;
+
+public class CreateTestCaseCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateTestCaseCommand, ValidationResultModel>
 {
-    public class CreateTestCaseCommandHandler : IRequestHandler<CreateTestCaseCommand, ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(CreateTestCaseCommand request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
-        public CreateTestCaseCommandHandler(IApplicationDbContext context) => _context = context;
+        var entity = request.Adapt<TestCase>();
 
-        public async Task<ValidationResultModel> Handle(CreateTestCaseCommand request, CancellationToken cancellationToken)
-        {
-            var entity = new TestCase
-            {
-                ProblemId = request.ProblemId,
-                InputParameter = request.Inputs,
-                ExpectedOutput = request.ExpectedOutput
-            };
+        await context.TestCases.AddAsync(entity, cancellationToken);
 
-            _context.TestCases.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
 
-            return new ValidationResultModel { IsValid = true };
-        }
+        return new ValidationResultModel();
     }
 }

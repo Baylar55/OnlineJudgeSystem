@@ -1,31 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AlgoCode.Domain.Entities.Identity;
 
-namespace AlgoCode.Application.Features.Subscriptions.Commands.UpdateUserSubscription
+namespace AlgoCode.Application.Features.Subscriptions.Commands.UpdateUserSubscription;
+
+public record UpdateUserSubscriptionCommand(int SubscriptionId, SubscriptionStatus SubscriptionStatus) : IRequest<Unit>;
+
+public class UpdateUserSubscriptionCommandHandler(UserManager<ApplicationUser> userManager, IHttpContextAccessor accessor) : IRequestHandler<UpdateUserSubscriptionCommand, Unit>
 {
-    public class UpdateUserSubscriptionCommand : IRequest<Unit>
+    public async Task<Unit> Handle(UpdateUserSubscriptionCommand request, CancellationToken cancellationToken)
     {
-        public int SubscriptionId { get; set; }
-        public SubscriptionStatus SubscriptionStatus { get; set; }
-    }
+        var user = await userManager.GetUserAsync(accessor.HttpContext.User);
+        
+        user.Adapt(request);
 
-    public class UpdateUserSubscriptionCommandHandler : IRequestHandler<UpdateUserSubscriptionCommand, Unit>
-    {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IApplicationDbContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public UpdateUserSubscriptionCommandHandler(UserManager<ApplicationUser> userManager, IApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
-        {
-            _userManager = userManager;
-            _context = context;
-            _httpContextAccessor = httpContextAccessor;
-        }
-        public async Task<Unit> Handle(UpdateUserSubscriptionCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            user.SubscriptionId = request.SubscriptionId;
-            user.SubscriptionStatus = request.SubscriptionStatus;
-            await _userManager.UpdateAsync(user);
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }

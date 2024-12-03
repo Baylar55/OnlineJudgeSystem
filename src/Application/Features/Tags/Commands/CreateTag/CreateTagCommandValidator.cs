@@ -1,17 +1,12 @@
-﻿namespace AlgoCode.Application.Features.Tags.Commands.CreateTag
+﻿namespace AlgoCode.Application.Features.Tags.Commands.CreateTag;
+
+public class CreateTagCommandValidator : AbstractValidator<CreateTagCommand>
 {
-    public class CreateTagCommandValidator : AbstractValidator<CreateTagCommand>
+    public CreateTagCommandValidator()
     {
-        private readonly IApplicationDbContext context;
-
-        public CreateTagCommandValidator(IApplicationDbContext context)
-        {
-            this.context = context;
-
-            RuleFor(v => v.Title)
-                .MaximumLength(200)
-                .NotNull()
-                .NotEmpty().WithName("Tag title");
-        }
+        RuleFor(v => v.Title)
+            .MaximumLength(200)
+            .NotNull()
+            .NotEmpty().WithName("Tag title required");
     }
 }

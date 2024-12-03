@@ -1,26 +1,21 @@
-﻿using AlgoCode.Domain.Exceptions;
+﻿namespace AlgoCode.Application.Features.Problem.Commands.DeleteProblem;
 
-namespace AlgoCode.Application.Features.Problem.Commands.DeleteProblem
+public record DeleteProblemCommand(int Id) : IRequest<ValidationResultModel>;
+
+public class DeleteProblemCommandRequest(IApplicationDbContext context) : IRequestHandler<DeleteProblemCommand, ValidationResultModel>
 {
-    public class DeleteProblemCommand : IRequest<ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(DeleteProblemCommand request, CancellationToken cancellationToken)
     {
-        public int Id { get; set; }
-    }
+        var validationResult = new ValidationResultModel();
 
-    public class DeleteProblemCommandRequest : IRequestHandler<DeleteProblemCommand, ValidationResultModel>
-    {
-        private readonly IApplicationDbContext _context;
-        public DeleteProblemCommandRequest(IApplicationDbContext context) => _context = context;
-        public async Task<ValidationResultModel> Handle(DeleteProblemCommand request, CancellationToken cancellationToken)
-        {
-            var validationResult = new ValidationResultModel();
-            var problem = await _context.Problems.FindAsync(request.Id);
-            if (problem == null)
-                throw new NotFoundException(request.Id.ToString(), "Problem");
+        var problem = await context.Problems.FindAsync([request.Id], cancellationToken);
 
-            _context.Problems.Remove(problem);
-            await _context.SaveChangesAsync(cancellationToken);
-            return validationResult;
-        }
+        if (problem == null) throw new NotFoundException(request.Id.ToString(), "Problem");
+
+        context.Problems.Remove(problem);
+        
+        await context.SaveChangesAsync(cancellationToken);
+        
+        return validationResult;
     }
 }

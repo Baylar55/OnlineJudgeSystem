@@ -1,19 +1,14 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AlgoCode.Domain.Events;
+using Microsoft.Extensions.Logging;
 
-namespace Application.Features.Tags.EventHandlers
+namespace AlgoCode.Application.Features.Tags.EventHandlers;
+
+public class TagCreatedEventHandler(ILogger<TagCreatedEventHandler> logger) : INotificationHandler<TagCreatedEvent>
 {
-    public class TagCreatedEventHandler : INotificationHandler<TagCreatedEvent>
+    public Task Handle(TagCreatedEvent notification, CancellationToken cancellationToken)
     {
-        private readonly ILogger<TagCreatedEventHandler> _logger;
-        public TagCreatedEventHandler(ILogger<TagCreatedEventHandler> logger)
-        {
-            _logger = logger;
-        }
-        public Task Handle(TagCreatedEvent notification, CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("CleanArchitecture Application Event: {Name} {@UserId} {@UserName} {@Request}",
-                               notification.GetType().Name, notification.Tag.CreatedBy, notification.Tag.CreatedBy, notification);
-            return Task.CompletedTask;
-        }
+        logger.LogInformation("CleanArchitecture Application Event: {Name} {@UserId} {@UserName} {@Request}",
+                           notification.GetType().Name, notification.Tag.CreatedBy, notification.Tag.CreatedBy, notification);
+        return Task.CompletedTask;
     }
 }

@@ -213,7 +213,8 @@
                         @foreach (var problem in Model.GetProblemsWithPaginationQueryResponse.Problems)
                         {
                             <tr>
-                                <td width="20">@if(@problem.UserProblemStatus==ProblemStatus.Solved)
+                                <td width="20">
+                                    @if (@problem.UserProblemStatus == ProblemStatus.Solved)
                                     {
                                         <i class="fa-regular fa-circle-check"></i>
                                     }
@@ -318,56 +319,61 @@
                 </div> -->
                 <div class="month-list"></div>
             </div>
-            <div class="user-session mt-5">
-                <div class="row mb-3">
-                    <div class="col-6 d-flex align-items-center">
-                        <div class="session-header">Session</div>
-                    </div>
-                    <div class="col-6">
-                        <div class="d-flex justify-content-end btn">
-                            <div class="session-name">@Model.GetSessionDetailsByIdQueryResponse.Title<i class="fa-solid fa-gear"></i></div>
+            @{
+                @if (Model?.GetSessionDetailsByIdQueryResponse is not null)
+                {
+                    <div class="user-session mt-5">
+                        <div class="row mb-3">
+                            <div class="col-6 d-flex align-items-center">
+                                <div class="session-header">Session</div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-end btn">
+                                    <div class="session-name">@Model.GetSessionDetailsByIdQueryResponse.Title<i class="fa-solid fa-gear"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="circle">
+                                    <h3>@Model.GetSessionDetailsByIdQueryResponse.SolvedProblemsCount</h3>
+                                    <hr>
+                                    <span>@Model.GetSessionDetailsByIdQueryResponse.AllProblemsCount</span>
+                                </div>
+                            </div>
+                            <div class="col-7 dataDifficulty">
+                                <div class="difficulty-easy d-flex justify-content-between">
+                                    <div>
+                                        <p class="d-inline status-easy">Easy</p>
+                                    </div>
+                                    <div>
+                                        <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedEasyProblemsCount</span>
+                                        <span>/@Model.GetSessionDetailsByIdQueryResponse.AllEasyProblemsCount</span>
+                                    </div>
+                                </div>
+                                <div class="difficulty-medium d-flex justify-content-between">
+                                    <div>
+                                        <p class="d-inline status-medium">Medium</p>
+                                    </div>
+                                    <div>
+                                        <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedMediumProblemsCount</span>
+                                        <span>/@Model.GetSessionDetailsByIdQueryResponse.AllMediumProblemsCount</span>
+                                    </div>
+                                </div>
+                                <div class="difficulty-hard d-flex justify-content-between">
+                                    <div>
+                                        <p class="d-inline status-hard">Hard</p>
+                                    </div>
+                                    <div>
+                                        <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedHardProblemsCount</span>
+                                        <span>/@Model.GetSessionDetailsByIdQueryResponse.AllHardProblemsCount</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-5">
-                        <div class="circle">
-                            <h3>@Model.GetSessionDetailsByIdQueryResponse.SolvedProblemsCount</h3>
-                            <hr>
-                            <span>@Model.GetSessionDetailsByIdQueryResponse.AllProblemsCount</span>
-                        </div>
-                    </div>
-                    <div class="col-7 dataDifficulty">
-                        <div class="difficulty-easy d-flex justify-content-between">
-                            <div>
-                                <p class="d-inline status-easy">Easy</p>
-                            </div>
-                            <div>
-                                <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedEasyProblemsCount</span>
-                                <span>/@Model.GetSessionDetailsByIdQueryResponse.AllEasyProblemsCount</span>
-                            </div>
-                        </div>
-                        <div class="difficulty-medium d-flex justify-content-between">
-                            <div>
-                                <p class="d-inline status-medium">Medium</p>
-                            </div>
-                            <div>
-                                <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedMediumProblemsCount</span>
-                                <span>/@Model.GetSessionDetailsByIdQueryResponse.AllMediumProblemsCount</span>
-                            </div>
-                        </div>
-                        <div class="difficulty-hard d-flex justify-content-between">
-                            <div>
-                                <p class="d-inline status-hard">Hard</p>
-                            </div>
-                            <div>
-                                <span>@Model.GetSessionDetailsByIdQueryResponse.SolvedHardProblemsCount</span>
-                                <span>/@Model.GetSessionDetailsByIdQueryResponse.AllHardProblemsCount</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                }
+            }
         </div>
     </div>
 </div>

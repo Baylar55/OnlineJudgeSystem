@@ -1,6 +1,4 @@
-﻿using Domain.Common;
-
-namespace AlgoCode.Domain.Common;
+﻿namespace AlgoCode.Domain.Common;
 public abstract class BaseAuditableEntity : BaseEntity
 {
     public DateTimeOffset Created { get; set; }

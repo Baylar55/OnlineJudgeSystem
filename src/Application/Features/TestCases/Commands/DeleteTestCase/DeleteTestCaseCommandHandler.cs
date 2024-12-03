@@ -1,26 +1,15 @@
-﻿namespace AlgoCode.Application.Features.TestCases.Commands.DeleteTestCase
+﻿namespace AlgoCode.Application.Features.TestCases.Commands.DeleteTestCase;
+
+public class DeleteTestCaseCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteTestCaseCommand, ValidationResultModel>
 {
-    public class DeleteTestCaseCommandHandler : IRequestHandler<DeleteTestCaseCommand, ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(DeleteTestCaseCommand request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
+        var entity = await context.TestCases.FindAsync([request.Id], cancellationToken) ?? throw new NotFoundException(request.Id.ToString(), nameof(TestCase));
 
-        public DeleteTestCaseCommandHandler(IApplicationDbContext context) => _context = context;
+        context.TestCases.Remove(entity);
+        
+        await context.SaveChangesAsync(cancellationToken);
 
-        public async Task<ValidationResultModel> Handle(DeleteTestCaseCommand request, CancellationToken cancellationToken)
-        {
-            var entity = await _context.TestCases.FindAsync(request.Id, cancellationToken);
-            var validationResult = new ValidationResultModel();
-
-            if (entity == null)
-            {
-                validationResult.IsValid = false;
-                validationResult.Errors.Add("Id", new List<string> { "TestCase not found." });
-                return validationResult;
-            }
-
-            _context.TestCases.Remove(entity);
-            await _context.SaveChangesAsync(cancellationToken);
-            return validationResult;
-        }
+        return new();
     }
 }

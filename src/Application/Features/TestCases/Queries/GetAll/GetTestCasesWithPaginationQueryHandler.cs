@@ -1,24 +1,16 @@
-﻿namespace AlgoCode.Application.Features.TestCases.Queries.GetAll
+﻿namespace AlgoCode.Application.Features.TestCases.Queries.GetAll;
+
+public class GetTestCasesWithPaginationQueryHandler(IApplicationDbContext context) : IRequestHandler<GetTestCasesWithPaginationQuery, GetTestCasesWithPaginationQueryResponse>
 {
-    public class GetTestCasesWithPaginationQueryHandler : IRequestHandler<GetTestCasesWithPaginationQuery, GetTestCasesWithPaginationQueryResponse>
+    public async Task<GetTestCasesWithPaginationQueryResponse> Handle(GetTestCasesWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDbContext _context;
+        var testCases = await context.TestCases.OrderByDescending(p => p.Id)
+                                  .Skip((request.PageNumber - 1) * request.PageSize)
+                                  .Take(request.PageSize)
+                                  .ToListAsync(cancellationToken);
 
-        public GetTestCasesWithPaginationQueryHandler(IApplicationDbContext context) => _context = context;
+        var pageCount = (int)Math.Ceiling((await context.TestCases.CountAsync(cancellationToken)) / (decimal)request.PageSize);
 
-        public async Task<GetTestCasesWithPaginationQueryResponse> Handle(GetTestCasesWithPaginationQuery request, CancellationToken cancellationToken)
-        {
-            var testCases = await _context.TestCases.OrderByDescending(p => p.Id)
-                                      .Skip((request.PageNumber - 1) * request.PageSize)
-                                      .Take(request.PageSize)
-                                      .ToListAsync();
-            return new()
-            {
-                TestCases = testCases,
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                PageCount = (int)Math.Ceiling((await _context.TestCases.CountAsync()) / (decimal)request.PageSize)
-            };
-        }
+        return new GetTestCasesWithPaginationQueryResponse(testCases, request.PageNumber, request.PageSize, pageCount);
     }
 }

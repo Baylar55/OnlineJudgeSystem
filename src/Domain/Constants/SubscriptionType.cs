@@ -1,8 +1,7 @@
-﻿namespace AlgoCode.Domain.Constants
+﻿namespace AlgoCode.Domain.Constants;
+
+public enum SubscriptionType
 {
-    public enum SubscriptionType
-    {
-        Monthly = 1,
-        Yearly = 2
-    }
+    Monthly = 1,
+    Yearly = 2
 }

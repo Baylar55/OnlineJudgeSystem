@@ -1,6 +1,8 @@
 ﻿@using AlgoCode.Application.Features.Contests.Queries.GetAll
 @model GetAllContestsWithPaginationQueryResponse
-
+@{
+    int counter = (Model.PageNumber - 1) * Model.PageSize;
+}
 <header>
     <style>
         td {
@@ -18,7 +20,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Title</th>
                         <th>Is Active</th>
                         <th>Created At</th>
@@ -27,12 +29,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model is not null)
+                    @if (Model is not null && Model.Contests?.Count>0)
                     {
                         @foreach (var contest in Model.Contests)
                         {
                             <tr>
-                                <td>@contest.Id</td>
+                                <td>@(++counter)</td>
                                 <td>@contest.Title</td>
                                 <td>@contest.IsActive</td>
                                 <td>@contest.Created</td>
@@ -55,6 +57,7 @@
                 </tbody>
             </table>
             <div class="pagination d-flex justify-content-center">
+                <ul class="pagination">
                 @{
                     if (Model is not null)
                     {
@@ -71,7 +74,7 @@
                         }
                         @for (int i = 1; i <= Model.PageCount; i++)
                         {
-                            <li class="page-item">
+                                <li class="page-item @(Model.PageNumber == i ? "active" : "")">
                                 <a asp-action="index" asp-area="admin" asp-controller="contests" asp-route-page="@i" class="@(Model.PageNumber==i ? "mkdf-pag-active disabled page-link" : "mkdf-pag-inactive page-link")">@i</a>
                             </li>
                         }
@@ -88,6 +91,7 @@
                         }
                     }
                 }
+                </ul>
             </div>
         </div>
     </div>

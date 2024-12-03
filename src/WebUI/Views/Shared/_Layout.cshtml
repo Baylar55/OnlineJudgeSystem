@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AlgoCode</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> 
-    <link href="https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.1-web/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://atugatran.github.io/FontAwesome6Pro/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -17,7 +17,7 @@
     <script>hljs.highlightAll();</script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
+
     <link rel="stylesheet" href="~/assets/css/styles.css" />
 </head>
 <body>
@@ -107,87 +107,22 @@
                     <div class="nav-menus-wrapper">
                         <ul class="nav-menu">
 
-                            <li class="active">
+                            <li class="@ActivePageHelper.IsActive(ViewContext, "Home")">
                                 <a asp-action="index" asp-controller="home">Home</a>
-                                @* <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="index.html">Home 1</a></li>
-                                    <li><a href="home-2.html">Home 2</a></li>
-                                    <li><a href="home-3.html">Home 3</a></li>
-                                    <li><a href="home-4.html">Home 4</a></li>
-                                    <li><a href="home-5.html">Home 5</a></li>
-                                    <li><a href="home-6.html">Home 6</a></li>
-                                    <li><a href="home-7.html">Home 7</a></li>
-                                </ul> *@
                             </li>
 
-                            <li>
+                            <li class="@ActivePageHelper.IsActive(ViewContext, "Contests")">
                                 <a asp-action="index" asp-controller="contests">Contests</a>
-                                @* <ul class="nav-dropdown nav-submenu">
-                                    <li>
-                                        <a href="#">Search Courses in Grid<span class="submenu-indicator"></span></a>
-                                        <ul class="nav-dropdown nav-submenu">
-                                            <li><a href="grid-layout-with-sidebar.html">Grid Layout Style 1</a></li>
-                                            <li><a href="grid-layout-with-sidebar-2.html">Grid Layout Style 2</a></li>
-                                            <li><a href="grid-layout-with-sidebar-3.html">Grid Layout Style 3</a></li>
-                                            <li><a href="grid-layout-with-sidebar-4.html">Grid Layout Style 4</a></li>
-                                            <li><a href="grid-layout-with-sidebar-5.html">Grid Layout Style 5</a></li>
-                                            <li><a href="grid-layout-full.html">Grid Full Width</a></li>
-                                            <li><a href="grid-layout-full-2.html">Grid Full Width 2</a></li>
-                                            <li><a href="grid-layout-full-3.html">Grid Full Width 3</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Search Courses in List<span class="submenu-indicator"></span></a>
-                                        <ul class="nav-dropdown nav-submenu">
-                                            <li><a href="list-layout-with-sidebar.html">List Layout Style 1</a></li>
-                                            <li><a href="list-layout-with-full.html">List Full Width</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Courses Detail<span class="submenu-indicator"></span></a>
-                                        <ul class="nav-dropdown nav-submenu">
-                                            <li><a href="course-detail.html">Course Detail 01</a></li>
-                                            <li><a href="course-detail-2.html">Course Detail 02</a></li>
-                                            <li><a href="course-detail-3.html">Course Detail 03</a></li>
-                                            <li><a href="course-detail-4.html">Course Detail 04</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="explore-category.html">Explore Category</a></li>
-                                    <li><a href="find-instructor.html">Find Instructor</a></li>
-                                    <li><a href="instructor-detail.html">Instructor Detail</a></li>
-                                </ul> *@
                             </li>
 
-                            <li>
+                            <li class="@ActivePageHelper.IsActive(ViewContext, "Problems")">
                                 <a asp-action="index" asp-controller="problems">Problems</a>
-                                @* <ul class="nav-dropdown nav-submenu">
-                                    <li>
-                                        <a href="#">Shop Pages<span class="submenu-indicator"></span></a>
-                                        <ul class="nav-dropdown nav-submenu">
-                                            <li><a href="shop-with-sidebar.html">Shop Sidebar Left</a></li>
-                                            <li><a href="shop-with-right-sidebar.html">Shop Sidebar Right</a></li>
-                                            <li><a href="list-shop-with-sidebar.html">Shop List Style</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="product-detail.html">Product Detail</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Say Hello</a></li>
-                                    <li><a href="blogs.html">Blog Style</a></li>
-                                    <li><a href="pricing.html">Pricing</a></li>
-                                    <li><a href="404.html">404 Page</a></li>
-                                    <li><a href="component.html">Elements</a></li>
-                                    <li><a href="faq.html">FAQs</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="signup.html">Signup</a></li>
-                                    <li><a href="forgot.html">Forgot</a></li>
-                                </ul> *@
                             </li>
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <li><a asp-action="index" asp-controller="dashboard">Dashboard</a></li>
+                                <li class="@ActivePageHelper.IsActive(ViewContext, "Dashboard")">
+                                    <a asp-action="index" asp-controller="dashboard">Dashboard</a>
+                                </li>
                             }
 
                         </ul>
@@ -195,13 +130,13 @@
                         <ul class="nav-menu nav-menu-social align-to-right">
                             @{
                                 if (User.Identity.IsAuthenticated)
-                                {                                    
+                                {
                                     <li class="account-drop">
                                         <div class="btn-group account-drop">
                                             <a href="javascript:void(0);" class="crs_yuo12 btn btn-order-by-filt"
                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <img src="~/assets/img/user-1.jpg" class="avater-img" alt="">
-                                                    <span class="badge premium-badge rounded-pill text-bg-light" style="display:none;"><i class="fa-solid fa-circle-star"></i></span>
+                                                <span class="badge premium-badge rounded-pill text-bg-light" style="display:none;"><i class="fa-solid fa-circle-star"></i></span>
 
                                             </a>
                                             <div class="dropdown-menu pull-right animated flipInX">
@@ -213,7 +148,7 @@
                                                         <a asp-action="index" asp-controller="dashboard">
                                                             <i class="fa fa-tachometer-alt"></i>Dashboard<span class="notti_coun style-1">4</span>
                                                         </a>
-                                                    </li>                                
+                                                    </li>
                                                     <li>
                                                         <a asp-action="index" asp-controller="submissions">
                                                             <i class="fa fa-envelope"></i>Submissions<span class="notti_coun style-3">3</span>
@@ -461,6 +396,10 @@
             });
         });
     </script>
-
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
 </body>
 </html>

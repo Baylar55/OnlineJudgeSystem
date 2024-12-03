@@ -62,7 +62,7 @@
                         <td>
                             @foreach (var tag in Model.Tags)
                             {
-                                @tag
+                                @tag.Title
                                 @if (tag != Model.Tags[Model.Tags.Count-1])
                                 {
                                     @:, 

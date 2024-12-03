@@ -1,8 +1,4 @@
-﻿namespace AlgoCode.Application.Features.TestCases.Queries.GetAll
-{
-    public class GetTestCasesWithPaginationQuery : IRequest<GetTestCasesWithPaginationQueryResponse>
-    {
-        public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 5;
-    }
-}
+﻿namespace AlgoCode.Application.Features.TestCases.Queries.GetAll;
+
+public record GetTestCasesWithPaginationQuery(int PageNumber = 1, int PageSize = 5) : IRequest<GetTestCasesWithPaginationQueryResponse>;
+

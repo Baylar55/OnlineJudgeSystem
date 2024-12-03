@@ -1,8 +1,16 @@
-﻿namespace AlgoCode.Application.Common.Models
+﻿namespace AlgoCode.Application.Common.Models;
+
+public class ValidationResultModel
 {
-    public class ValidationResultModel
+    private Dictionary<string, List<string>> _errors = [];
+    public Dictionary<string, List<string>> Errors
     {
-        public bool IsValid { get; set; } = true;
-        public Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
+        get => _errors;
+        set
+        {
+            _errors = value ?? [];
+            IsValid = _errors.Count == 0;
+        }
     }
+    public bool IsValid { get; private set; }
 }

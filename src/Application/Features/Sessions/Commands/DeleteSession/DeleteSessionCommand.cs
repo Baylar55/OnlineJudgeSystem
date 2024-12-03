@@ -1,39 +1,32 @@
-﻿namespace AlgoCode.Application.Features.Sessions.Commands.DeleteSession
+﻿namespace AlgoCode.Application.Features.Sessions.Commands.DeleteSession;
+
+public record DeleteSessionCommand(int Id) : IRequest<ValidationResultModel>;
+
+public class DeleteSessionCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteSessionCommand, ValidationResultModel>
 {
-    public class DeleteSessionCommand : IRequest<ValidationResultModel>
+    public async Task<ValidationResultModel> Handle(DeleteSessionCommand request, CancellationToken cancellationToken)
     {
-        public int Id { get; set; }
-    }
+        var sessions = await context.Sessions.ToListAsync(cancellationToken);
 
-    public class DeleteSessionCommandHandler : IRequestHandler<DeleteSessionCommand, ValidationResultModel>
-    {
-        private readonly IApplicationDbContext _context;
+        var validationResult = new ValidationResultModel();
 
-        public DeleteSessionCommandHandler(IApplicationDbContext context) => _context = context;
-
-        public async Task<ValidationResultModel> Handle(DeleteSessionCommand request, CancellationToken cancellationToken)
+        if (sessions.Count == 1)
         {
-            var sessions = await _context.Sessions.ToListAsync(cancellationToken);
-            var validationResult = new ValidationResultModel();
-            if (sessions.Count == 1)
-            {
-                validationResult = new ValidationResultModel();
-                validationResult.Errors.Add("Session", ["You can't delete the last session"]);
-                return validationResult;
-            }
-            else
-            {
-                var session = await _context.Sessions.FindAsync(request.Id);
-                if (session == null)
-                {
-                    validationResult.Errors.Add("Session", ["Session not found"]);
-                    return validationResult;
-                }
-
-                _context.Sessions.Remove(session);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
+            validationResult.Errors.Add("Session", ["You can't delete the last session"]);
             return validationResult;
         }
+        else
+        {
+            var session = await context.Sessions.FindAsync([request.Id], cancellationToken: cancellationToken);
+            if (session == null)
+            {
+                validationResult.Errors.Add("Session", ["Session not found"]);
+                return validationResult;
+            }
+
+            context.Sessions.Remove(session);
+            await context.SaveChangesAsync(cancellationToken);
+        }
+        return validationResult;
     }
 }

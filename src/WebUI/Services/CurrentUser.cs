@@ -1,16 +1,6 @@
-﻿using System.Security.Claims;
+﻿namespace AlgoCode.WebUI.Services;
 
-namespace AlgoCode.WebUI.Services
+public class CurrentUser(IHttpContextAccessor httpContextAccessor) : IUser
 {
-    public class CurrentUser : IUser
-    {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public CurrentUser(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
-        }
-
-        public string? Id => _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    }
+    public string? Id => httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 }

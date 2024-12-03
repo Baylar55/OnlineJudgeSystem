@@ -2,8 +2,8 @@
 global using AlgoCode.Application.Common.Models;
 global using AlgoCode.Domain.Constants;
 global using AlgoCode.Domain.Entities;
-global using AlgoCode.Domain.Identity;
-global using Domain.Events;
+global using AlgoCode.Domain.Entities.Identity;
+global using AlgoCode.Domain.Events;
 global using FluentValidation;
 global using MediatR;
 global using Microsoft.AspNetCore.Identity;
@@ -11,3 +11,5 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Http;
 global using System.Security.Claims;
+global using Mapster;
+global using AlgoCode.Domain.Exceptions;

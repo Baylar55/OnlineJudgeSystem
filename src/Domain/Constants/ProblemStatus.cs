@@ -1,9 +1,8 @@
-﻿namespace AlgoCode.Domain.Constants
+﻿namespace AlgoCode.Domain.Constants;
+
+public enum ProblemStatus
 {
-    public enum ProblemStatus
-    {
-        Solved,
-        Unsolved,
-        Attempted
-    }
+    Solved,
+    Unsolved,
+    Attempted
 }

@@ -1,4 +1,5 @@
 ﻿using AlgoCode.Application.Common.Interfaces;
+using AlgoCode.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Reflection;
 
