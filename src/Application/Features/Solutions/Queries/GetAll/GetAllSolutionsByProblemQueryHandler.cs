@@ -10,6 +10,12 @@ public class GetAllSolutionsByProblemQueryHandler(IApplicationDbContext context)
                                       .Where(s => s.Submission.ProblemId == request.ProblemId)
                                       .ToListAsync(cancellationToken);
 
-        return solutions.Adapt<List<GetAllSolutionsByProblemQueryResponse>>();
+        return solutions.Select(solution => new GetAllSolutionsByProblemQueryResponse
+        (
+            solution.Id,
+            solution.Title,
+            solution.Submission.User,
+            solution.SubmissionId
+        )).ToList();
     }
 }

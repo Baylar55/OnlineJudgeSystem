@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlgoCode.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6963ebd2d76f3810e7139287d231bfd8c03ac97e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8dc5e5ae74d1c6e622e908c11233dab6ff7153ca")]
 [assembly: System.Reflection.AssemblyProductAttribute("AlgoCode.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AlgoCode.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

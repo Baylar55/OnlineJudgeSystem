@@ -1,6 +1,4 @@
-﻿using AlgoCode.Domain.Entities.Identity;
-
-namespace AlgoCode.Domain.Entities;
+﻿namespace AlgoCode.Domain.Entities;
 
 public class Problem : BaseAuditableEntity
 {

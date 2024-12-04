@@ -14,7 +14,9 @@
             var entity = await context.Problems.Include(x => x.TestCases).Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken) 
                 ?? throw new NotFoundException(request.Id.ToString(), nameof(Problem));
 
-            return entity.Adapt<GetProblemByIdWithTestCaseQueryResponse>();
+            var resp = entity.Adapt<GetProblemByIdWithTestCaseQueryResponse>();
+
+            return resp;
         }
     }
 }
