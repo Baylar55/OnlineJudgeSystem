@@ -1,6 +1,4 @@
-﻿using AlgoCode.Domain.Entities.Identity;
-
-namespace AlgoCode.Application.Features.Subscriptions.Commands.UpdateUserSubscription;
+﻿namespace AlgoCode.Application.Features.Subscriptions.Commands.UpdateUserSubscription;
 
 public record UpdateUserSubscriptionCommand(int SubscriptionId, SubscriptionStatus SubscriptionStatus) : IRequest<Unit>;
 

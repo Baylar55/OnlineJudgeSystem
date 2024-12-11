@@ -56,10 +56,13 @@ public class ProblemsController : BaseMVCController
     [HttpGet("/Problems/PostSolution/{submissionId}")]
     public async Task<IActionResult> PostSolution(int submissionId)
     {
-        //TODO: Complete this method, title property is missing
         var submission = await Mediator.Send(new GetSubmissionByIdQuery(submissionId));
-        //var command = new PostSolutionCommand(submissionId, submission.SourceCode);
-        return View();
+
+        var formattedSourceCode = $"<pre><code class=\"language-csharp\">{submission.SourceCode}</code></pre>";
+
+        var command = new PostSolutionCommand(submission.Id, "", formattedSourceCode);
+
+        return View(command);
     }
 
     [Authorize]
@@ -77,7 +80,7 @@ public class ProblemsController : BaseMVCController
     {
         var response = new SolutionIndexDTO
         {
-            GetSolutionByIdQueryResponse = await Mediator.Send(new GetSolutionByIdQuery (solutionId)),
+            GetSolutionByIdQueryResponse = await Mediator.Send(new GetSolutionByIdQuery(solutionId)),
             GetAllComentsQueryResponse = await Mediator.Send(new GetAllCommentsQuery(solutionId))
         };
 

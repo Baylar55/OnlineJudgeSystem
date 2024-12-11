@@ -19,20 +19,31 @@
 <div class="submissions-container container">
     <table class="table table-responsive table-bordered table-striped table-hover">
         <thead>
-        <th>Time Submitted</th>
-        <th>Question</th>
-        <th>Status</th>
-        <th>Runtime</th>
+            <tr>
+                <th>Time Submitted</th>
+                <th>Question</th>
+                <th>Status</th>
+                <th>Runtime</th>
+            </tr>
         </thead>
-            @foreach (var submission in Model.Submissions)
+        <tbody>
+            @for (var i = 0; i < Model.Submissions.Count; i++)
             {
+                var submission = Model.Submissions.ToList()[i];
+                var problemTitle = Model.ProblemTitles.ElementAtOrDefault(i);
+
                 <tr>
-                    <td>@submission.Created.ToString()</td>
-                    <td>@Model.ProblemTitles.ElementAtOrDefault(Model.Submissions.ToList().IndexOf(submission))</td>
-                    <td><a asp-action="details" asp-controller="submissions" asp-route-id="@submission.Id">@submission.Status</a></td>
+                    <td>@(submission.Created != null ? submission.Created.ToString("MM/dd/yyyy hh:mm tt") : "N/A")</td>
+                    <td>@problemTitle</td>
+                    <td>
+                        <a asp-action="details" asp-controller="submissions" asp-route-id="@submission.Id">
+                            @submission.Status
+                        </a>
+                    </td>
                     <td>@submission.ExecutionTime ms</td>
                 </tr>
             }
+        </tbody>
     </table>
 </div>
 <nav aria-label="Page navigation example" class="mb-3">

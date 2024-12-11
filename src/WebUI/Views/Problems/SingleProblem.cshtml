@@ -4,7 +4,7 @@
 @using AlgoCode.Application.DTOs.Problems
 @model SingleProblemDTO
 @{
-    string badgeClass = Model.GetProblemByIdWithTestCaseQueryResponse.Difficulty.ToLower() switch
+    string badgeClass = Model?.GetProblemByIdWithTestCaseQueryResponse?.Difficulty.ToLower() switch
     {
         "hard" => "bg-danger",
         "medium" => "bg-warning",
@@ -150,11 +150,11 @@
                                  aria-labelledby="pills-description-tab" tabindex="0">
                                 <div>
                                     <h4>
-                                        @Model.GetProblemByIdWithTestCaseQueryResponse.Id. @Model.GetProblemByIdWithTestCaseQueryResponse.Title
+                                        @Model?.GetProblemByIdWithTestCaseQueryResponse?.Id. @Model?.GetProblemByIdWithTestCaseQueryResponse?.Title
                                     </h4>
-                                    <span class="badge @badgeClass mb-3">@Model.GetProblemByIdWithTestCaseQueryResponse.Difficulty</span>
-                                    <span class="badge bg-secondary">@Model.GetProblemByIdWithTestCaseQueryResponse.Point Point</span>
-                                    @foreach (var tag in Model.GetProblemByIdWithTestCaseQueryResponse.Tags)
+                                    <span class="badge @badgeClass mb-3">@Model?.GetProblemByIdWithTestCaseQueryResponse?.Difficulty</span>
+                                    <span class="badge bg-secondary">@Model?.GetProblemByIdWithTestCaseQueryResponse?.Point Point</span>
+                                    @foreach (var tag in Model?.GetProblemByIdWithTestCaseQueryResponse?.Tags)
                                     {
                                         <span class="badge text-bg-light">@tag.Title</span>
                                     }
@@ -197,7 +197,7 @@
                                             height: 50px;
                                             border-radius: 50%;
                                             width: 50px;
-                                                " />
+                                                        " />
                                             </div>
                                             <div class="ms-3">
                                                 <span class="fs-6" style="color: gray;">@solution.User.UserName</span>
@@ -463,21 +463,30 @@
             url: '/Submissions/GetAllByProblemId/@Model.GetProblemByIdWithTestCaseQueryResponse.Id',
             success: function (submissions) {
                 var tbody = document.querySelector('.submission-table tbody');
-                tbody.innerHTML = ' ';
+                tbody.innerHTML = '';
 
                 submissions.forEach(function (submission) {
                     var row = document.createElement('tr');
                     row.innerHTML = `
-                            <input type="hidden" id="submissionId" value="${submission.id}">
-                                                        <td class="${submission.status.toLowerCase()}">
-                                                            <i class="fa-solid ${submission.status.toLowerCase() === 'accepted' ? 'fa-circle-check' : 'fa-ban'} me-2"></i>${submission.status}
-                                                        </td>
-                                                        <td><i class="fa-regular fa-clock me-2"></i>${submission.executionTime} milli seconds</td>
-                                                        <td><i class="fa-solid fa-microchip me-2"></i>${submission.memoryUsage} MB</td>
-                                                            <td>
-                                                           <a href="/Problems/PostSolution/${submission.id}" class="text-decoration-none btn btn-sm btn-primary">Share my solution</a>
-                                             </td>
-                                                    `;
+                        <input type="hidden" id="submissionId" value="${submission.id}">
+                        <td class="${submission.status.toLowerCase()}">
+                            <i class="fa-solid ${submission.status.toLowerCase() === 'accepted' ? 'fa-circle-check' : 'fa-ban'} me-2"></i>${submission.status}
+                        </td>
+                        <td><i class="fa-regular fa-clock me-2"></i>${submission.executionTime} milli seconds</td>
+                        <td><i class="fa-solid fa-microchip me-2"></i>${submission.memoryUsage} MB</td>
+                    `;
+
+                    // Conditionally add the "Share my solution" button if the submission is accepted
+                    if (submission.status.toLowerCase() === 'accepted') {
+                        row.innerHTML += `
+                            <td>
+                                <a href="/Problems/PostSolution/${submission.id}" class="text-decoration-none btn btn-sm btn-primary">Share my solution</a>
+                            </td>
+                        `;
+                    } else {
+                        row.innerHTML += `<td></td>`; // Add an empty cell to maintain table alignment
+                    }
+
                     tbody.appendChild(row);
                 });
             },
@@ -487,6 +496,7 @@
         });
         switchToSubmissionsTab();
     }
+
 
     $('#pills-submission-tab').on('click', function () {
         fetchSubmissions();

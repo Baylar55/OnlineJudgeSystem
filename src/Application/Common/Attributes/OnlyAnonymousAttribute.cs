@@ -6,7 +6,7 @@ namespace AlgoCode.Application.Common.Attributes
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            if (context.HttpContext.User.Identity.IsAuthenticated)
+            if (context?.HttpContext?.User?.Identity?.IsAuthenticated == true)
             {
                 context.Result = new NotFoundResult();
             }
