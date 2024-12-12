@@ -58,7 +58,6 @@ public static class DependencyInjection
 #endif
 
         services.AddSingleton(TimeProvider.System);
-        //services.AddTransient<IIdentityService, IdentityService>();
 
         return services;
     }

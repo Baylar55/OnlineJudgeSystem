@@ -1,7 +1,8 @@
-﻿using AlgoCode.Domain.Entities.Identity;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Reflection;
 
 namespace AlgoCode.Infrastructure.Data;
 
@@ -62,24 +63,84 @@ public class ApplicationDbContextInitialiser
 
     public async Task TrySeedAsync()
     {
-        // Default roles
-        var administratorRole = new IdentityRole(Roles.Administrator);
-
-        if (_roleManager.Roles.All(r => r.Name != administratorRole.Name))
+        // Create roles
+        foreach (var role in Enum.GetValues(typeof(UserRoles)))
         {
-            await _roleManager.CreateAsync(administratorRole);
-        }
-
-        // Default users
-        var administrator = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost" };
-
-        if (_userManager.Users.All(u => u.UserName != administrator.UserName))
-        {
-            await _userManager.CreateAsync(administrator, "Administrator1!");
-            if (!string.IsNullOrWhiteSpace(administratorRole.Name))
+            if (!await _roleManager.RoleExistsAsync(role.ToString()))
             {
-                await _userManager.AddToRolesAsync(administrator, [administratorRole.Name]);
+                await _roleManager.CreateAsync(new IdentityRole
+                {
+                    Name = role.ToString(),
+                });
             }
         }
+
+        // Seed admin user
+        if (await _userManager.FindByNameAsync("admin") == null)
+        {
+            var adminUser = new ApplicationUser
+            {
+                UserName = "admin",
+                Email = "admin@app.com"
+            };
+
+            var result = await _userManager.CreateAsync(adminUser, "Admin12345678*");
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    throw new Exception(error.Description);
+                }
+            }
+
+            await _userManager.AddToRoleAsync(adminUser, UserRoles.Admin.ToString());
+
+            Session defaultSession = new()
+            {
+                Title = "Default",
+                UserId = adminUser.Id,
+                IsActive = true
+            };
+
+            _context.Sessions.Add(defaultSession);
+            await _context.SaveChangesAsync();
+        }
+
+        await SeedTagsAsync();
+        await SeedProblemsAsync();
     }
+
+    private async Task SeedTagsAsync()
+    {
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "Infrastructure", "Data", "SeedData");
+        if (!_context.Tags.Any())
+        {
+            var json = await File.ReadAllTextAsync(path + @"/tags.json");
+            var tags = JsonConvert.DeserializeObject<List<Tag>>(json);
+
+            if (tags is null) return;
+
+            await _context.Tags.AddRangeAsync(tags);
+            await _context.SaveChangesAsync();
+        }
+    }
+
+    //TODO: Edit problem.json file, note that relationships are not being seeded
+    private async Task SeedProblemsAsync()
+    {
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "Infrastructure", "Data", "SeedData");
+
+        if (!_context.Problems.Any())
+        {
+            var json = await File.ReadAllTextAsync(path + @"/problems.json");
+            var products = JsonConvert.DeserializeObject<List<Problem>>(json);
+
+            if (products is null) return;
+
+            await _context.Problems.AddRangeAsync(products);
+            await _context.SaveChangesAsync();
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 using AlgoCode.Application;
-using AlgoCode.Domain.Entities.Identity;
+using AlgoCode.Infrastructure.Data;
 using AlgoCode.WebUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,12 +40,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=home}/{action=index}/{id?}");
 
-var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
-using (var scope = scopeFactory.CreateScope())
+if(app.Environment.IsDevelopment())
 {
-    var userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
-    var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-    await DbInitializer.SeedAsync(userManager, roleManager);
+    await app.InitialiseDatabaseAsync();
 }
 
 app.Run();

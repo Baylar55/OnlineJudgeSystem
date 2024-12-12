@@ -3,28 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\webui\\views\\home\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\home\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{93E3574C-9DB6-40E3-A053-AAF2A12BB1A7}|src\\Infrastructure\\Infrastructure.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\infrastructure\\data\\seeddata\\problems.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{93E3574C-9DB6-40E3-A053-AAF2A12BB1A7}|src\\Infrastructure\\Infrastructure.csproj|solutionrelative:src\\infrastructure\\data\\seeddata\\problems.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\application\\features\\submissions\\queries\\getall\\getsubmissionswithpaginationquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\submissions\\queries\\getall\\getsubmissionswithpaginationquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93E3574C-9DB6-40E3-A053-AAF2A12BB1A7}|src\\Infrastructure\\Infrastructure.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\infrastructure\\data\\applicationdbcontextinitialiser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93E3574C-9DB6-40E3-A053-AAF2A12BB1A7}|src\\Infrastructure\\Infrastructure.csproj|solutionrelative:src\\infrastructure\\data\\applicationdbcontextinitialiser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\webui\\views\\submissions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\submissions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{FA78D67C-4019-4C04-A82D-8247753CB8F6}|src\\Domain\\Domain.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\domain\\entities\\problem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA78D67C-4019-4C04-A82D-8247753CB8F6}|src\\Domain\\Domain.csproj|solutionrelative:src\\domain\\entities\\problem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\webui\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AEE4F175-7673-402E-A06A-02B4F09B7A1C}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\controllers\\submissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA78D67C-4019-4C04-A82D-8247753CB8F6}|src\\Domain\\Domain.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\domain\\entities\\submission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA78D67C-4019-4C04-A82D-8247753CB8F6}|src\\Domain\\Domain.csproj|solutionrelative:src\\domain\\entities\\submission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\application\\features\\sessions\\queries\\getall\\getsessionsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D31973C-5BD9-47A2-AB97-DA8507B379FA}|src\\Application\\Application.csproj|solutionrelative:src\\application\\features\\sessions\\queries\\getall\\getsessionsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93E3574C-9DB6-40E3-A053-AAF2A12BB1A7}|src\\Infrastructure\\Infrastructure.csproj|c:\\users\\baylar\\source\\repos\\algocode\\src\\infrastructure\\data\\seeddata\\tags.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{93E3574C-9DB6-40E3-A053-AAF2A12BB1A7}|src\\Infrastructure\\Infrastructure.csproj|solutionrelative:src\\infrastructure\\data\\seeddata\\tags.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,79 +31,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Error.cshtml",
-              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\WebUI\\Views\\Home\\Error.cshtml",
-              "RelativeDocumentMoniker": "src\\WebUI\\Views\\Home\\Error.cshtml",
-              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\WebUI\\Views\\Home\\Error.cshtml*",
-              "RelativeToolTip": "src\\WebUI\\Views\\Home\\Error.cshtml*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-11T12:18:55.851Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\WebUI\\Views\\Submissions\\Index.cshtml",
-              "RelativeDocumentMoniker": "src\\WebUI\\Views\\Submissions\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\WebUI\\Views\\Submissions\\Index.cshtml",
-              "RelativeToolTip": "src\\WebUI\\Views\\Submissions\\Index.cshtml",
-              "ViewState": "AgIAABoAAACAy8zMzMwnwB8AAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-11T11:57:08.956Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GetSubmissionsWithPaginationQuery.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Application\\Features\\Submissions\\Queries\\GetAll\\GetSubmissionsWithPaginationQuery.cs",
-              "RelativeDocumentMoniker": "src\\Application\\Features\\Submissions\\Queries\\GetAll\\GetSubmissionsWithPaginationQuery.cs",
-              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Application\\Features\\Submissions\\Queries\\GetAll\\GetSubmissionsWithPaginationQuery.cs",
-              "RelativeToolTip": "src\\Application\\Features\\Submissions\\Queries\\GetAll\\GetSubmissionsWithPaginationQuery.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAowB4AAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T11:40:50.449Z",
+              "Title": "problems.json",
+              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Infrastructure\\Data\\SeedData\\problems.json",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\Data\\SeedData\\problems.json",
+              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Infrastructure\\Data\\SeedData\\problems.json",
+              "RelativeToolTip": "src\\Infrastructure\\Data\\SeedData\\problems.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-12T12:03:05.142Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SubmissionsController.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\WebUI\\Controllers\\SubmissionsController.cs",
-              "RelativeDocumentMoniker": "src\\WebUI\\Controllers\\SubmissionsController.cs",
-              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\WebUI\\Controllers\\SubmissionsController.cs",
-              "RelativeToolTip": "src\\WebUI\\Controllers\\SubmissionsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T11:40:42.962Z",
+              "Title": "tags.json",
+              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Infrastructure\\Data\\SeedData\\tags.json",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\Data\\SeedData\\tags.json",
+              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Infrastructure\\Data\\SeedData\\tags.json",
+              "RelativeToolTip": "src\\Infrastructure\\Data\\SeedData\\tags.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-12T11:46:20.611Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GetSessionsQuery.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Application\\Features\\Sessions\\Queries\\GetAll\\GetSessionsQuery.cs",
-              "RelativeDocumentMoniker": "src\\Application\\Features\\Sessions\\Queries\\GetAll\\GetSessionsQuery.cs",
-              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Application\\Features\\Sessions\\Queries\\GetAll\\GetSessionsQuery.cs",
-              "RelativeToolTip": "src\\Application\\Features\\Sessions\\Queries\\GetAll\\GetSessionsQuery.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAA1wAYAAABjAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Problem.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Entities\\Problem.cs",
+              "RelativeDocumentMoniker": "src\\Domain\\Entities\\Problem.cs",
+              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Entities\\Problem.cs",
+              "RelativeToolTip": "src\\Domain\\Entities\\Problem.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAoAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T11:44:15.872Z",
+              "WhenOpened": "2024-12-12T11:38:23.277Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Submission.cs",
-              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Entities\\Submission.cs",
-              "RelativeDocumentMoniker": "src\\Domain\\Entities\\Submission.cs",
-              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Domain\\Entities\\Submission.cs",
-              "RelativeToolTip": "src\\Domain\\Entities\\Submission.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContextInitialiser.cs",
+              "DocumentMoniker": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Infrastructure\\Data\\ApplicationDbContextInitialiser.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\Data\\ApplicationDbContextInitialiser.cs",
+              "ToolTip": "C:\\Users\\Baylar\\source\\repos\\AlgoCode\\src\\Infrastructure\\Data\\ApplicationDbContextInitialiser.cs",
+              "RelativeToolTip": "src\\Infrastructure\\Data\\ApplicationDbContextInitialiser.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAqwIIAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T11:51:57.692Z",
+              "WhenOpened": "2024-12-12T09:01:01.557Z",
               "EditorCaption": ""
             }
           ]

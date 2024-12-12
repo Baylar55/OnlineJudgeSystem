@@ -1,0 +1,29 @@
+[
+  {
+    "Title": "Two Sum",
+    "Description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\n\nYou can return the answer in any order.",
+    "MethodName": "TwoSum",
+    "CodeTemplate": "public class Solution {\n    public int[] TwoSum(int[] nums, int target) {\n        \n    }\n}",
+    "Point": 5,
+    "Difficulty": 0,
+    "AccessLevel": 0
+  },
+  {
+    "Title": "Longest Substring Without Repeating Characters",
+    "Description": "Given a string s, find the length of the longest substring without repeating characters.",
+    "MethodName": "LengthOfLongestSubstring",
+    "CodeTemplate": "public class Solution {\n    public int LengthOfLongestSubstring(string s) {\n        \n    }\n}",
+    "Point": 10,
+    "Difficulty": 1,
+    "AccessLevel": 0
+  },
+  {
+    "Title": "Median of Two Sorted Arrays",
+    "Description": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.",
+    "MethodName": "FindMedianSortedArrays",
+    "CodeTemplate": "public class Solution {\n    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {\n        \n    }\n}",
+    "Point": 20,
+    "Difficulty": 2,
+    "AccessLevel": 1
+  }
+]
